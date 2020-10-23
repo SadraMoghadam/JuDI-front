@@ -1,5 +1,5 @@
 import * as React from "react";
-import "../BasePage.scss"
+import "../CSS/BasePage.scss"
 import FadeIn from "react-fade-in";
 import ScrollAnimation from 'react-animate-on-scroll';
 import VisibilitySensor from "react-visibility-sensor";

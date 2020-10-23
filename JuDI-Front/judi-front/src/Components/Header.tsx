@@ -1,7 +1,7 @@
 import * as React from "react";
 import {createRef, RefObject} from "react";
 import {RouteComponentProps} from "react-router";
-import "../BasePage.scss"
+import "../CSS/BasePage.scss"
 
 interface HeaderProps {
     menuSectionRef: RefObject<HTMLDivElement>,

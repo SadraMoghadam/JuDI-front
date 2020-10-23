@@ -22,7 +22,8 @@ class MainPage extends React.Component<RouteComponentProps> {
             <div>
                 <Header aboutUsRef={aboutUsRef}
                         aboutSiteRef={aboutSiteRef}
-                        menuSectionRef={menuSectionRef}/>
+                        menuSectionRef={menuSectionRef}
+                        />
                 {/** END nav  **/}
 
                 <div className="main-page-body">
