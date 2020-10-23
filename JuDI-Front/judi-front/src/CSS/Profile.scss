@@ -1,4 +1,40 @@
 .profile-base {
-  
+  margin: 0 auto;
+  padding: 50px;
+  width: 75%;
   position: relative;
+}
+
+.profile-alternatives{
+  padding-bottom: 30px;
+  border-radius: 20px;
+  border: 4px;
+  border-color: #3EECAC;
+  border-style: double;
+}
+
+
+.alt {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 10px auto;
+  border-radius: 20px;
+  align-items: center;
+}
+
+.alt a{
+  color: black;
+}
+
+.alt a.active{
+  color: #3EECAC;
+}
+
+.alt :hover{
+  align-items: center;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: #a7a7a7;
+  text-decoration: none;
+  color: #3EECAC;
 }
