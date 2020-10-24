@@ -10,15 +10,19 @@ import {RefObject} from "react";
 
 interface scoreProps {
     scoreRef: RefObject<HTMLDivElement>
-    state: string
 }
 
 class Score extends React.Component<scoreProps> 
 {
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
-            <div ref={this.props.scoreRef} style={{display: (this.props.state==="account" ? "none" : "hidden")}}>
-                score
+            <div ref={this.props.scoreRef}>
+                <h2>Score and XP</h2>
+                <div className="inside-profile-alt ">
+                    <h5 style={{margin:30}}>XP : 0</h5>
+                    <h5 style={{margin:30}}>Number of tasks completed : 0</h5>
+                    <h5 style={{margin:30}}>ranking : 100</h5>
+                </div>
             </div>
         )
     }

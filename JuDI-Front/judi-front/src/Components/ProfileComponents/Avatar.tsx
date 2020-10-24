@@ -10,7 +10,6 @@ import {RefObject} from "react";
 
 interface AvatarProps {
     avatarRef: RefObject<HTMLDivElement>
-    state: string
 }
 
 class Avatar extends React.Component<AvatarProps> 
@@ -18,7 +17,7 @@ class Avatar extends React.Component<AvatarProps>
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <div ref={this.props.avatarRef}>
-                avatar
+                <h2>Avatar</h2>
             </div>
         )
     }
