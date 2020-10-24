@@ -6,6 +6,7 @@ import {createRef, RefObject} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
 import "../CSS/Profile.scss"
+import "../CSS/Base.scss"
 import Account from "../Components/ProfileComponents/Account";
 import Avatar from "../Components/ProfileComponents/Avatar";
 import Score from "../Components/ProfileComponents/Score";
@@ -14,14 +15,28 @@ export const accountRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const avatarRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const scoreRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 
-
-var profileState = "account";
-
-function SetState(state:string): void {
-    profileState = state;
+interface IProfileState {
+    profileState: string
+    checkRef: RefObject<HTMLDivElement>
 }
 
-class Profile extends React.Component<RouteComponentProps> {
+
+class Profile extends React.Component<RouteComponentProps, IProfileState> {
+
+    constructor(props: RouteComponentProps) {
+        super(props);
+        this.state = {
+            profileState: "account",
+            checkRef: accountRef
+        }
+    }
+
+    setProfileState = (state: string, ref: RefObject<HTMLDivElement>) => {
+        this.setState({
+            profileState: state,
+            checkRef: ref
+        })    
+    }
 
     componentWillMount = async () => {
         window.scrollTo(0, 0)
@@ -33,18 +48,27 @@ class Profile extends React.Component<RouteComponentProps> {
                 <DashboardHeader state={"profile"}/>
                 <div className="profile-base">
                     <div className="row" >
-                        <div className="col-lg-5 col-md-4 col-sm-12 profile-alternatives">
+                        <div className="col-lg-4 col-md-4 col-sm-12 profile-alternatives">
                             <div className="row">
-                                <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={()=>profileState="account"} className={profileState==="account" ? "active" : ""}>Acount</a></div>
-                                <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={()=>profileState="avatar"} className={profileState==="avatar" ? "active" : ""}>Avatar</a></div>
-                                <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={()=>profileState="score"} className={profileState==="score" ? "active" : ""} >Score and XP</a></div>
+                                <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("account", accountRef)} className={this.state.profileState==="account" ? "active" : ""}>Account</a></div>
+                                <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("avatar", avatarRef)} className={this.state.profileState==="avatar" ? "active" : ""}>Avatar</a></div>
+                                <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("score", scoreRef)} className={this.state.profileState==="score" ? "active" : ""} >Score and XP</a></div>
                             </div>
                         </div>
-                        <div className="col-lg-1 col-md-1 col-sm-12"></div>
-                        <div className="col-lg-7 col-md-7 col-sm-12" style={{backgroundColor: "blue", height:"100px"}}>
-                            <Account accountRef={accountRef} state={profileState}/>
-                            <Avatar avatarRef={avatarRef} state={profileState}/>
-                            <Score scoreRef={scoreRef} state={profileState}/>
+                        <div className="col-lg-1 col-md-1 col-sm-12" style={{height:"10px"}}></div>
+                        <div className="col-lg-7 col-md-7 col-sm-12 profile-parts">
+                            {
+                                this.state.profileState == "account" ? 
+                                <Account accountRef={accountRef}/>
+                                :
+                                this.state.profileState == "avatar" ?
+                                <Avatar avatarRef={avatarRef}/>
+                                :
+                                <Score scoreRef={scoreRef}/>
+                            }
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>
