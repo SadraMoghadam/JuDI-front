@@ -106,7 +106,7 @@ a {
   height: 400px;
   border-radius: 50%;
   background-color: #3EECAC;
-  padding: 10px;
+  padding: 5px;
   border: solid;
 }
 
@@ -176,4 +176,46 @@ a {
 
 .App-link {
   color: #61dafb;
+}
+
+
+.mainmenubtn {
+  background-color: #a7a7a7;
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 22px;
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-child {
+  display: none;
+  background-color: #3EECAC;
+  min-width: 100px;
+}
+.dropdown-child a {
+  color: white;
+  padding: 20px;
+  position: relative;
+  text-decoration: none;
+  display: block;
+}
+.dropdown:hover .dropdown-child {
+  display: block;
+}
+
+.profile-nav{
+  align-items: "right";
+  height: 30px;
+  width: 30px; 
+  position: "absolute";
+  float: "right"; 
+  background-size: 'cover';
 }
