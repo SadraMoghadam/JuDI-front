@@ -2,6 +2,7 @@ import * as React from "react";
 import {createRef, RefObject} from "react";
 import {RouteComponentProps} from "react-router";
 import "../CSS/BasePage.scss"
+import profileAvatar from "../Assets/Images/profile.png";
 
 interface HeaderProps {
     state: string
@@ -15,12 +16,18 @@ class DashboardHeader extends React.Component<HeaderProps>
             <div>
                 <div className="App-header-judi">
                     JuDI
+                    <a className={this.props.state==="profile" ? "active" : ""} href="/dashboard/profile">
+                    <div className="circle" style={{overflow: "hidden", alignItems:"right", height:40, width:40, position:"absolute", right:20, marginTop:-50, backgroundImage: `url(${profileAvatar})`, backgroundSize: 'cover'}}>
+                        
+                    </div>
+                    </a>
                 </div>
                 <div className="topnav">
                     <a className={this.props.state==="dashboard" ? "active" : ""} href="/dashboard">dashboard</a>
-                    <a className={this.props.state==="profile" ? "active" : ""} href="/dashboard/profile">profile</a>
+                    
                     <div className="topnav-right">
                         <a href="/">logout</a>
+                        
                     </div>
                 </div>
 
