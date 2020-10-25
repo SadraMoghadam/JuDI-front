@@ -54,3 +54,22 @@
   margin: 10px 20px;
   text-align: left;
 }
+
+.profile-picture-input{
+  border-radius: 5px;
+  border-color: #a7a7a7;
+  border-style: solid;
+  text-align: center;
+  height: 40px;
+  left: 0;
+  width: 50%;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+
+.profile-picture-input:hover{
+  outline: none !important;
+  border:3px solid #3EECAC;
+  box-shadow: 0 0 10px #719ECE;
+}

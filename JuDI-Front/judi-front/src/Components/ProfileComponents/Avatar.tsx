@@ -6,6 +6,8 @@ import VisibilitySensor from "react-visibility-sensor";
 import "animate.css/animate.min.css";
 import p2 from "../Assets/Images/about_us.png";
 import {RefObject} from "react";
+import ProfilePictue from "./ProfilePictue"
+import ProfilePicture from "./ProfilePictue";
 
 
 interface AvatarProps {
@@ -18,6 +20,7 @@ class Avatar extends React.Component<AvatarProps>
         return(
             <div ref={this.props.avatarRef}>
                 <h2>Avatar</h2>
+                <ProfilePicture/>
             </div>
         )
     }
