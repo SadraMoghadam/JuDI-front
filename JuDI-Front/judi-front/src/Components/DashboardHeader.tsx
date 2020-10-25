@@ -4,23 +4,11 @@ import {RouteComponentProps} from "react-router";
 import "../CSS/BasePage.scss"
 
 interface HeaderProps {
-    menuSectionRef: RefObject<HTMLDivElement>,
-    aboutUsRef: RefObject<HTMLDivElement>,
-    aboutSiteRef: RefObject<HTMLDivElement>
+    state: string
 }
 
-class Header extends React.Component<HeaderProps> 
+class DashboardHeader extends React.Component<HeaderProps> 
 {
-    menuRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
-    slideToAboutSite = () => {
-        if (this.props.aboutSiteRef.current)
-            this.props.aboutSiteRef.current.scrollIntoView({behavior: "smooth"})
-    }
-
-    slideToAboutUs = () => {
-        if (this.props.aboutUsRef.current)
-            this.props.aboutUsRef.current.scrollIntoView({behavior: "smooth"})
-    }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
@@ -29,12 +17,10 @@ class Header extends React.Component<HeaderProps>
                     JuDI
                 </div>
                 <div className="topnav">
-                    <a className="active">home</a>
-                    <a onClick={this.slideToAboutSite}>about website</a>
-                    <a onClick={this.slideToAboutUs}>about us</a>
+                    <a className={this.props.state==="dashboard" ? "active" : ""} href="/dashboard">dashboard</a>
+                    <a className={this.props.state==="profile" ? "active" : ""} href="/dashboard/profile">profile</a>
                     <div className="topnav-right">
-                        <a href="#login">login</a>
-                        <a href="#register">register</a>
+                        <a href="/">logout</a>
                     </div>
                 </div>
 
@@ -65,4 +51,4 @@ class Header extends React.Component<HeaderProps>
 
 
 
-export default Header;
+export default DashboardHeader;
