@@ -33,8 +33,8 @@ class Header extends React.Component<HeaderProps>
                     <a onClick={this.slideToAboutSite}>about website</a>
                     <a onClick={this.slideToAboutUs}>about us</a>
                     <div className="topnav-right">
-                        <a href="#login">login</a>
-                        <a href="#register">register</a>
+                        <a href="/login">login</a>
+                        <a href="/register">register</a>
                     </div>
                 </div>
 
