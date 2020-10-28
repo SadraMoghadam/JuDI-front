@@ -11,11 +11,12 @@ import { accountRef } from "../../Pages/Profile";
 import {RouteComponentProps, withRouter} from "react-router";
 
 
-interface AccountProps {
+interface PasswordProps {
+
 }
 var changePassword: boolean;
 
-class ChangePassword extends React.Component<AccountProps> 
+class ChangePassword extends React.Component<PasswordProps>
 {
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
