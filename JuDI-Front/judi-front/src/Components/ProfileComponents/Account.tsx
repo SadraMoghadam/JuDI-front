@@ -11,7 +11,7 @@ import { accountRef } from "../../Pages/Profile";
 import {RouteComponentProps, withRouter} from "react-router";
 import ChangePassword from "./ChangePassword";
 import {User} from "../../Models/user";
-import {postUser} from "../../Actions/user_actions";
+import {postUser} from "../../Actions/UserActions";
 
 
 interface AccountProps {
