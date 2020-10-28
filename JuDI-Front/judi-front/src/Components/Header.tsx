@@ -29,12 +29,12 @@ class Header extends React.Component<HeaderProps>
                     JuDI
                 </div>
                 <div className="topnav">
-                    <a className="active">home</a>
-                    <a onClick={this.slideToAboutSite}>about website</a>
-                    <a onClick={this.slideToAboutUs}>about us</a>
+                    <a className="active">Home</a>
+                    <a onClick={this.slideToAboutSite}>About Website</a>
+                    <a onClick={this.slideToAboutUs}>About Us</a>
                     <div className="topnav-right">
-                        <a href="/login">login</a>
-                        <a href="/register">register</a>
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
                     </div>
                 </div>
 

@@ -39,8 +39,8 @@ class ProfilePicture extends React.Component<any, IImage>{
             <div className="inside-profile-alt" style={{textAlign:"center"}}>
               Upload Image
             </div>
-            <div className="profile-picture-input" style={{height:25}}>
-              <div style={{position:"absolute", cursor:"pointer", textAlign:"center"}}>Click Here</div>
+            <div className="profile-picture-input" style={{height:25, width:200, cursor:"pointer"}}>
+              <div style={{position:"absolute", cursor:"pointer", textAlign:"center", width:200}}>Click Here</div>
               <input type="file" style={{opacity:0, height:"100%", width:"100%", margin:0, padding:0, cursor:"pointer"}} onChange={this.handleImageChange}/>
             </div>
             <div className="circle" style={{alignItems:"center", height:200, width:200, margin:"auto", marginTop:30}}>
