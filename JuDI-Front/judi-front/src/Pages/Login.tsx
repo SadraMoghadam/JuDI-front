@@ -1,4 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
+import Loader from "../Components/Loader";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -6,6 +9,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
+import {createRef, RefObject} from "react";
+
+export const menuSectionRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
+export const aboutUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
+export const aboutSiteRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
+export const contactUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,19 +23,24 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexWrap: 'wrap',
       width: 375,
+      height: 400,
+      fontSize: '1.25rem',
       margin: `${theme.spacing(0)} auto`
     },
     loginBtn: {
       marginTop: theme.spacing(2),
       flexGrow: 1,
+      fontSize: '1.5rem',
       background: '#2DD111'
     },
     header: {
+      color: 'black',
       textAlign: 'center',
-      background: 'Blue',
-      color: '#fff'
+      background: '#3EECAC',
     },
     card: {
+      width: 400,
+      height: 325,
       marginTop: theme.spacing(10)
     }
   })
@@ -113,7 +128,8 @@ const Login = () => {
     if (state.username === 'abc@email.com' && state.password === 'password') {
       dispatch({
         type: 'loginSuccess',
-        payload: 'Login Successfully'
+        payload: 'Login Successfully',
+        
       });
     } else {
       dispatch({
@@ -144,7 +160,17 @@ const Login = () => {
         payload: event.target.value
       });
     }
+  
+
+
   return (
+    <div>
+      <Header aboutUsRef={aboutUsRef}
+              aboutSiteRef={aboutSiteRef}
+              menuSectionRef={menuSectionRef}
+                        />
+      {/** END nav  **/}
+    <div className="main-page-body">
     <form className={classes.container} noValidate autoComplete="off">
       <Card className={classes.card}>
         <CardHeader className={classes.header} title="Login" />
@@ -176,7 +202,8 @@ const Login = () => {
           </div>
         </CardContent>
         <CardActions>
-          <Button
+          <Button 
+            href="/Dashboard"
             variant="contained"
             size="large"
             color="secondary"
@@ -186,8 +213,19 @@ const Login = () => {
             Login
           </Button>
         </CardActions>
+        <div>
+          <a href="/register">Click here to SignUp!</a>
+        </div>
       </Card>
     </form>
+    </div>
+    {/** footer **/}
+    <Footer aboutUsRef={aboutUsRef}
+            aboutSiteRef={aboutSiteRef}
+            contactUsRef={contactUsRef}/>
+                        {/** loader **/}
+    <Loader/>
+    </div>
   );
 }
 

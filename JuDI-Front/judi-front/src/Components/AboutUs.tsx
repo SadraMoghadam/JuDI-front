@@ -40,7 +40,7 @@ class AboutUs extends React.Component<AboutUsProps>
                         </div>
                         <div className="col-lg-6 col-md-6 info-section-p" style={{left: 250}}>
                             <p style={{fontSize: 30, color: "white"}}>About Us<br/></p>
-                            <p style={{fontSize: 20}}><hr style={{width: "50%"}}/>We are 4 students and this is our software engineering project.<br/>You can contact us via the following email<br/>sadra_h_m@outlook.com</p>    
+                            <p style={{fontSize: 20}}><hr style={{width: "50%"}}/>We are 4 students from <br/>Iran University of Science and Technology (IUST) <br/> and this is our software engineering project.</p>    
                         </div>
                         
                     </div>
@@ -48,7 +48,7 @@ class AboutUs extends React.Component<AboutUsProps>
                 <ScrollAnimation animateIn='bounceIn' duration={fadeDuration2} >
                     <div className="circle2-width2 circle" >
                         <p style={{fontSize: 30, color: "white"}}>About Us<br/></p>
-                        <p style={{fontSize: 20}}><hr style={{width: "50%"}}/><br/>We are 4 students and this <br/>is our software engineering project.<br/>You can contact us via <br/>the following email<br/>sadra_h_m@outlook.com</p>    
+                        <p style={{fontSize: 20}}><hr style={{width: "50%"}}/><br/>We are 4 students from <br/>Iran University of Science and Technology (IUST) <br/> and this is our software engineering project.</p>    
                     </div>
                 </ScrollAnimation>
             </div>

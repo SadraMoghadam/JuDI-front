@@ -16,7 +16,7 @@ const App: React.FC = () => {
                     <Route exact path="/register"  component={Register}/>
                     <Route exact path="/dashboard"  component={Dashboard}/>
                     <Route exact path="/dashboard/profile"  component={Profile}/>
-                    
+                    <Route exact path="/MainPage"  component={MainPage}/>
                 </Switch>
             </Router>
         </div>

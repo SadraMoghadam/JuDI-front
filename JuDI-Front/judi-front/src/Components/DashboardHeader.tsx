@@ -23,10 +23,10 @@ class DashboardHeader extends React.Component<HeaderProps>
                     </a>
                 </div>
                 <div className="topnav">
-                    <a className={this.props.state==="dashboard" ? "active" : ""} href="/dashboard">dashboard</a>
+                    <a className={this.props.state==="dashboard" ? "active" : ""} href="/dashboard">Dashboard</a>
                     
                     <div className="topnav-right">
-                        <a href="/">logout</a>
+                        <a href="/">Logout</a>
                         
                     </div>
                 </div>
