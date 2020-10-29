@@ -219,11 +219,6 @@ const Login = () => {
       </Card>
     </form>
     </div>
-    {/** footer **/}
-    <Footer aboutUsRef={aboutUsRef}
-            aboutSiteRef={aboutSiteRef}
-            contactUsRef={contactUsRef}/>
-                        {/** loader **/}
     <Loader/>
     </div>
   );

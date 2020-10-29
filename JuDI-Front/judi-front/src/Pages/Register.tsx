@@ -271,10 +271,6 @@ const Register = () => {
       </Card>
     </form>
     </div>
-    <Footer aboutUsRef={aboutUsRef}
-            aboutSiteRef={aboutSiteRef}
-            contactUsRef={contactUsRef}/>
-                        {/** loader **/}
     <Loader/>
     </div>
   );
