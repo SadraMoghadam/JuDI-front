@@ -6,7 +6,7 @@ import "../CSS/BasePage.scss"
 interface HeaderProps {
     menuSectionRef: RefObject<HTMLDivElement>,
     aboutUsRef: RefObject<HTMLDivElement>,
-    aboutSiteRef: RefObject<HTMLDivElement>
+    aboutSiteRef: RefObject<HTMLDivElement>,
 }
 
 class Header extends React.Component<HeaderProps> 
@@ -22,6 +22,7 @@ class Header extends React.Component<HeaderProps>
             this.props.aboutUsRef.current.scrollIntoView({behavior: "smooth"})
     }
 
+
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <div>
@@ -29,7 +30,11 @@ class Header extends React.Component<HeaderProps>
                     JuDI
                 </div>
                 <div className="topnav">
+<<<<<<< HEAD
                     <a className="active">Home</a>
+=======
+                    <a href="/MainPage" className="active">Home</a>
+>>>>>>> LoginAndRegisterImprovement
                     <a onClick={this.slideToAboutSite}>About Website</a>
                     <a onClick={this.slideToAboutUs}>About Us</a>
                     <div className="topnav-right">
@@ -39,6 +44,7 @@ class Header extends React.Component<HeaderProps>
                 </div>
 
             </div>
+            
         );
     }
 }
