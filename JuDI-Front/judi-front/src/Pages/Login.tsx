@@ -16,6 +16,11 @@ export const aboutUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const aboutSiteRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const contactUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 
+//document.getElementById("wellSentence").r_text = i;
+
+//var bgcolorlist=new Array("#e2e2e2")
+
+//document.body.style.background=bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)];
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
