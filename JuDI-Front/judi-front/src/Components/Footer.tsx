@@ -5,11 +5,11 @@ import ContactUs from "./ContactUs"
 import {RefObject} from "react";
 import { aboutUsRef, aboutSiteRef } from "../Pages/MainPage";
 
-
 interface FooterProps {
     aboutUsRef: RefObject<HTMLDivElement>
     aboutSiteRef: RefObject<HTMLDivElement>
     contactUsRef: RefObject<HTMLDivElement>
+    
 }
 
 class Footer extends React.Component<FooterProps> 
