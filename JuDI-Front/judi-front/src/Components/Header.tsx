@@ -30,11 +30,7 @@ class Header extends React.Component<HeaderProps>
                     JuDI
                 </div>
                 <div className="topnav">
-<<<<<<< HEAD
-                    <a className="active">Home</a>
-=======
                     <a href="/MainPage" className="active">Home</a>
->>>>>>> LoginAndRegisterImprovement
                     <a onClick={this.slideToAboutSite}>About Website</a>
                     <a onClick={this.slideToAboutUs}>About Us</a>
                     <div className="topnav-right">
