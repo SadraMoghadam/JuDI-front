@@ -1,8 +1,9 @@
 import * as React from "react";
-import {createRef, RefObject} from "react";
+import {ButtonHTMLAttributes, createRef, DetailedHTMLProps, RefObject} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
 import {Card} from "../../Models/Card";
+import CardForm from "./CardForm";
 
 interface EditableCardProps {
     key: number,
@@ -19,7 +20,7 @@ class EditableCard extends React.Component<EditableCardProps> {
     enterEditMode = () => {
         this.setState({inEditMode: true});
     }
-    leaveEditMode = () => {
+    leaveEditMode = (): any => {
         this.setState({inEditMode: false});
     }
     handleDelete = () => {
@@ -30,11 +31,19 @@ class EditableCard extends React.Component<EditableCardProps> {
         card.id = this.props.card.id;
         this.props.onUpdateClick(card);
     }
-    render() {
-
+    render() : React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined{
+        const component = () => {
+            if(this.state.inEditMode) {
+                return (
+                    <CardForm card={this.props.card} onCancelClick={this.leaveEditMode()} onFormSubmit={this.handleUpdate}/>);
+            }
+            return (
+                <CardBase/>
+            );
+        }
         return (
             <div className="mb-3 p-4" style={{boxShadow: '0 0 10px #ccc'}} >
-                
+                {component()}
             </div>
         )
     }
