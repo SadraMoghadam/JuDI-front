@@ -77,12 +77,18 @@ class CRUDPage extends React.Component<RouteComponentProps> {
 
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-        return <main className="d-flex justify-content-center my-4">
-            <div className="col-5">
-                <CardList cards={this.state.cards} onDeleteClick={this.deleteCard} onUpdateClick={this.updateCard}/>
+        return(
+        <div>
+            <DashboardHeader state={"CRUDCard"}/>
+            <main className="d-flex justify-content-center my-4">
+                <div className="col-5" >
 
-            </div>
-        </main>;
+                    <CardList cards={this.state.cards} onDeleteClick={this.deleteCard} onUpdateClick={this.updateCard}/>
+
+                </div>
+            </main>;
+        </div>
+        )
     }
 }
 
