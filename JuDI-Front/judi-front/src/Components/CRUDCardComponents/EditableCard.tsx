@@ -4,6 +4,7 @@ import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
 import {Card} from "../../Models/Card";
 import CardForm from "./CardForm";
+import CardBase from "./CardBase";
 
 interface EditableCardProps {
     key: number,
@@ -38,7 +39,7 @@ class EditableCard extends React.Component<EditableCardProps> {
                     <CardForm card={this.props.card} onCancelClick={this.leaveEditMode()} onFormSubmit={this.handleUpdate}/>);
             }
             return (
-                <CardBase/>
+                <CardBase card={this.props.card} onEditClick={this.enterEditMode} onDeleteClick={this.handleDelete}/>
             );
         }
         return (
