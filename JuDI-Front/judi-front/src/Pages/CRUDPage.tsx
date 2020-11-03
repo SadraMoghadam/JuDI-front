@@ -6,6 +6,8 @@ import {createRef, RefObject} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
 import {Card, Categories, WeekDays} from "../Models/Card";
+import CardList from "../Components/CRUDCardComponents/CardList";
+import ToggleableCardForm from "../Components/CRUDCardComponents/ToggleableCardForm";
 
 
 class CRUDPage extends React.Component<RouteComponentProps> {
@@ -41,6 +43,12 @@ class CRUDPage extends React.Component<RouteComponentProps> {
         ]
     }
 
+    //convertToCardFormat = () => {
+    //    var cards: Card[]{
+    //
+    //    }
+    //}
+
     createNewCard = (card: Card) => {
         card.id = Math.floor(Math.random() * 1000);
         this.setState({cards: this.state.cards.concat([card])});
@@ -55,11 +63,11 @@ class CRUDPage extends React.Component<RouteComponentProps> {
             }
         });
 
-        this.setState({books: newBooks});
+        this.setState({cards: newCard});
     }
 
     deleteCard = (cardID: number) => {
-        this.setState({books: this.state.cards.filter(card => card.id !== cardID)})
+        this.setState({cards: this.state.cards.filter(card => card.id !== cardID)})
     }
 
     componentWillMount = async () => {
@@ -69,14 +77,12 @@ class CRUDPage extends React.Component<RouteComponentProps> {
 
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-        return (
-            <main className="d-flex justify-content-center my-4">
-                <div  className="col-5">
-                    
-                </div>
-            </main>
-        );
+        return <main className="d-flex justify-content-center my-4">
+            <div className="col-5">
+                <CardList cards={this.state.cards} onDeleteClick={this.deleteCard} onUpdateClick={this.updateCard}/>
 
+            </div>
+        </main>;
     }
 }
 
