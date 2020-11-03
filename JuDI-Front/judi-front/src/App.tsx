@@ -5,6 +5,7 @@ import Profile from "./Pages/Profile";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import CRUDPage from "./Pages/CRUDPage";
 
 const App: React.FC = () => {
     return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
                     <Route exact path="/register"  component={Register}/>
                     <Route exact path="/dashboard"  component={Dashboard}/>
                     <Route exact path="/dashboard/profile"  component={Profile}/>
+                    <Route exact path="/dashboard/crudcard"  component={CRUDPage}/>
                     <Route exact path="/MainPage"  component={MainPage}/>
                 </Switch>
             </Router>

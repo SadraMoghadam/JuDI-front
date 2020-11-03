@@ -24,7 +24,7 @@ class DashboardHeader extends React.Component<HeaderProps>
                 </div>
                 <div className="topnav">
                     <a className={this.props.state==="dashboard" ? "active" : ""} href="/dashboard">Dashboard</a>
-                    
+                    <a className={this.props.state==="CRUDCard" ? "active" : ""} href="/dashboard/crudcard">Create Card</a>
                     <div className="topnav-right">
                         <a href="/">Logout</a>
                         
