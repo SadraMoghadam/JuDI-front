@@ -11,13 +11,21 @@ interface CardFormProps {
     onFormSubmit: Function,
 }
 
+interface ICardFormState {
+    title: string,
+    description : string
+}
 
 
-class CardForm extends React.Component<CardFormProps> {
-    state = {
-        title: this.props.card.title || '',
-        description: this.props.card.description || ''
+class CardForm extends React.Component<CardFormProps, ICardFormState> {
+    constructor(props: CardFormProps) {
+        super(props);
+        this.state = {
+            title: this.props.card.title || "" as string,
+            description: this.props.card.description || "" as string
+        }
     }
+
     handleFormSubmit = (e: ChangeEvent<HTMLFormElement>): void => {
         e.preventDefault();
         this.props.onFormSubmit({...this.state});
@@ -42,21 +50,11 @@ class CardForm extends React.Component<CardFormProps> {
                     />
                 </div>
 
-                {/*<div className="form-group">*/}
-                {/*    <label>*/}
-                {/*        Author*/}
-                {/*    </label>*/}
-                {/*    <input type="text" placeholder="Author's name"*/}
-                {/*           value={this.state.card.author} onChange={this.handleAuthorUpdate}*/}
-                {/*           className="form-control"*/}
-                {/*    />*/}
-                {/*</div>*/}
-
                 <div className="form-group">
                     <label>
                         Description
                     </label>
-                    <textarea className="form-control" placeholder="Book Description"
+                    <textarea className="form-control" placeholder="Card Description"
                               rows={5} value={this.state.description}
                               onChange={this.handleDescriptionUpdate}
                     >
@@ -64,10 +62,10 @@ class CardForm extends React.Component<CardFormProps> {
           </textarea>
                 </div>
                 <div className="form-group d-flex justify-content-between">
-                    <button type="submit" className="btn btn-md btn-primary">
+                    <button type="submit" className="createbtn">
                         {buttonText}
                     </button>
-                    <button type="button" className="btn btn-md btn-secondary" onClick={() => this.props.onCancelClick}>
+                    <button type="button" className="canclebtn" onClick={() => this.props.onCancelClick()}>
                         Cancel
                     </button>
                 </div>

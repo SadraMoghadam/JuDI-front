@@ -1,0 +1,29 @@
+.card{
+  margin: auto;
+  width: 100%;
+  border-color: #3EECAC;
+}
+
+.createbtn{
+  width: 15%;
+  height: 30px;
+  background-color: #3EECAC;
+  border-color: #a7a7a7;
+  border-radius: 10px;
+}
+
+.createbtn:hover{
+  background-color: #69ecc3;
+}
+
+.canclebtn{
+  width: 15%;
+  height: 30px;
+  background-color: #ec4e3b;
+  border-color: #a7a7a7;
+  border-radius: 10px;
+}
+
+.canclebtn:hover{
+  background-color: #ec5b61;
+}
