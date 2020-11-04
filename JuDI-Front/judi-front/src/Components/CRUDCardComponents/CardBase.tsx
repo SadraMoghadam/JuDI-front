@@ -14,11 +14,35 @@ interface CardBaseProps {
     onDeleteClick: Function,
 }
 
+
+
 class CardBase extends React.Component<CardBaseProps> {
+    constructor(props: CardBaseProps) {
+        super(props);
+        this.state= {
+            card: props.card
+        }
+    }
+    renderSwitch(param: string) {
+        switch(param) {
+            case "sport":
+                return "lightgreen";
+            case "work":
+                return "lightpink";
+            case "study":
+                return "lightblue";
+            case "educational":
+                return "lightyellow";
+            default:
+                return "lightgray";
+        }
+    }
+
+
     render() {
         return (
             <div className="card">
-                <div className="card-header d-flex justify-content-between">
+                <div className="card-header d-flex justify-content-between" style={{backgroundColor: this.renderSwitch(this.props.card.category)}}>
                     <span>
                         <strong>Title: </strong>{this.props.card.title}
                     </span>

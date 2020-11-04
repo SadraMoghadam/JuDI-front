@@ -2,7 +2,7 @@ import * as React from "react";
 import {ButtonHTMLAttributes, createRef, DetailedHTMLProps, RefObject, TextareaHTMLAttributes} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
-import {Card} from "../../Models/Card";
+import {Card, Categories} from "../../Models/Card";
 import {ChangeEvent} from "react"
 
 interface CardFormProps {
@@ -18,6 +18,8 @@ interface ICardFormState {
 
 
 class CardForm extends React.Component<CardFormProps, ICardFormState> {
+
+
     constructor(props: CardFormProps) {
         super(props);
         this.state = {
@@ -30,6 +32,22 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         e.preventDefault();
         this.props.onFormSubmit({...this.state});
     }
+
+
+    c: Card = {
+        id: this.props.card.id,
+        title: this.props.card.title,
+        description: this.props.card.description,
+        dueDate: "",
+        category: Categories[2],
+        label: "",
+        isImportant: false,
+        reminder: false,
+        done: false,
+        isRepetitive: false,
+        weekDays: []
+    }
+
     handleTitleUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
         this.setState({title: e.target.value});
     }

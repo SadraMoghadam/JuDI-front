@@ -9,38 +9,44 @@ import {Card, Categories, WeekDays} from "../Models/Card";
 import CardList from "../Components/CRUDCardComponents/CardList";
 import ToggleableCardForm from "../Components/CRUDCardComponents/ToggleableCardForm";
 
+interface ICRUDPageState {
+    cards: Card[]
+}
 
-class CRUDPage extends React.Component<RouteComponentProps> {
+class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
-    state = {
-        cards: [
-            {
-                id: 1,
-                title: "read a book",
-                description: "i want to read a book",
-                dueDate: "",
-                category: Categories[2],
-                label: "",
-                isImportant: false,
-                reminder: false,
-                done: false,
-                isRepetitive: false,
-                weekDays: []
-            },
-            {
-                id: 2,
-                title: "run for 30 minutes",
-                description: "i want to run everyday to lose some weight",
-                dueDate: "",
-                category: Categories[0],
-                label: "",
-                isImportant: true,
-                reminder: false,
-                done: false,
-                isRepetitive: true,
-                weekDays: [WeekDays[0], WeekDays[2], WeekDays[4]]
-            }
-        ]
+    constructor(props: RouteComponentProps) {
+        super(props);
+        this.state = {
+            cards: [
+                {
+                    id: 1,
+                    title: "read a book",
+                    description: "i want to read a book",
+                    dueDate: "",
+                    category: Categories[2],
+                    label: "",
+                    isImportant: false,
+                    reminder: false,
+                    done: false,
+                    isRepetitive: false,
+                    weekDays: []
+                },
+                {
+                    id: 2,
+                    title: "run for 30 minutes",
+                    description: "i want to run everyday to lose some weight",
+                    dueDate: "",
+                    category: Categories[0],
+                    label: "",
+                    isImportant: true,
+                    reminder: false,
+                    done: false,
+                    isRepetitive: true,
+                    weekDays: [WeekDays[0], WeekDays[2], WeekDays[4]]
+                }
+            ]
+        }
     }
 
     //convertToCardFormat = () => {
@@ -55,7 +61,7 @@ class CRUDPage extends React.Component<RouteComponentProps> {
     }
 
     updateCard = (newCard: Card) => {
-        const newBooks = this.state.cards.map(card => {
+        const newCards = this.state.cards.map(card => {
             if(card.id === newCard.id) {
                 return Object.assign({}, newCard)
             } else {
@@ -63,7 +69,7 @@ class CRUDPage extends React.Component<RouteComponentProps> {
             }
         });
 
-        this.setState({cards: newCard});
+        this.setState({cards: newCards});
     }
 
     deleteCard = (cardID: number) => {
