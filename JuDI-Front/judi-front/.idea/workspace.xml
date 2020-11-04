@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed0e2cbe-fe91-493b-88a6-d22eaf6def1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CSS/Card.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CRUDCardComponents/EditableCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CRUDCardComponents/EditableCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/CRUDPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/CRUDPage.tsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,20 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/ProfileComponents/Account.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2878">
-              <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/ProfileComponents/Avatar.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+            <state relative-caret-position="255">
+              <caret line="42" column="5" lean-forward="true" selection-start-line="33" selection-start-column="4" selection-end-line="42" selection-end-column="5" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -37,28 +37,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/ProfileComponents/ProfilePictue.tsx">
+        <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/ToggleableCardForm.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="929">
-              <caret line="49" column="56" lean-forward="true" selection-start-line="49" selection-start-column="56" selection-end-line="49" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/ProfileComponents/ChangePassword.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+            <state relative-caret-position="391">
+              <caret line="62" column="13" lean-forward="true" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -67,44 +49,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/index.tsx">
+        <entry file="file://$PROJECT_DIR$/src/Models/Card.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="289">
+              <caret line="17" column="75" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="75" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Actions/UserActions.ts">
+        <entry file="file://$PROJECT_DIR$/src/CSS/Card.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
-              <folding>
-                <element signature="e#1#49#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="442">
+              <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Pages/Login.tsx">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardForm.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <folding>
-                <element signature="e#0#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Header.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+            <state relative-caret-position="294">
+              <caret line="56" column="72" selection-start-line="56" selection-start-column="72" selection-end-line="56" selection-end-column="72" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -113,10 +79,55 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/user.ts">
+        <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+            <state relative-caret-position="306">
+              <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardList.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/EditableCard.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Pages/CRUDPage.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="27" column="28" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="27" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -134,10 +145,16 @@
     <findStrings>
       <find>getUser</find>
       <find>firstName</find>
+      <find>evt</find>
+      <find>book</find>
     </findStrings>
     <replaceStrings>
       <replace>fullName</replace>
       <replace>postUser</replace>
+      <replace>e</replace>
+      <replace>e:</replace>
+      <replace>e: ChangeEvent&lt;HTMLInputElement&gt;</replace>
+      <replace>card</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -152,13 +169,27 @@
         <option value="$PROJECT_DIR$/src/Components/ProfileComponents/Account.tsx" />
         <option value="$PROJECT_DIR$/src/Actions/UserActions.ts" />
         <option value="$PROJECT_DIR$/src/Components/Header.tsx" />
+        <option value="$PROJECT_DIR$/src/Pages/CRUDPage.ts" />
+        <option value="$PROJECT_DIR$/src/Pages/Dashboard.tsx" />
+        <option value="$PROJECT_DIR$/src/App.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/DashboardHeader.tsx" />
+        <option value="$PROJECT_DIR$/src/Models/Card.ts" />
+        <option value="$PROJECT_DIR$/src/Pages/CRUDPage.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardList.tsx" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/EditableCard.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx" />
+        <option value="$PROJECT_DIR$/src/CSS/Card.scss" />
+        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/ToggleableCardForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardForm.tsx" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="396" />
-    <option name="y" value="-30" />
-    <option name="width" value="979" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="160" />
+    <option name="y" value="105" />
+    <option name="width" value="980" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -167,13 +198,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="judi-front" type="b2602c69:ProjectViewProjectNode" />
               <item name="judi-front" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="judi-front" type="b2602c69:ProjectViewProjectNode" />
+              <item name="judi-front" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="judi-front" type="b2602c69:ProjectViewProjectNode" />
@@ -197,7 +232,20 @@
               <item name="judi-front" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="CRUDCardComponents" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="judi-front" type="b2602c69:ProjectViewProjectNode" />
+              <item name="judi-front" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
               <item name="ProfileComponents" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="judi-front" type="b2602c69:ProjectViewProjectNode" />
+              <item name="judi-front" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="CSS" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="judi-front" type="b2602c69:ProjectViewProjectNode" />
@@ -215,6 +263,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -222,11 +271,18 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="ts.external.directory.path" value="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\node_modules\typescript\lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\src\CSS" />
+      <recent name="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\src\Components\CRUDCardComponents" />
+      <recent name="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\src\Models" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -253,17 +309,20 @@
       <workItem from="1603911090080" duration="8156000" />
       <workItem from="1603925716171" duration="399000" />
       <workItem from="1603967276057" duration="2623000" />
+      <workItem from="1604302118740" duration="7272000" />
+      <workItem from="1604389658736" duration="12164000" />
+      <workItem from="1604471925567" duration="10236000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11178000" />
+    <option name="totallyTimeSpent" value="40850000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14697987" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18724832" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -278,7 +337,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="TypeScript" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.20538244" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.20254958" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Tool Output" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -311,6 +370,13 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/ProfileComponents/ProfilePictue.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="49" column="56" selection-start-line="49" selection-start-column="56" selection-end-line="49" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/ProfileComponents/ChangePassword.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -318,54 +384,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Pages/Login.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
+        <state relative-caret-position="-3009">
           <folding>
             <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Header.tsx">
+    <entry file="file://$PROJECT_DIR$/src/Pages/CRUDPage.ts" />
+    <entry file="file://$PROJECT_DIR$/src/Pages/Register.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+        <state>
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/user.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        <state relative-caret-position="17">
+          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Actions/UserActions.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
+        <state relative-caret-position="17">
           <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
           <folding>
             <element signature="e#1#49#0" expanded="true" />
@@ -373,9 +430,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pages/Dashboard.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pages/MainPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Header.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="1" selection-start-line="5" selection-end-line="9" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/DashboardHeader.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="26" column="62" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/ProfileComponents/Avatar.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
+        <state relative-caret-position="221">
           <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
@@ -383,17 +479,129 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/ProfileComponents/ProfilePictue.tsx">
+    <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="929">
-          <caret line="49" column="56" lean-forward="true" selection-start-line="49" selection-start-column="56" selection-end-line="49" selection-end-column="56" />
+        <state relative-caret-position="461">
+          <caret line="28" column="113" lean-forward="true" selection-start-line="28" selection-start-column="113" selection-end-line="28" selection-end-column="113" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/setupTests.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/serviceWorker.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/react-app-env.d.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/ProfileComponents/Account.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2878">
-          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+        <state relative-caret-position="255">
+          <caret line="42" column="5" lean-forward="true" selection-start-line="33" selection-start-column="4" selection-end-line="42" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CSS/Card.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/EditableCard.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pages/CRUDPage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="27" column="28" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="27" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Card.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="75" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/ToggleableCardForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="62" column="13" lean-forward="true" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="56" column="72" selection-start-line="56" selection-start-column="72" selection-end-line="56" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

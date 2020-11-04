@@ -13,15 +13,23 @@ interface EditableCardProps {
     onUpdateClick: Function,
 }
 
+interface IEditableCardState{
+    inEditMode: boolean
+}
 
-class EditableCard extends React.Component<EditableCardProps> {
-    state = {
-        inEditMode: false
-    };
+
+class EditableCard extends React.Component<EditableCardProps, IEditableCardState> {
+    constructor(props: EditableCardProps) {
+        super(props);
+        this.state = {
+            inEditMode: false
+        }
+    }
     enterEditMode = () => {
+        console.log("000")
         this.setState({inEditMode: true});
     }
-    leaveEditMode = (): any => {
+    leaveEditMode = () => {
         this.setState({inEditMode: false});
     }
     handleDelete = () => {
@@ -33,18 +41,17 @@ class EditableCard extends React.Component<EditableCardProps> {
         this.props.onUpdateClick(card);
     }
     render() : React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined{
-        const component = () => {
-            if(this.state.inEditMode) {
-                return (
-                    <CardForm card={this.props.card} onCancelClick={this.leaveEditMode()} onFormSubmit={this.handleUpdate}/>);
-            }
-            return (
-                <CardBase card={this.props.card} onEditClick={this.enterEditMode} onDeleteClick={this.handleDelete}/>
-            );
-        }
+
         return (
-            <div className="mb-3 p-4" style={{boxShadow: '0 0 10px #ccc'}} >
-                {component()}
+            <div className="mb-3 p-4" style={{boxShadow: '0 0 10px #ccc', margin: "auto", alignItems:"center", alignContent:"center", width:"100%"}} >
+                {
+                    this.state.inEditMode ?
+                    <CardForm card={this.props.card} onCancelClick={this.leaveEditMode} onFormSubmit={this.handleUpdate}/>
+
+                    : (
+                    <CardBase card={this.props.card} onEditClick={this.enterEditMode} onDeleteClick={this.handleDelete}/>
+                    )
+                }
             </div>
         )
     }
