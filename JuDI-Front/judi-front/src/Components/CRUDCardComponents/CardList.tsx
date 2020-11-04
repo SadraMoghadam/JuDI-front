@@ -23,7 +23,7 @@ class CardList extends React.Component<CardListProps> {
             ></EditableCard>
         ));
         return (
-            <div>
+            <div style={{margin:"auto"}}>
                 {cards}
             </div>
         );
