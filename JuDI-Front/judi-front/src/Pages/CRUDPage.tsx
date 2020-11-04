@@ -81,10 +81,9 @@ class CRUDPage extends React.Component<RouteComponentProps> {
         <div>
             <DashboardHeader state={"CRUDCard"}/>
             <main className="d-flex justify-content-center my-4">
-                <div className="col-5" >
-
+                <div className="col-6" style={{alignContent:"center", margin: "auto"}}>
                     <CardList cards={this.state.cards} onDeleteClick={this.deleteCard} onUpdateClick={this.updateCard}/>
-
+                    <ToggleableCardForm onCardCreate={this.createNewCard}/>
                 </div>
             </main>;
         </div>
