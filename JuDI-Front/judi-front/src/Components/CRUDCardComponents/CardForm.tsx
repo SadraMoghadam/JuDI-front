@@ -37,7 +37,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
             description: this.props.card.description || "" as string,
             category: this.props.card.category || "" as string,
             done: this.props.card.done || false,
-            dueDate: this.props.card.dueDate || new Date() as Date,
+            dueDate: this.props.card.dueDate || new Date(),
             isImportant: this.props.card.isImportant || false,
             isRepetitive: this.props.card.isRepetitive || false,
             label: this.props.card.label || "" as string,
@@ -87,11 +87,12 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
     handleDescriptionUpdate = (e: ChangeEvent<HTMLTextAreaElement>): void => {
         this.setState({description: e.target.value});
     }
+    handleDateUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
+        this.setState({dueDate: e.target.valueAsDate as Date});
+    }
     handleDoneUpdate = (): void => {
         console.log("-0-")
         this.setState({done: !this.state.done});
-        //if(this.state.done == true)
-        //    this.setState({done: false});
     }
     handleWeekDaysUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
         const weekDays = this.state.weekDays
@@ -111,7 +112,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         return (
             <form onSubmit={this.handleFormSubmit}>
                 <div className="form-group">
-                    <label style={{textDecoration:"underline"}}>
+                    <label id="title" style={{textDecoration:"underline"}}>
                         Title
                     </label>
                     <input type="text" placeholder="Enter a title"
@@ -262,7 +263,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                         {/*<label className="col-lg-1"></label>*/}
                         {/*<label className="col-lg-1" style={{paddingTop: 8}}>Time:</label>*/}
                         <label className="col-lg-4"></label>
-                        <input className="col-lg-4" type="datetime-local" style={{height: 30}}/>
+                        <input className="col-lg-4" type="datetime-local" onChange={this.handleDateUpdate} style={{height: 30}}/>
                         <label className="col-lg-4"></label>
                     </div>
                 </div>
@@ -278,7 +279,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     </textarea>
                 </div>
                 <div className="form-group d-flex justify-content-between">
-                    <button type="submit" className="createbtn">
+                    <button type="submit" className="createbtn" disabled={this.state.title == "" ? true : false} style={{backgroundColor: this.state.title == "" ? "lightgray" : ""}}>
                         {buttonText}
                     </button>
                     <button type="button" className="canclebtn" onClick={() => this.props.onCancelClick()}>
@@ -286,7 +287,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     </button>
                 </div>
                 <div className="form-group d-flex justify-content-center">
-                    <button type="submit" className="donebtn" onClick={this.handleDoneUpdate}>
+                    <button type="submit" className="donebtn" disabled={this.state.title == "" ? true : false} style={{backgroundColor: this.state.title == "" ? "lightgray" : ""}} onClick={this.handleDoneUpdate}>
                         {
                             this.state.done ?
                                 <span>Undo</span>

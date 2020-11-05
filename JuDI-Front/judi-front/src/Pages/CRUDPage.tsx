@@ -13,7 +13,11 @@ interface ICRUDPageState {
     cards: Card[]
 }
 
+
+
 class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
+
+
 
     constructor(props: RouteComponentProps) {
         super(props);
@@ -23,7 +27,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
                     id: 1,
                     title: "read a book",
                     description: "i want to read a book",
-                    dueDate: "",
+                    dueDate: new Date(2020, 0O5, 0O5, 17, 23, 42),
                     category: Categories[2],
                     label: "",
                     isImportant: false,
@@ -36,7 +40,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
                     id: 2,
                     title: "run for 30 minutes",
                     description: "i want to run everyday to lose some weight",
-                    dueDate: "",
+                    dueDate: new Date(2020, 0o12, 0o10, 17, 23, 42),
                     category: Categories[0],
                     label: "",
                     isImportant: true,

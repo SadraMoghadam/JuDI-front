@@ -18,7 +18,7 @@ const card: Card ={
     id: 0,
     title: "",
     description: "",
-    dueDate: "",
+    dueDate: new Date(),
     category: Categories[4],
     label: "",
     isImportant: false,

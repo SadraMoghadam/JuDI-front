@@ -15,13 +15,16 @@ interface CardBaseProps {
 
 
 
+
 class CardBase extends React.Component<CardBaseProps> {
     constructor(props: CardBaseProps) {
         super(props);
         this.state= {
-            card: props.card
+            card: props.card,
+            date: (props.card.dueDate.getFullYear() + '-' + ((props.card.dueDate.getMonth() + 1)) + '-' + props.card.dueDate.getDate() + ' ' +props.card.dueDate.getHours() + ':' + props.card.dueDate.getMinutes()+ ':' + props.card.dueDate.getSeconds())
         }
     }
+
     renderSwitch(param: string) {
         switch(param) {
             case "sport":
@@ -60,12 +63,15 @@ class CardBase extends React.Component<CardBaseProps> {
                 <div className="card-body"  style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
                     {this.props.card.description}
                 </div>
-                <div className="row card-body">
+                <div className="row card-body" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
                     <div className="col-lg-6 col-md-6 col-sm-12">{this.props.card.isRepetitive ? "Is" : "Is not"} repetitive{this.props.card.isRepetitive ? ": [" : ""} {this.props.card.isRepetitive ? this.props.card.weekDays.map(day => {
                         return <span> {day} </span>
                     }) : ""}{this.props.card.isRepetitive ? "]" : ""}</div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12">reminder: {this.props.card.reminder ? "On" : "Off"}</div>
+                </div>
+                <div className="row card-body" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
+                    <div className="col-lg-12 col-md-12 col-sm-12">Due date: {this.props.card.dueDate.toLocaleString()}</div>
                 </div>
                 <div className="card-footer" style={{backgroundColor: this.props.card.done ? "#3EECAC" : "lightgray"}}>
                     <div>{this.props.card.done ? "Done" : "Ongoing"}</div>
