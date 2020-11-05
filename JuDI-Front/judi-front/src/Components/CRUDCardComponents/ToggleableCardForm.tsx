@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import {Card, Categories} from "../../Models/Card";
 import CardForm from "./CardForm";
 import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface ToggleableCardFormProps {
     onCardCreate: Function

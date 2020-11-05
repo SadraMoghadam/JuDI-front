@@ -6,7 +6,6 @@ import {Card} from "../../Models/Card";
 import "../../CSS/Card.scss"
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface CardBaseProps {
     card: Card,
@@ -51,11 +50,25 @@ class CardBase extends React.Component<CardBaseProps> {
                         <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i className="fa fa-trash-o"></i></span>
                     </div>
                 </div>
-                <div className="card-body">
+                <div className="card-header d-flex justify-content-between" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
+                    <div>Label: {this.props.card.label}</div>
+                    <span><i className="fa fa-star" style={{color: this.props.card.isImportant ? "gold" : "black"}}></i></span>
+                </div>
+                <div className="card-body"  style={{textDecoration: "underline", height: 15}}>
+                    Description
+                </div>
+                <div className="card-body"  style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
                     {this.props.card.description}
                 </div>
-                <div className="card-footer">
-                    <strong>---:</strong>
+                <div className="row card-body">
+                    <div className="col-lg-6 col-md-6 col-sm-12">{this.props.card.isRepetitive ? "Is" : "Is not"} repetitive{this.props.card.isRepetitive ? ": [" : ""} {this.props.card.isRepetitive ? this.props.card.weekDays.map(day => {
+                        return <span> {day} </span>
+                    }) : ""}{this.props.card.isRepetitive ? "]" : ""}</div>
+
+                    <div className="col-lg-6 col-md-6 col-sm-12">remainder: {this.props.card.reminder ? "On" : "Off"}</div>
+                </div>
+                <div className="card-footer" style={{backgroundColor: this.props.card.done?"green":"lightgray"}}>
+                    <div>{this.props.card.done?"Done":"Ongoing"}</div>
                 </div>
             </div>
         );
