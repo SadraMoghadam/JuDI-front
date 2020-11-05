@@ -27,8 +27,8 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
                     category: Categories[2],
                     label: "",
                     isImportant: false,
-                    reminder: false,
-                    done: false,
+                    reminder: true,
+                    done: true,
                     isRepetitive: false,
                     weekDays: []
                 },

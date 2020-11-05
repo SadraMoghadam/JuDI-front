@@ -65,10 +65,10 @@ class CardBase extends React.Component<CardBaseProps> {
                         return <span> {day} </span>
                     }) : ""}{this.props.card.isRepetitive ? "]" : ""}</div>
 
-                    <div className="col-lg-6 col-md-6 col-sm-12">remainder: {this.props.card.reminder ? "On" : "Off"}</div>
+                    <div className="col-lg-6 col-md-6 col-sm-12">reminder: {this.props.card.reminder ? "On" : "Off"}</div>
                 </div>
-                <div className="card-footer" style={{backgroundColor: this.props.card.done?"green":"lightgray"}}>
-                    <div>{this.props.card.done?"Done":"Ongoing"}</div>
+                <div className="card-footer" style={{backgroundColor: this.props.card.done ? "#3EECAC" : "lightgray"}}>
+                    <div>{this.props.card.done ? "Done" : "Ongoing"}</div>
                 </div>
             </div>
         );
