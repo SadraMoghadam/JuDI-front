@@ -9,6 +9,10 @@ input{
   margin-left: 0;
 }
 
+input[datetime-local]{
+  cursor: pointer;
+}
+
 input:focus{
   outline: none !important;
   border:3px solid #3EECAC;
@@ -31,4 +35,31 @@ input:focus{
 
 .button:hover{
   background-color: #3EECAC;
+}
+
+select{
+  cursor: pointer;
+  border-radius: 5px;
+  border-color: #a7a7a7;
+  border-style: solid;
+  text-align: left;
+  height: 40px;
+  left: 0;
+  width: 93%;
+  margin-left: 0;
+}
+
+select:focus{
+  outline: none !important;
+  border:3px solid #3EECAC;
+  box-shadow: 0 0 10px #719ECE;
+}
+
+select option {
+
+}
+
+select option:hover {
+  cursor: pointer;
+  background: #000 !important;
 }

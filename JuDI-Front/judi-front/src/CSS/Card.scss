@@ -4,7 +4,7 @@
   border-color: #3EECAC;
 }
 
-.createbtn{
+.donebtn{
   width: 15%;
   height: 30px;
   background-color: #3EECAC;
@@ -12,8 +12,20 @@
   border-radius: 10px;
 }
 
-.createbtn:hover{
+.donebtn:hover{
   background-color: #69ecc3;
+}
+
+.createbtn{
+  width: 15%;
+  height: 30px;
+  background-color: #61dafb;
+  border-color: #a7a7a7;
+  border-radius: 10px;
+}
+
+.createbtn:hover{
+  background-color: #81e4fb;
 }
 
 .canclebtn{
@@ -57,4 +69,10 @@ label.css-label {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.css-checkbox{
+  height: 5px;
+  width: 5px;
+  margin: 20px;
 }
