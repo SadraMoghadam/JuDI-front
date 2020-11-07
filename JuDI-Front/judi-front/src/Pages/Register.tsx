@@ -1,4 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
+import Loader from "../Components/Loader";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -6,6 +9,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
+import {createRef, RefObject} from "react";
+
+export const menuSectionRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
+export const aboutUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
+export const aboutSiteRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
+export const contactUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,19 +23,24 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexWrap: 'wrap',
       width: 375,
+      height: 400,
+      fontSize: '1.25rem',
       margin: `${theme.spacing(0)} auto`
     },
     registerBtn: {
       marginTop: theme.spacing(2),
       flexGrow: 1,
+      fontSize: '1.5rem',
       background: '#2DD111'
     },
     header: {
       textAlign: 'center',
-      background: 'Blue',
-      color: '#fff'
+      background: '#3EECAC',
+      color: 'black'
     },
     card: {
+      width: 400,
+      height: 500,
       marginTop: theme.spacing(10)
     }
   })
@@ -178,6 +193,13 @@ const Register = () => {
     }
   
   return (
+    <div>
+      <Header aboutUsRef={aboutUsRef}
+              aboutSiteRef={aboutSiteRef}
+              menuSectionRef={menuSectionRef}
+                        />
+      {/** END nav  **/}
+    <div className="main-page-body">
     <form className={classes.container} noValidate autoComplete="off">
       <Card className={classes.card}>
         <CardHeader className={classes.header} title="Register" />
@@ -242,8 +264,15 @@ const Register = () => {
             Sign Up
           </Button>
         </CardActions>
+        <div>
+          <p>Do you have an Account ?</p>
+          <a href="/Login">SignIn Here!</a>
+        </div>
       </Card>
     </form>
+    </div>
+    <Loader/>
+    </div>
   );
 }
 
