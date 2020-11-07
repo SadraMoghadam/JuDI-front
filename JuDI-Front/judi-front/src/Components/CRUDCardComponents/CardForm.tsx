@@ -6,6 +6,8 @@ import {Card, Categories} from "../../Models/Card";
 import {ChangeEvent} from "react"
 import "../../CSS/Card.scss"
 import "../../CSS/Base.scss"
+import {DetailedArguments} from "yargs-parser";
+import {number} from "prop-types";
 
 interface CardFormProps {
     card: Card,
@@ -88,7 +90,25 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         this.setState({description: e.target.value});
     }
     handleDateUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
-        this.setState({dueDate: e.target.valueAsDate as Date});
+        var date = e.target.value
+        console.log(e.target.value)
+        var newDate = date.split(/-|T|:/)
+        console.log(newDate[0])
+        console.log(parseInt(date[0], 10))
+        //date.toISOString() = e.target.value;
+        var nowDate = new Date();
+        e.target.checked = true
+
+            //(Number(newDate[0]) == nowDate.getFullYear() && Number(newDate[1]) == nowDate.getMonth()-1 && Number(newDate[2]) == nowDate.getDay() && Number(newDate[3]) < nowDate.getHours()) ||
+            //(Number(newDate[0]) == nowDate.getFullYear() && Number(newDate[1]) == nowDate.getMonth()-1 && Number(newDate[2]) == nowDate.getDay() && Number(newDate[3]) == nowDate.getHours() && Number(newDate[4]) < nowDate.getMinutes())
+        if(Number(newDate[0]) < nowDate.getFullYear() || Number(newDate[1]) < nowDate.getMonth()-1 || Number(newDate[2]) < nowDate.getDay() || Number(newDate[3]) < nowDate.getHours() || Number(newDate[4]) < nowDate.getMinutes()){
+            this.setState({dueDate: null as any})
+        }
+        else {
+
+            this.setState({dueDate: new Date(Number(newDate[0]), Number(newDate[1]) - 1, Number(newDate[2]), Number(newDate[3]), Number(newDate[4]))})
+        }
+
     }
     handleDoneUpdate = (): void => {
         console.log("-0-")
@@ -262,6 +282,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                         {/*<input className="col-lg-4" type="date" style={{height: 30}}/>*/}
                         {/*<label className="col-lg-1"></label>*/}
                         {/*<label className="col-lg-1" style={{paddingTop: 8}}>Time:</label>*/}
+
                         <label className="col-lg-4"></label>
                         <input className="col-lg-4" type="datetime-local" onChange={this.handleDateUpdate} style={{height: 30}}/>
                         <label className="col-lg-4"></label>

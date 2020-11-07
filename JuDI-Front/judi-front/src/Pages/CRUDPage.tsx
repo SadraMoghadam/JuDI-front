@@ -21,13 +21,14 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
     constructor(props: RouteComponentProps) {
         super(props);
+        //new Date(2020, 0O5, 0O5, 17, 23, 42)
         this.state = {
             cards: [
                 {
                     id: 1,
                     title: "read a book",
                     description: "i want to read a book",
-                    dueDate: new Date(2020, 0O5, 0O5, 17, 23, 42),
+                    dueDate: new Date(),
                     category: Categories[2],
                     label: "",
                     isImportant: false,
