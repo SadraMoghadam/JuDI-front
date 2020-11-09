@@ -2,14 +2,34 @@ import * as React from "react";
 import {createRef, RefObject} from "react";
 import {RouteComponentProps} from "react-router";
 import "../CSS/BasePage.scss"
+import {User, UserGlobalVars} from "../Models/user";
 import profileAvatar from "../Assets/Images/profile.png";
 
 interface HeaderProps {
     state: string
 }
 
-class DashboardHeader extends React.Component<HeaderProps> 
+interface IHeaderState {
+    profileImage: string
+}
+
+class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
 {
+    constructor(props: HeaderProps) {
+        super(props);
+        this.state = {
+            profileImage: ""
+        }
+    }
+
+    componentWillMount = async () => {
+        let img = await localStorage.getItem("image");
+        if (img != null ) {
+            this.setState({profileImage: img})
+        }
+        else
+            this.setState({profileImage: ""})
+    }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
@@ -17,8 +37,8 @@ class DashboardHeader extends React.Component<HeaderProps>
                 <div className="App-header-judi">
                     JuDI
                     <a className={this.props.state==="profile" ? "active" : ""} href="/dashboard/profile">
-                    <div className="circle" style={{overflow: "hidden", alignItems:"right", height:40, width:40, position:"absolute", right:20, marginTop:-50, backgroundImage: `url(${profileAvatar})`, backgroundSize: 'cover'}}>
-                        
+                    <div className="circle" style={{overflow: "hidden", alignItems:"right", height:40, width:40, position:"absolute", right:20, marginTop:-50, backgroundImage: this.state.profileImage == "" ? `url(${profileAvatar}")` : `url("data:image/jpeg;base64,${this.state.profileImage}")`, backgroundSize: 'cover'}}>
+
                     </div>
                     </a>
                 </div>
