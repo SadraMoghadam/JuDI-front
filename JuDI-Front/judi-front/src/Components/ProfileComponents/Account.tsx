@@ -72,16 +72,24 @@ class Account extends React.Component<AccountProps, IAccountState>
         })
     }
 
-    onChangePassword = (newpass: string, newConfirmpass: string) => {
-        if(newpass == newConfirmpass)
-            this.setState({
-                password: newpass,
-                canSubmit: true
-            })
-        else
-            this.setState({
-                canSubmit: false
-            })
+    // onChangePassword = (newpass: string, newConfirmpass: string) => {
+    //     console.log("---"+ newpass + " -- " +  newConfirmpass)
+    //     if(newpass == newConfirmpass)
+    //         this.setState({
+    //             password: newpass,
+    //             canSubmit: true
+    //         })
+    //     else
+    //         this.setState({
+    //             canSubmit: false
+    //         })
+    // }
+
+    passSet = (pass: string, isConfirmed: boolean) => {
+        this.setState({
+            password: pass,
+            canSubmit: isConfirmed
+        })
     }
 
     submit = async () => {
@@ -89,7 +97,7 @@ class Account extends React.Component<AccountProps, IAccountState>
             username: this.state.username,
             email: this.state.email,
             password: this.state.password,
-            fullName: this.state.fullName
+            fullName: this.state.fullName,
         }
 
         var u: User = await postUser(user)
@@ -114,14 +122,18 @@ class Account extends React.Component<AccountProps, IAccountState>
                     <input placeholder="write your Email here ..." value={this.state.email} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeEmail(e)}></input>
                     <div style={{color: "#404040", margin:20}}>not verified yet? <a style={{fontSize:20, color:"#3EECAC"}}>Verify</a></div>
                     <div style={{margin:20}}><a style={{color:"#3EECAC"}} onClick={() => {
-                        if(this.state.changePassword==true)
+                        if(this.state.changePassword==true) {
+                            this.setState({canSubmit: true})
                             this.setPasswordState(false)
-                        else
+                        }
+                        else {
+                            this.setState({canSubmit: false})
                             this.setPasswordState(true)
+                        }
                         }}>
                             Change password</a></div>
                     {
-                        this.state.changePassword == true ? <ChangePassword onChangePassword={this.onChangePassword}/> : null
+                        this.state.changePassword == true ? <ChangePassword onChangePassword={this.passSet}/> : null
                     }
 
                     <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit ? false : true} style={{backgroundColor: this.state.canSubmit ? "" : "gray"}}>Save Changes</button>

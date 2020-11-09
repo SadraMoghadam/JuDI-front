@@ -14,7 +14,7 @@ import {ChangeEvent} from "react";
 
 
 interface PasswordProps {
-    onChangePassword: Function,
+    onChangePassword: (newPass: string, isConfirmed: boolean) => void,
 }
 
 interface IPasswordState {
@@ -38,16 +38,25 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
     }
 
     handlePasswordUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
-        this.setState({newPasswordState: e.target.value});
+        this.setState({newPasswordState: e.target.value})
+
     }
 
     handleconfirmPasswordState = (e: ChangeEvent<HTMLInputElement>) => {
+        if (this.state.newPasswordState == e.target.value) {
+            this.props.onChangePassword(this.state.newPasswordState, true)
+        } else {
+            this.props.onChangePassword(this.state.newPasswordState, false)
+        }
         //
-        // if(this.state.newPasswordState != this.state.confirmPasswordState)
+        // if(this.state.newPasswordState != thishis.state.confirmPasswordState)
         //     this.setState({showMessage: true})
         // else
         //     this.setState({showMessage: false})
-        this.setState({confirmPasswordState: e.target.value})
+
+        // let n : string = e.target.value
+        // this.setState({confirmPasswordState: n})
+        // console.log("-->" + this.state.confirmPasswordState + " "  + n)
         // console.log(this.state.confirmPasswordState)
         // console.log(this.state.newPasswordState)
 
@@ -59,13 +68,13 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
                 <div className="inside-profile-alt" >
                     Password
                 </div>
-                <input type="password" onChange={this.handlePasswordUpdate}/>
+                <input type="password" onBlur={this.handlePasswordUpdate}/>
                 <div className="inside-profile-alt" >
                     Confirm Password
                 </div>
                 <input type="password" onChange={(e) => {
                     this.handleconfirmPasswordState(e);
-                    this.props.onChangePassword(this.state.newPasswordState, this.state.confirmPasswordState);
+                    // this.props.onChangePassword(this.state.newPasswordState, this.state.confirmPasswordState);
                 }}/>
                 <div style={{color: "red", fontSize: 10}}>{this.state.showMessage ? "password is not the same" : ""}</div>
             </div>

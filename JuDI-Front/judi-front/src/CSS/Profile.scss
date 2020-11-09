@@ -13,6 +13,24 @@
   border-style: double;
 }
 
+.canclebutton{
+  background-color: #a7a7a7;
+  border: 3px solid red;
+  color: #404040;
+  padding: 15px 32px;
+  border-radius: 30px;
+  margin-top: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.canclebutton:hover{
+  background-color: red;
+}
+
 
 .alt {
   padding-top: 20px;
