@@ -1,6 +1,8 @@
 
 import axios, {AxiosRequestConfig} from "axios";
 import {User} from "../Models/user";
+
+
 export const postUser = async (user: User) : Promise<User> => {
     let config: AxiosRequestConfig = {
         method: "post",
@@ -19,6 +21,8 @@ export const postUser = async (user: User) : Promise<User> => {
     })
 
 }
+
+
 
 export const getUser = async () => {
     let config: AxiosRequestConfig = {
