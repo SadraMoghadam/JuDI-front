@@ -5,3 +5,10 @@ export interface User {
     email: string,
     fullName: string,
 }
+
+export interface rUser {
+    username: string,
+    email: string,
+    password: string,
+    confirmPassword: string,
+}

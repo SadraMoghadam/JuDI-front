@@ -11,30 +11,13 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import {createRef, RefObject} from "react";
 import axios, {AxiosRequestConfig} from "axios";
+import {rUser} from "../Models/user";
+import {postRegister} from "../Actions/UserActions";
 
 export const menuSectionRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const aboutUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const aboutSiteRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const contactUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
-
-export const postRegister = async (user: State) : Promise<State> =>{
-    let config: AxiosRequestConfig = {
-        method: "post",
-        url: "http://localhost:8000/api/users",
-        headers: {
-            "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest"
-        }
-    }
-    return axios.post("http://localhost:8000/api/users", user, config).then((res) => {
-        if (res.status == 200) {
-            var u: State = res.data;
-            return u
-        }
-        return null as any;
-    })
-
-}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,6 +57,7 @@ type State = {
   helperText: string
   isError: boolean
 };
+
 
 const initialState:State = {
   username: '',
@@ -146,7 +130,7 @@ const Register = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    if (state.username.trim() && state.email.trim() && state.password.trim()) {
+    if (state.username.trim() && state.email.trim() && state.password.trim() ) {
      dispatch({
        type: 'setIsButtonDisabled',
        payload: false
@@ -159,13 +143,12 @@ const Register = () => {
     }
   }, [state.username, state.password]);
 
-  const handleRegister = () => {
-
-      const user = {
-            "user-name": state.username,
-            "email": state.email,
-            "password": state.password,
-            "password_confirmation": state.confirmPassword
+  const handleRegister = async() => {
+            var ruser: rUser = {
+            username: state.username,
+            email: state.email,
+            password: state.password,
+            confirmPassword: state.confirmPassword
         }
     
     console.log(state.username);
@@ -182,11 +165,11 @@ const Register = () => {
       });
 
     } else {
-      //var u = await postRegister(user)
       dispatch({
         type: 'registerSuccess',
         payload: 'Sign Up Successfully'
       });
+      var u : rUser= await postRegister(ruser)
     }
   };
 
