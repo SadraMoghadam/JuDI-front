@@ -1,6 +1,9 @@
 
 import axios, {AxiosRequestConfig} from "axios";
 import {User} from "../Models/user";
+import {rUser} from "../Models/user";
+
+
 export const postUser = async (user: User) : Promise<User> => {
     let config: AxiosRequestConfig = {
         method: "post",
@@ -38,6 +41,21 @@ export const postImage = async (image: string) : Promise<string> => {
     })
 
 }
+
+export const postRegister = async (ruser: rUser) : Promise<rUser> =>{
+    let config: AxiosRequestConfig = {
+        method: "post",
+        url: "http://localhost:8000/api/users",
+    }
+    return axios.post("http://localhost:8000/api/users", ruser, config).then((res) => {
+        if (res.status == 200) {
+            var u: rUser = res.data;
+            return u
+        }
+        return null as any;
+    })
+}
+
 
 export const getUser = async () => {
     let config: AxiosRequestConfig = {

@@ -25,3 +25,9 @@ export interface UserAvatar {
 //export const AdminStore = React.createContext({} as IContextProps)
 
 
+export interface rUser {
+    username: string,
+    email: string,
+    password: string,
+    confirmPassword: string,
+}

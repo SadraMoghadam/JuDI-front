@@ -10,12 +10,14 @@ import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import {createRef, RefObject} from "react";
+import axios, {AxiosRequestConfig} from "axios";
+import {rUser} from "../Models/user";
+import {postRegister} from "../Actions/UserActions";
 
 export const menuSectionRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const aboutUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const aboutSiteRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const contactUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
-
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,6 +57,7 @@ type State = {
   helperText: string
   isError: boolean
 };
+
 
 const initialState:State = {
   username: '',
@@ -127,7 +130,7 @@ const Register = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    if (state.username.trim() && state.password.trim()) {
+    if (state.username.trim() && state.email.trim() && state.password.trim() ) {
      dispatch({
        type: 'setIsButtonDisabled',
        payload: false
@@ -140,22 +143,38 @@ const Register = () => {
     }
   }, [state.username, state.password]);
 
-  const handleRegister = () => {
-    if (state.email === 'abc@email.com' && state.username === 'username' 
-    && state.password === 'password' && state.confirmPassword == 'password') {
-      dispatch({
-        type: 'registerSuccess',
-        payload: 'Sign Up Successfully'
-      });
-    } else {
+  const handleRegister = async() => {
+            var ruser: rUser = {
+            username: state.username,
+            email: state.email,
+            password: state.password,
+            confirmPassword: state.confirmPassword
+        }
+    
+    console.log(state.username);
+    if (state.email === '' && state.username === '' 
+    && state.password === '' && state.confirmPassword == '') {
       dispatch({
         type: 'registerFailed',
         payload: 'Please Try Again'
       });
+    } else if(state.password != state.confirmPassword){
+      dispatch({
+        type: 'registerFailed',
+        payload: 'Please Try Again'
+      });
+
+    } else {
+      dispatch({
+        type: 'registerSuccess',
+        payload: 'Sign Up Successfully'
+      });
+      var u : rUser= await postRegister(ruser)
     }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
+    //console.log(state.username);
     if (event.keyCode === 13 || event.which === 13) {
       state.isButtonDisabled || handleRegister();
     }
@@ -171,6 +190,7 @@ const Register = () => {
 
   const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      //console.log(state.email);
       dispatch({
         type: 'setEmail',
         payload: event.target.value
