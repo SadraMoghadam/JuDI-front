@@ -49,6 +49,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
     }
 
     handleFormSubmit = (e: ChangeEvent<HTMLFormElement>): void => {
+        console.log("-----------------")
         e.preventDefault();
         this.props.onFormSubmit({...this.state});
     }

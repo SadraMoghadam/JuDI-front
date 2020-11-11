@@ -20,6 +20,25 @@ export const postUser = async (user: User) : Promise<User> => {
 
 }
 
+export const postImage = async (image: string) : Promise<string> => {
+    let config: AxiosRequestConfig = {
+        method: "post",
+        url: "http://localhost:8000/api/users/signout",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest"
+        }
+    }
+    return axios.post("http://localhost:8000/api/users/signout", image, config).then((res) => {
+        if (res.status == 200) {
+            image = res.data;
+            return image
+        }
+        return null as any;
+    })
+
+}
+
 export const getUser = async () => {
     let config: AxiosRequestConfig = {
         method: "post",

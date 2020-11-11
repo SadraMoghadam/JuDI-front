@@ -20,11 +20,13 @@ interface AccountProps {
 }
 
 interface IAccountState {
-    changePassword: boolean;
+    changePassword: boolean,
     username: string,
     email: string,
     password: string,
     fullName: string,
+    canSubmit: boolean,
+    correctEmail: boolean,
 }
 
 
@@ -35,11 +37,18 @@ class Account extends React.Component<AccountProps, IAccountState>
         super(props);
         this.state = {
             changePassword: false,
-            username: "",
-            password: "",
-            email: "",
-            fullName: "",
+            username: "Scorpion33033",
+            password: "SSS333",
+            email: "sadra_h_m@outlook.com",
+            fullName: "Sadra Moghadam",
+            canSubmit: true,
+            correctEmail: true
         }
+    }
+
+    componentWillMount(): void {
+        if(!this.state.email.match(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
+            this.setState({correctEmail: false})
     }
 
     setPasswordState = (bool:boolean) => {
@@ -52,6 +61,13 @@ class Account extends React.Component<AccountProps, IAccountState>
         this.setState({
             email: e.target.value
         })
+
+        var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if(reg.test(e.target.value))
+            this.setState({correctEmail: true})
+        else
+            this.setState({correctEmail: false})
     }
 
     onChangeFullName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -66,10 +82,38 @@ class Account extends React.Component<AccountProps, IAccountState>
         })
     }
 
-    onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    // onChangePassword = (newpass: string, newConfirmpass: string) => {
+    //     console.log("---"+ newpass + " -- " +  newConfirmpass)
+    //     if(newpass == newConfirmpass)
+    //         this.setState({
+    //             password: newpass,
+    //             canSubmit: true
+    //         })
+    //     else
+    //         this.setState({
+    //             canSubmit: false
+    //         })
+    // }
+
+    passSet = (pass: string, isConfirmed: boolean) => {
         this.setState({
-            password: e.target.value
+            password: pass,
+            canSubmit: isConfirmed
         })
+    }
+
+    currentPassCheck = (pass: string) => {
+        console.log(this.state.password + "------" + pass)
+        if(pass == this.state.password)
+            this.setState({
+                canSubmit: true
+            })
+        else {
+            alert("current password is incorrect")
+            this.setState({
+                canSubmit: false
+            })
+        }
     }
 
     submit = async () => {
@@ -77,7 +121,7 @@ class Account extends React.Component<AccountProps, IAccountState>
             username: this.state.username,
             email: this.state.email,
             password: this.state.password,
-            fullName: this.state.fullName
+            fullName: this.state.fullName,
         }
 
         var u: User = await postUser(user)
@@ -91,32 +135,38 @@ class Account extends React.Component<AccountProps, IAccountState>
                     <div className="inside-profile-alt">
                         FullName
                     </div>
-                    <input placeholder="write your Name here ..." onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeFullName(e)}></input>
+                    <input placeholder="write your Name here ..." defaultValue={this.state.fullName} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeFullName(e)}></input>
                     <div className="inside-profile-alt">
                         UserName
                     </div>
-                    <input placeholder="you want to be known as ..." onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeUserName(e)}></input>
+                    <input placeholder="you want to be known as ..." defaultValue={this.state.username} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeUserName(e)}></input>
                     <div className="inside-profile-alt">
                         Email
                     </div>
-                    <input placeholder="write your Email here ..." onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeEmail(e)}></input>
+                    <input placeholder="write your Email here ..." value={this.state.email} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeEmail(e)}></input>
+                    <div style={{color: "red", fontSize: 10}}>{this.state.correctEmail ? "" : "Email is not correct"}</div>
                     <div style={{color: "#404040", margin:20}}>not verified yet? <a style={{fontSize:20, color:"#3EECAC"}}>Verify</a></div>
                     <div style={{margin:20}}><a style={{color:"#3EECAC"}} onClick={() => {
-                        if(this.state.changePassword==true)
+                        if(this.state.changePassword==true) {
+                            this.setState({canSubmit: true})
                             this.setPasswordState(false)
-                        else
+                        }
+                        else {
+                            this.setState({canSubmit: false})
                             this.setPasswordState(true)
+                        }
                         }}>
                             Change password</a></div>
                     {
-                        this.state.changePassword == true ? <ChangePassword/> : null
+                        this.state.changePassword == true ? <ChangePassword onChangePassword={this.passSet} passwordCheck={this.currentPassCheck}/> : null
                     }
 
-                    <a  onClick={this.submit}><div className="button"  >Save Changes</div></a>
+                    <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit && this.state.correctEmail ? false : true} style={{backgroundColor: this.state.canSubmit  && this.state.correctEmail ? "" : "gray"}}>Save Changes</button>
                 </div>
 
         )
     }
+
 }
 
 
