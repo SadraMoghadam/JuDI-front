@@ -20,14 +20,13 @@ interface AccountProps {
 }
 
 interface IAccountState {
-    newPassword: string,
-    confirmNewPassword: string,
     changePassword: boolean,
     username: string,
     email: string,
     password: string,
     fullName: string,
-    canSubmit: boolean
+    canSubmit: boolean,
+    correctEmail: boolean,
 }
 
 
@@ -37,15 +36,19 @@ class Account extends React.Component<AccountProps, IAccountState>
     constructor(props: AccountProps) {
         super(props);
         this.state = {
-            newPassword: "",
-            confirmNewPassword: "",
             changePassword: false,
             username: "Scorpion33033",
             password: "SSS333",
             email: "sadra_h_m@outlook.com",
             fullName: "Sadra Moghadam",
-            canSubmit: true
+            canSubmit: true,
+            correctEmail: true
         }
+    }
+
+    componentWillMount(): void {
+        if(!this.state.email.match(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
+            this.setState({correctEmail: false})
     }
 
     setPasswordState = (bool:boolean) => {
@@ -58,6 +61,13 @@ class Account extends React.Component<AccountProps, IAccountState>
         this.setState({
             email: e.target.value
         })
+
+        var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if(reg.test(e.target.value))
+            this.setState({correctEmail: true})
+        else
+            this.setState({correctEmail: false})
     }
 
     onChangeFullName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -92,6 +102,20 @@ class Account extends React.Component<AccountProps, IAccountState>
         })
     }
 
+    currentPassCheck = (pass: string) => {
+        console.log(this.state.password + "------" + pass)
+        if(pass == this.state.password)
+            this.setState({
+                canSubmit: true
+            })
+        else {
+            alert("current password is incorrect")
+            this.setState({
+                canSubmit: false
+            })
+        }
+    }
+
     submit = async () => {
         var user: User = {
             username: this.state.username,
@@ -120,6 +144,7 @@ class Account extends React.Component<AccountProps, IAccountState>
                         Email
                     </div>
                     <input placeholder="write your Email here ..." value={this.state.email} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeEmail(e)}></input>
+                    <div style={{color: "red", fontSize: 10}}>{this.state.correctEmail ? "" : "Email is not correct"}</div>
                     <div style={{color: "#404040", margin:20}}>not verified yet? <a style={{fontSize:20, color:"#3EECAC"}}>Verify</a></div>
                     <div style={{margin:20}}><a style={{color:"#3EECAC"}} onClick={() => {
                         if(this.state.changePassword==true) {
@@ -133,10 +158,10 @@ class Account extends React.Component<AccountProps, IAccountState>
                         }}>
                             Change password</a></div>
                     {
-                        this.state.changePassword == true ? <ChangePassword onChangePassword={this.passSet}/> : null
+                        this.state.changePassword == true ? <ChangePassword onChangePassword={this.passSet} passwordCheck={this.currentPassCheck}/> : null
                     }
 
-                    <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit ? false : true} style={{backgroundColor: this.state.canSubmit ? "" : "gray"}}>Save Changes</button>
+                    <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit && this.state.correctEmail ? false : true} style={{backgroundColor: this.state.canSubmit  && this.state.correctEmail ? "" : "gray"}}>Save Changes</button>
                 </div>
 
         )

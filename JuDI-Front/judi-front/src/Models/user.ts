@@ -9,19 +9,19 @@ export interface User {
     fullName: string,
 }
 
-export interface UserProfile {
+export interface UserAvatar {
     image: string
 }
 
-export class UserGlobalVars {
-    public static ProfileImage: string = `url(${profileAvatar})`;
-}
+//export class UserGlobalVars {
+//    public static ProfileImage: string = `url(${profileAvatar})`;
+//}
 
-interface IContextProps {
-    state: UserProfile;
-    dispatch: (user: UserProfile) => void;
-}
+//interface IContextProps {
+//    state: UserAvatar;
+//    dispatch: (user: UserAvatar) => void;
+//}
 
-export const AdminStore = React.createContext({} as IContextProps)
+//export const AdminStore = React.createContext({} as IContextProps)
 
 

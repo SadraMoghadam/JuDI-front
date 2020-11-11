@@ -2,7 +2,7 @@ import * as React from "react";
 import {createRef, RefObject} from "react";
 import {RouteComponentProps} from "react-router";
 import "../CSS/BasePage.scss"
-import {User, UserGlobalVars} from "../Models/user";
+import {User} from "../Models/user";
 import profileAvatar from "../Assets/Images/profile.png";
 
 interface HeaderProps {
