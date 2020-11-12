@@ -3,12 +3,12 @@ export interface Card {
     id: number,
     title: string,
     description: string,
-    due: Date,
-    category_id: string,
+    dueDate: Date,
+    category: string,
     label: string,
-    with_star: boolean,
+    isImportant: boolean,
     reminder: boolean,
-    is_done: boolean,
+    done: boolean,
     isRepetitive: boolean,
     weekDays: string[]
 }

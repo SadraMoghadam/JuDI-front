@@ -18,12 +18,12 @@ interface CardFormProps {
 interface ICardFormState {
     title: string,
     description : string,
-    due: Date,
-    category_id: string,
+    dueDate: Date,
+    category: string,
     label: string,
-    with_star: boolean,
+    isImportant: boolean,
     reminder: boolean,
-    is_done: boolean,
+    done: boolean,
     isRepetitive: boolean,
     weekDays: string[]
 }
@@ -37,10 +37,10 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         this.state = {
             title: this.props.card.title || "" as string,
             description: this.props.card.description || "" as string,
-            category_id: this.props.card.category_id || "" as string,
-            is_done: this.props.card.is_done || false,
-            due: this.props.card.due || new Date(),
-            with_star: this.props.card.with_star || false,
+            category: this.props.card.category || "" as string,
+            done: this.props.card.done || false,
+            dueDate: this.props.card.dueDate || new Date(),
+            isImportant: this.props.card.isImportant || false,
             isRepetitive: this.props.card.isRepetitive || false,
             label: this.props.card.label || "" as string,
             reminder: this.props.card.reminder || false,
@@ -59,12 +59,12 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         id: this.props.card.id,
         title: this.props.card.title,
         description: this.props.card.description,
-        due: this.props.card.due,
-        category_id: Categories[2],
+        dueDate: this.props.card.dueDate,
+        category: Categories[2],
         label: "",
-        with_star: false,
+        isImportant: false,
         reminder: false,
-        is_done: false,
+        done: false,
         isRepetitive: false,
         weekDays: []
     }
@@ -79,13 +79,13 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         this.setState({reminder: e.target.checked});
     }
     handleImportantUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
-        this.setState({with_star: e.target.checked});
+        this.setState({isImportant: e.target.checked});
     }
     handleRepetitiveUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
         this.setState({isRepetitive: e.target.checked});
     }
-    handlecategory_idUpdate = (e: ChangeEvent<HTMLSelectElement>): void => {
-        this.setState({category_id: e.target.value});
+    handleCategoryUpdate = (e: ChangeEvent<HTMLSelectElement>): void => {
+        this.setState({category: e.target.value});
     }
     handleDescriptionUpdate = (e: ChangeEvent<HTMLTextAreaElement>): void => {
         this.setState({description: e.target.value});
@@ -103,17 +103,17 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
             //(Number(newDate[0]) == nowDate.getFullYear() && Number(newDate[1]) == nowDate.getMonth()-1 && Number(newDate[2]) == nowDate.getDay() && Number(newDate[3]) < nowDate.getHours()) ||
             //(Number(newDate[0]) == nowDate.getFullYear() && Number(newDate[1]) == nowDate.getMonth()-1 && Number(newDate[2]) == nowDate.getDay() && Number(newDate[3]) == nowDate.getHours() && Number(newDate[4]) < nowDate.getMinutes())
         if(Number(newDate[0]) < nowDate.getFullYear() || Number(newDate[1]) < nowDate.getMonth()-1 || Number(newDate[2]) < nowDate.getDay() || Number(newDate[3]) < nowDate.getHours() || Number(newDate[4]) < nowDate.getMinutes()){
-            this.setState({due: null as any})
+            this.setState({dueDate: null as any})
         }
         else {
 
-            this.setState({due: new Date(Number(newDate[0]), Number(newDate[1]) - 1, Number(newDate[2]), Number(newDate[3]), Number(newDate[4]))})
+            this.setState({dueDate: new Date(Number(newDate[0]), Number(newDate[1]) - 1, Number(newDate[2]), Number(newDate[3]), Number(newDate[4]))})
         }
 
     }
-    handleis_doneUpdate = (): void => {
+    handleDoneUpdate = (): void => {
         console.log("-0-")
-        this.setState({is_done: !this.state.is_done});
+        this.setState({done: !this.state.done});
     }
     handleWeekDaysUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
         const weekDays = this.state.weekDays
@@ -171,7 +171,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                         <input type="checkbox"
                                onChange={this.handleImportantUpdate}
                                className="col-lg-4"
-                               defaultChecked={this.props.card.with_star ? true : false}
+                               defaultChecked={this.props.card.isImportant ? true : false}
                                style={{height: 15, width: 15, marginTop:-1}}
                         />
                     </div>
@@ -258,11 +258,11 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
 
                 <div className="col-lg-12 col-md-12 col-sm-12" style={{marginBottom:30}}>
                     <label className="col-lg-12" style={{textDecoration:"underline"}}>
-                        category_id
+                        Category
                     </label>
                     <div className="col-lg-12 col-md-12 col-sm-12">
                         <label className="col-lg-4"></label>
-                        <select defaultValue={this.props.card.category_id} onChange={this.handlecategory_idUpdate} className="col-lg-4" name="category_id" style={{height: 30, borderRadius: 5, cursor: "pointer"}}>
+                        <select defaultValue={this.props.card.category} onChange={this.handleCategoryUpdate} className="col-lg-4" name="category" style={{height: 30, borderRadius: 5, cursor: "pointer"}}>
                             <option value="others" style={{backgroundColor: "lightgray"}}>others</option>
                             <option value="sport" style={{backgroundColor: "lightgreen"}}>Sport</option>
                             <option value="work" style={{backgroundColor: "lightpink"}}>Work</option>
@@ -309,12 +309,12 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     </button>
                 </div>
                 <div className="form-group d-flex justify-content-center">
-                    <button type="submit" className="is_donebtn" disabled={this.state.title == "" ? true : false} style={{backgroundColor: this.state.title == "" ? "lightgray" : ""}} onClick={this.handleis_doneUpdate}>
+                    <button type="submit" className="donebtn" disabled={this.state.title == "" ? true : false} style={{backgroundColor: this.state.title == "" ? "lightgray" : ""}} onClick={this.handleDoneUpdate}>
                         {
-                            this.state.is_done ?
+                            this.state.done ?
                                 <span>Undo</span>
                                 :
-                                <span>is_done</span>
+                                <span>Done</span>
                         }
                     </button>
                 </div>

@@ -18,12 +18,12 @@ const card: Card ={
     id: 0,
     title: "",
     description: "",
-    due: new Date(),
-    category_id: Categories[4],
+    dueDate: new Date(),
+    category: Categories[4],
     label: "",
-    with_star: false,
+    isImportant: false,
     reminder: false,
-    is_done: false,
+    done: false,
     isRepetitive: false,
     weekDays: []
 }
