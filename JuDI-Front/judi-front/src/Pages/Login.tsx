@@ -60,7 +60,7 @@ type State = {
   isButtonDisabled: boolean
   helperText: string
   isError: boolean
-  ableToLogin: boolean
+ // ableToLogin: boolean
 };
 
 const initialState:State = {
@@ -69,7 +69,7 @@ const initialState:State = {
   isButtonDisabled: true,
   helperText: '',
   isError: false,
-  ableToLogin: false
+  //ableToLogin: true
 };
 
 type Action = { type: 'setEmail', payload: string }
@@ -77,6 +77,7 @@ type Action = { type: 'setEmail', payload: string }
   | { type: 'setIsButtonDisabled', payload: boolean }
   | { type: 'loginSuccess', payload: string }
   | { type: 'loginFailed', payload: string }
+ // | { type: 'ableTomyLogin', payload: boolean }
   | { type: 'setIsError', payload: boolean };
 
 const reducer = (state: State, action: Action): State => {
@@ -100,14 +101,22 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         helperText: action.payload,
+        //ableToLogin: true,
         isError: false
       };
     case 'loginFailed': 
       return {
         ...state,
         helperText: action.payload,
+        //ableToLogin:false,
         isError: true
       };
+      /*case 'ableTomyLogin': 
+      return {
+        ...state,
+        helperText: action.payload,
+        ableToLogin: true
+      };*/
     case 'setIsError': 
       return {
         ...state,
@@ -135,17 +144,26 @@ const Login = () => {
   }, [state.email, state.password]);
 
   const handleLogin = async() => {
-    var u : userLogin= await getUserLogin()
 
-    if (state.email === u.user_name && state.password === u.password) {
-      state.ableToLogin = true
+    //var u : userLogin= await getUserLogin()
+    //console.log(u.email)
+    var luser: userLogin = {
+
+      email: state.email,
+      password: state.password,
+
+  }
+    var str : string = await getUserLogin(luser)
+    console.log(str)
+    if (state.email === "u.email" && state.password === "u.password") {
+     // state.isError = false
       dispatch({
         type: 'loginSuccess',
         payload: 'Login Successfully',
       });
     }
     else {
-      state.ableToLogin = false
+      //state.isError = true
       dispatch({
         type: 'loginFailed',
         payload: 'Incorrect email or password'
@@ -217,7 +235,7 @@ const Login = () => {
         </CardContent>
         <CardActions>
           <Button 
-            href={state.ableToLogin? "/Dashboard" : "/"}
+           href={state.isError? "/Login" : "/Dashboard"}
             variant="contained"
             size="large"
             color="secondary"

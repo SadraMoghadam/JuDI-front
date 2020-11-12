@@ -14,6 +14,6 @@ export interface userRegister {
 }
 
 export interface userLogin {
-    user_name: string,
+    email: string,
     password: string,
 }

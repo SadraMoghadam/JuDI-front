@@ -62,20 +62,42 @@ export const getUser = async () => {
 }
 
 
-export const getUserLogin = async () => {
+// export const getUserLogin = async () : Promise<string> => {
+//     let config: AxiosRequestConfig = {
+//         method: "post",
+//         url: "http://127.0.0.1:8000/api/users/signin",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "X-Requested-With": "XMLHttpRequest"
+//         }
+//     }
+//     return axios(config).then((res) => {
+//         console.log(res.statusText)
+//         if (res.status == 200) {
+//             var u: userLogin = res.data;
+//             return res.statusText
+//         }
+//         return res.statusText;
+//     })
+// }
+
+export const getUserLogin = async (userLogin: userLogin) : Promise<string> =>{
     let config: AxiosRequestConfig = {
         method: "post",
-        url: "http://localhost:8000/api/users/signin",
+        url: "http://127.0.0.1:8000/api/users/signin",
         headers: {
             "Content-Type": "application/json",
             "X-Requested-With": "XMLHttpRequest"
         }
     }
-    return axios(config).then((res) => {
+    return axios.post("http://127.0.0.1:8000/api/users/signin", userLogin, config).then((res) => {
         if (res.status == 200) {
-            var u: userLogin = res.data;
-            return u
+            var u: userRegister = res.data;
+            return res.statusText
         }
-        return null as any;
+        return res.statusText;
     })
 }
+
+
+
