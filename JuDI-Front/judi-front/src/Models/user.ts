@@ -3,10 +3,10 @@ import * as React from "react";
 import {useReducer} from "react";
 
 export interface User {
-    username: string,
+    user_name: string,
     password: string,
     email: string,
-    fullName: string,
+    full_name: string,
 }
 
 export interface UserAvatar {

@@ -21,10 +21,10 @@ interface AccountProps {
 
 interface IAccountState {
     changePassword: boolean,
-    username: string,
+    user_name: string,
     email: string,
     password: string,
-    fullName: string,
+    full_name: string,
     canSubmit: boolean,
     correctEmail: boolean,
 }
@@ -37,10 +37,10 @@ class Account extends React.Component<AccountProps, IAccountState>
         super(props);
         this.state = {
             changePassword: false,
-            username: "Scorpion33033",
+            user_name: "Scorpion33033",
             password: "SSS333",
             email: "sadra_h_m@outlook.com",
-            fullName: "Sadra Moghadam",
+            full_name: "Sadra Moghadam",
             canSubmit: true,
             correctEmail: true
         }
@@ -70,15 +70,15 @@ class Account extends React.Component<AccountProps, IAccountState>
             this.setState({correctEmail: false})
     }
 
-    onChangeFullName = (e: ChangeEvent<HTMLInputElement>) => {
+    onChangefull_name = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            fullName: e.target.value
+            full_name: e.target.value
         })
     }
 
-    onChangeUserName = (e: ChangeEvent<HTMLInputElement>) => {
+    onChangeuser_name = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            username: e.target.value
+            user_name: e.target.value
         })
     }
 
@@ -118,10 +118,10 @@ class Account extends React.Component<AccountProps, IAccountState>
 
     submit = async () => {
         var user: User = {
-            user_name: this.state.username,
+            user_name: this.state.user_name,
             email: this.state.email,
             password: this.state.password,
-            full_name: this.state.fullName,
+            full_name: this.state.full_name,
         }
 
         var u: User = await userProfileUpdate(user)
@@ -133,13 +133,13 @@ class Account extends React.Component<AccountProps, IAccountState>
                 <div ref={this.props.accountRef}>
                     <h2>Account</h2>
                     <div className="inside-profile-alt">
-                        FullName
+                        full_name
                     </div>
-                    <input placeholder="write your Name here ..." defaultValue={this.state.fullName} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeFullName(e)}></input>
+                    <input placeholder="write your Name here ..." defaultValue={this.state.full_name} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangefull_name(e)}></input>
                     <div className="inside-profile-alt">
-                        UserName
+                        user_name
                     </div>
-                    <input placeholder="you want to be known as ..." defaultValue={this.state.username} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeUserName(e)}></input>
+                    <input placeholder="you want to be known as ..." defaultValue={this.state.user_name} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeuser_name(e)}></input>
                     <div className="inside-profile-alt">
                         Email
                     </div>

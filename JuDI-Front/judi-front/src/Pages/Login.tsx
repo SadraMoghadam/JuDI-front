@@ -153,7 +153,7 @@ const Login = () => {
       password: state.password,
 
   }
-    var str : string = await getUserLogin(luser)
+    var str : number = await getUserLogin(luser)
     console.log(str)
     if (state.email === "u.email" && state.password === "u.password") {
      // state.isError = false
