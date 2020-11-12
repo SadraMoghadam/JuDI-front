@@ -271,7 +271,7 @@ const Register = () => {
               error={state.isError}
               fullWidth
               id="confirmPassword"
-              type="confirmPassword"
+              type="password"
               label="Confrim Password"
               placeholder="Confirm Password"
               margin="normal"
