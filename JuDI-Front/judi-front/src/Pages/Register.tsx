@@ -11,7 +11,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import {createRef, RefObject} from "react";
 import axios, {AxiosRequestConfig} from "axios";
-import {rUser} from "../Models/user";
+import {userRegister} from "../Models/user";
 import {postRegister} from "../Actions/UserActions";
 
 export const menuSectionRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       background: '#2DD111'
     },
     header: {
+      fontSize: '1.75rem',
       textAlign: 'center',
       background: '#3EECAC',
       color: 'black'
@@ -130,7 +131,7 @@ const Register = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    if (state.username.trim() && state.email.trim() && state.password.trim() ) {
+    if (state.username.trim() && state.email.trim() && state.password.trim() && state.confirmPassword.trim() ) {
      dispatch({
        type: 'setIsButtonDisabled',
        payload: false
@@ -141,14 +142,14 @@ const Register = () => {
         payload: true
       });
     }
-  }, [state.username, state.password]);
+  }, [state.username,state.email, state.password, state.confirmPassword]);
 
   const handleRegister = async() => {
-            var ruser: rUser = {
-            username: state.username,
+            var ruser: userRegister = {
+            user_name: state.username,
             email: state.email,
             password: state.password,
-            confirmPassword: state.confirmPassword
+            password_confirmation: state.confirmPassword
         }
     
     console.log(state.username);
@@ -164,12 +165,19 @@ const Register = () => {
         payload: 'Please Try Again'
       });
 
+    }
+    else if (state.password.length <8){
+      dispatch({
+        type: 'registerFailed',
+        payload: 'Your password must be at least 8 characters'
+      });
+
     } else {
       dispatch({
         type: 'registerSuccess',
         payload: 'Sign Up Successfully'
       });
-      var u : rUser= await postRegister(ruser)
+      var u : userRegister= await postRegister(ruser)
     }
   };
 
@@ -263,7 +271,7 @@ const Register = () => {
               error={state.isError}
               fullWidth
               id="confirmPassword"
-              type="password"
+              type="confirmPassword"
               label="Confrim Password"
               placeholder="Confirm Password"
               margin="normal"
