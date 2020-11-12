@@ -1,7 +1,6 @@
 
 import axios, {AxiosRequestConfig} from "axios";
-import {User} from "../Models/user";
-import {rUser} from "../Models/user";
+import {User, userRegister, userLogin} from "../Models/user";
 
 
 export const postUser = async (user: User) : Promise<User> => {
@@ -22,7 +21,6 @@ export const postUser = async (user: User) : Promise<User> => {
     })
 
 }
-
 export const postImage = async (image: string) : Promise<string> => {
     let config: AxiosRequestConfig = {
         method: "post",
@@ -42,14 +40,18 @@ export const postImage = async (image: string) : Promise<string> => {
 
 }
 
-export const postRegister = async (ruser: rUser) : Promise<rUser> =>{
+export const postRegister = async (userRegister: userRegister) : Promise<userRegister> =>{
     let config: AxiosRequestConfig = {
         method: "post",
         url: "http://localhost:8000/api/users",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest"
+        }
     }
-    return axios.post("http://localhost:8000/api/users", ruser, config).then((res) => {
+    return axios.post("http://127.0.0.1:8000/api/users", userRegister, config).then((res) => {
         if (res.status == 200) {
-            var u: rUser = res.data;
+            var u: userRegister = res.data;
             return u
         }
         return null as any;
@@ -74,4 +76,23 @@ export const getUser = async () => {
         return null as any;
     })
 
+}
+
+
+export const getUserLogin = async () => {
+    let config: AxiosRequestConfig = {
+        method: "post",
+        url: "http://localhost:8000/api/users/signin",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest"
+        }
+    }
+    return axios(config).then((res) => {
+        if (res.status == 200) {
+            var u: userLogin = res.data;
+            return u
+        }
+        return null as any;
+    })
 }

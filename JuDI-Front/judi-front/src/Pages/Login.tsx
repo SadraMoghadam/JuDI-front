@@ -10,6 +10,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import {createRef, RefObject} from "react";
+import axios, {AxiosRequestConfig} from "axios";
+import {userLogin} from "../Models/user";
+import {getUserLogin} from "../Actions/UserActions";
 
 export const menuSectionRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const aboutUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
@@ -52,22 +55,24 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type State = {
-  username: string
+  email: string
   password:  string
   isButtonDisabled: boolean
   helperText: string
   isError: boolean
+  ableToLogin: boolean
 };
 
 const initialState:State = {
-  username: '',
+  email: '',
   password: '',
   isButtonDisabled: true,
   helperText: '',
-  isError: false
+  isError: false,
+  ableToLogin: false
 };
 
-type Action = { type: 'setUsername', payload: string }
+type Action = { type: 'setEmail', payload: string }
   | { type: 'setPassword', payload: string }
   | { type: 'setIsButtonDisabled', payload: boolean }
   | { type: 'loginSuccess', payload: string }
@@ -76,10 +81,10 @@ type Action = { type: 'setUsername', payload: string }
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'setUsername': 
+    case 'setEmail': 
       return {
         ...state,
-        username: action.payload
+        email: action.payload
       };
     case 'setPassword': 
       return {
@@ -116,7 +121,7 @@ const Login = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    if (state.username.trim() && state.password.trim()) {
+    if (state.email.trim() && state.password.trim()) {
      dispatch({
        type: 'setIsButtonDisabled',
        payload: false
@@ -127,21 +132,25 @@ const Login = () => {
         payload: true
       });
     }
-  }, [state.username, state.password]);
+  }, [state.email, state.password]);
 
-  const handleLogin = () => {
-    if (state.username === 'abc@email.com' && state.password === 'password') {
+  const handleLogin = async() => {
+    var u : userLogin= await getUserLogin()
+
+    if (state.email === u.user_name && state.password === u.password) {
+      state.ableToLogin = true
       dispatch({
         type: 'loginSuccess',
         payload: 'Login Successfully',
-        
-      });
-    } else {
-      dispatch({
-        type: 'loginFailed',
-        payload: 'Incorrect username or password'
       });
     }
+    else {
+      state.ableToLogin = false
+      dispatch({
+        type: 'loginFailed',
+        payload: 'Incorrect email or password'
+      });
+    } 
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
@@ -153,7 +162,7 @@ const Login = () => {
   const handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       dispatch({
-        type: 'setUsername',
+        type: 'setEmail',
         payload: event.target.value
       });
     };
@@ -184,10 +193,10 @@ const Login = () => {
             <TextField
               error={state.isError}
               fullWidth
-              id="username"
+              id="email"
               type="email"
-              label="Username"
-              placeholder="Username"
+              label="Email"
+              placeholder="Email"
               margin="normal"
               onChange={handleUsernameChange}
               onKeyPress={handleKeyPress}
@@ -208,7 +217,7 @@ const Login = () => {
         </CardContent>
         <CardActions>
           <Button 
-            href="/Dashboard"
+            href={state.ableToLogin? "/Dashboard" : "/"}
             variant="contained"
             size="large"
             color="secondary"
