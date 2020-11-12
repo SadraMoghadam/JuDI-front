@@ -21,7 +21,7 @@ class CardBase extends React.Component<CardBaseProps> {
         super(props);
         this.state= {
             card: props.card,
-            //date: (props.card.dueDate.getFullYear() + '-' + ((props.card.dueDate.getMonth() + 1)) + '-' + props.card.dueDate.getDate() + ' ' +props.card.dueDate.getHours() + ':' + props.card.dueDate.getMinutes()+ ':' + props.card.dueDate.getSeconds())
+            //date: (props.card.due.getFullYear() + '-' + ((props.card.due.getMonth() + 1)) + '-' + props.card.due.getDate() + ' ' +props.card.due.getHours() + ':' + props.card.due.getMinutes()+ ':' + props.card.due.getSeconds())
         }
     }
 
@@ -44,7 +44,7 @@ class CardBase extends React.Component<CardBaseProps> {
     render() {
         return (
             <div className="card">
-                <div className="card-header d-flex justify-content-between" style={{backgroundColor: this.renderSwitch(this.props.card.category)}}>
+                <div className="card-header d-flex justify-content-between" style={{backgroundColor: this.renderSwitch(this.props.card.category_id)}}>
                     <span>
                         <strong>Title: </strong>{this.props.card.title}
                     </span>
@@ -55,7 +55,7 @@ class CardBase extends React.Component<CardBaseProps> {
                 </div>
                 <div className="card-header d-flex justify-content-between" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
                     <div>Label: {this.props.card.label}</div>
-                    <span><i className="fa fa-star" style={{color: this.props.card.isImportant ? "gold" : "black"}}></i></span>
+                    <span><i className="fa fa-star" style={{color: this.props.card.with_star ? "gold" : "black"}}></i></span>
                 </div>
                 <div className="card-body"  style={{textDecoration: "underline", height: 15}}>
                     Description
@@ -71,10 +71,10 @@ class CardBase extends React.Component<CardBaseProps> {
                     <div className="col-lg-6 col-md-6 col-sm-12">reminder: {this.props.card.reminder ? "On" : "Off"}</div>
                 </div>
                 <div className="row card-body" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
-                    <div className="col-lg-12 col-md-12 col-sm-12">Due date: {this.props.card.isRepetitive ? "already assigned" : this.props.card.dueDate == null ? "not assigned" : this.props.card.dueDate.toLocaleString()}</div>
+                    <div className="col-lg-12 col-md-12 col-sm-12">Due date: {this.props.card.isRepetitive ? "already assigned" : this.props.card.due == null ? "not assigned" : this.props.card.due.toLocaleString()}</div>
                 </div>
-                <div className="card-footer" style={{backgroundColor: this.props.card.done ? "#3EECAC" : "lightgray"}}>
-                    <div>{this.props.card.done ? "Done" : "Ongoing"}</div>
+                <div className="card-footer" style={{backgroundColor: this.props.card.is_done ? "#3EECAC" : "lightgray"}}>
+                    <div>{this.props.card.is_done ? "is_done" : "Ongoing"}</div>
                 </div>
             </div>
         );
