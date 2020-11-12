@@ -11,7 +11,7 @@ import { accountRef } from "../../Pages/Profile";
 import {RouteComponentProps, withRouter} from "react-router";
 import ChangePassword from "./ChangePassword";
 import {User} from "../../Models/user";
-import {postUser} from "../../Actions/UserActions";
+import {userProfileUpdate} from "../../Actions/UserActions";
 
 
 interface AccountProps {
@@ -118,13 +118,13 @@ class Account extends React.Component<AccountProps, IAccountState>
 
     submit = async () => {
         var user: User = {
-            username: this.state.username,
+            user_name: this.state.username,
             email: this.state.email,
             password: this.state.password,
-            fullName: this.state.fullName,
+            full_name: this.state.fullName,
         }
 
-        var u: User = await postUser(user)
+        var u: User = await userProfileUpdate(user)
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {

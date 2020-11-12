@@ -4,7 +4,7 @@ import { useState } from 'react';
 import "../../CSS/Profile.scss"
 import "../../CSS/BasePage.scss"
 import profileAvatar from "../../Assets/Images/profile.png";
-import {postImage, postUser} from "../../Actions/UserActions";
+import {postImage, userProfileUpdate} from "../../Actions/UserActions";
 
 interface IImage{
   image: string

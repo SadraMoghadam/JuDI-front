@@ -31,6 +31,10 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
             this.setState({profileImage: ""})
     }
 
+    onLogoutClick = () => {
+        localStorage.setItem("token", "")
+    }
+
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <div>
@@ -46,7 +50,7 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
                     <a className={this.props.state==="dashboard" ? "active" : ""} href="/dashboard">Dashboard</a>
                     <a className={this.props.state==="CRUDCard" ? "active" : ""} href="/dashboard/crudcard">Cards</a>
                     <div className="topnav-right">
-                        <a href="/">Logout</a>
+                        <a onClick={this.onLogoutClick} href="/">Logout</a>
                         
                     </div>
                 </div>
