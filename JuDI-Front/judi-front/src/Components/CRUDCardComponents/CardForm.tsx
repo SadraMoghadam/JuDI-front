@@ -8,6 +8,8 @@ import "../../CSS/Card.scss"
 import "../../CSS/Base.scss"
 import {DetailedArguments} from "yargs-parser";
 import {number} from "prop-types";
+import {getUserLogin} from "../../Actions/UserActions";
+import {updateCard, createCard, getCards} from "../../Actions/CardActions";
 
 interface CardFormProps {
     card: Card,
@@ -111,9 +113,23 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         }
 
     }
-    handleis_doneUpdate = (): void => {
+    handleisDoneUpdate = async () => {
         console.log("-0-")
+        var updatedCard: Card = {
+            id: this.props.card.id,
+            title: this.props.card.title,
+            description: this.props.card.description,
+            due: this.props.card.due,
+            category_id: this.props.card.category_id,
+            label: this.props.card.label,
+            with_star: this.props.card.with_star,
+            reminder: this.props.card.reminder,
+            is_done: this.props.card.is_done,
+            isRepetitive: this.props.card.isRepetitive,
+            weekDays: this.props.card.weekDays
+        }
         this.setState({is_done: !this.state.is_done});
+        //var cardUpdateResponse : number = await updateCard(updatedCard)
     }
     handleWeekDaysUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
         const weekDays = this.state.weekDays
@@ -309,7 +325,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     </button>
                 </div>
                 <div className="form-group d-flex justify-content-center">
-                    <button type="submit" className="is_donebtn" disabled={this.state.title == "" ? true : false} style={{backgroundColor: this.state.title == "" ? "lightgray" : ""}} onClick={this.handleis_doneUpdate}>
+                    <button type="submit" className="is_donebtn" disabled={this.state.title == "" ? true : false} style={{backgroundColor: this.state.title == "" ? "lightgray" : ""}} onClick={this.handleisDoneUpdate}>
                         {
                             this.state.is_done ?
                                 <span>Undo</span>

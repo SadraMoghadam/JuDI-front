@@ -8,6 +8,10 @@ import { useHistory } from 'react-router-dom';
 import {Card, Categories, WeekDays} from "../Models/Card";
 import CardList from "../Components/CRUDCardComponents/CardList";
 import ToggleableCardForm from "../Components/CRUDCardComponents/ToggleableCardForm";
+import {updateCard, createCard, getCards} from "../Actions/CardActions";
+import {async} from "q";
+import {UserProfile} from "../Models/user";
+import {getUserProfile} from "../Actions/UserActions";
 
 interface ICRUDPageState {
     cards: Card[]
@@ -18,11 +22,11 @@ interface ICRUDPageState {
 class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
 
-
     constructor(props: RouteComponentProps) {
         super(props);
         //new Date(2020, 0O5, 0O5, 17, 23, 42)
         this.state = {
+            // cards: []
             cards: [
                 {
                     id: 1,
@@ -54,6 +58,13 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
         }
     }
 
+
+    componentWillMount = async() =>{
+        //var newCards: Card[] = await getCards();
+        //this.setState({cards:newCards})
+        window.scrollTo(0, 0)
+    }
+
     //convertToCardFormat = () => {
     //    var cards: Card[]{
     //
@@ -66,24 +77,28 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
     }
 
     updateCard = (newCard: Card) => {
-        const newCards = this.state.cards.map(card => {
+        const newCards = this.state.cards.map( (card) => {
             if(card.id === newCard.id) {
+                //var cardCreateResponse : number = await createCard(newCard)
                 return Object.assign({}, newCard)
             } else {
+                //var cardUpdateResponse : number = await updateCard(card)
                 return card;
             }
         });
-
-        this.setState({cards: newCards});
+        //const n: Card[] = [];
+        //for (let k of Array.from(newCards.values())) {
+        //    let card: Card = await k;
+        //    n.push(card)
+        //}
+        if(newCard != null)
+            this.setState({cards: newCards});
     }
 
     deleteCard = (cardID: number) => {
         this.setState({cards: this.state.cards.filter(card => card.id !== cardID)})
     }
 
-    componentWillMount = async () => {
-        window.scrollTo(0, 0)
-    }
 
 
 
