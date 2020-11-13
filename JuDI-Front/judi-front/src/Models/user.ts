@@ -9,6 +9,12 @@ export interface User {
     full_name: string,
 }
 
+export interface UserProfile {
+    user_name: string,
+    email: string,
+    full_name: string,
+}
+
 export interface UserAvatar {
     image: string
 }
@@ -33,6 +39,6 @@ export interface userRegister {
 }
 
 export interface userLogin {
-    email: string,
+    user_name: string,
     password: string,
 }

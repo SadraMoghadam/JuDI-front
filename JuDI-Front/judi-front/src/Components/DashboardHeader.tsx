@@ -33,6 +33,7 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
 
     onLogoutClick = () => {
         localStorage.setItem("token", "")
+        localStorage.removeItem("image")
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
@@ -41,9 +42,12 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
                 <div className="App-header-judi">
                     JuDI
                     <a className={this.props.state==="profile" ? "active" : ""} href="/dashboard/profile">
-                    <div className="circle" style={{overflow: "hidden", alignItems:"right", height:40, width:40, position:"absolute", right:20, marginTop:-50, backgroundImage: this.state.profileImage == "" ? `url(${profileAvatar}")` : `url("data:image/jpeg;base64,${this.state.profileImage}")`, backgroundSize: 'cover'}}>
+                        <div className="circle" style={{overflow: "hidden", alignItems:"right", height:40, width:40, position:"absolute", right:20, marginTop:-50, backgroundImage: this.state.profileImage == "" ? `url(${profileAvatar}")` : `url("data:image/jpeg;base64,${this.state.profileImage}")`, backgroundSize: 'cover'}}>
 
-                    </div>
+                        </div>
+                        <div style={{overflow: "hidden", alignItems:"right", fontSize: 10, color:"#3EECAC", position:"absolute", right:65, marginTop:-40}}>
+                            profile
+                        </div>
                     </a>
                 </div>
                 <div className="topnav">

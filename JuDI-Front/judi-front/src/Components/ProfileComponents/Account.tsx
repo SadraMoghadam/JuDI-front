@@ -10,8 +10,8 @@ import { stat } from "fs";
 import { accountRef } from "../../Pages/Profile";
 import {RouteComponentProps, withRouter} from "react-router";
 import ChangePassword from "./ChangePassword";
-import {User} from "../../Models/user";
-import {userProfileUpdate} from "../../Actions/UserActions";
+import {User, UserProfile} from "../../Models/user";
+import {getUserProfile, userProfileUpdate} from "../../Actions/UserActions";
 
 
 interface AccountProps {
@@ -32,23 +32,30 @@ interface IAccountState {
 
 class Account extends React.Component<AccountProps, IAccountState>
 {
-    
+
     constructor(props: AccountProps) {
         super(props);
         this.state = {
             changePassword: false,
-            user_name: "Scorpion33033",
+            user_name: "",
             password: "SSS333",
-            email: "sadra_h_m@outlook.com",
-            full_name: "Sadra Moghadam",
+            email: "",
+            full_name: "",
             canSubmit: true,
             correctEmail: true
         }
     }
 
-    componentWillMount(): void {
-        if(!this.state.email.match(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
-            this.setState({correctEmail: false})
+    componentWillMount =  async() => {
+        // if(!this.state.email.match(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
+        //     this.setState({correctEmail: true})
+        var user = await getUserProfile();
+        console.log(user.user_name)
+        this.setState({
+            user_name: user.user_name,
+            email: user.email,
+            full_name: user.full_name
+        })
     }
 
     setPasswordState = (bool:boolean) => {
@@ -117,6 +124,7 @@ class Account extends React.Component<AccountProps, IAccountState>
     }
 
     submit = async () => {
+
         var user: User = {
             user_name: this.state.user_name,
             email: this.state.email,
@@ -124,7 +132,7 @@ class Account extends React.Component<AccountProps, IAccountState>
             full_name: this.state.full_name,
         }
 
-        var u: User = await userProfileUpdate(user)
+        var userProfileResponse: number = await userProfileUpdate(user)
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
@@ -133,11 +141,11 @@ class Account extends React.Component<AccountProps, IAccountState>
                 <div ref={this.props.accountRef}>
                     <h2>Account</h2>
                     <div className="inside-profile-alt">
-                        full_name
+                        FullName
                     </div>
                     <input placeholder="write your Name here ..." defaultValue={this.state.full_name} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangefull_name(e)}></input>
                     <div className="inside-profile-alt">
-                        user_name
+                        UserName
                     </div>
                     <input placeholder="you want to be known as ..." defaultValue={this.state.user_name} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeuser_name(e)}></input>
                     <div className="inside-profile-alt">
@@ -161,7 +169,7 @@ class Account extends React.Component<AccountProps, IAccountState>
                         this.state.changePassword == true ? <ChangePassword onChangePassword={this.passSet} passwordCheck={this.currentPassCheck}/> : null
                     }
 
-                    <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit && this.state.correctEmail ? false : true} style={{backgroundColor: this.state.canSubmit  && this.state.correctEmail ? "" : "gray"}}>Save Changes</button>
+                    <a href="/dashboard"> <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit && this.state.correctEmail ? false : true} style={{backgroundColor: this.state.canSubmit  && this.state.correctEmail ? "" : "gray"}}>Save Changes</button></a>
                 </div>
 
         )
