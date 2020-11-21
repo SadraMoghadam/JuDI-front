@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed0e2cbe-fe91-493b-88a6-d22eaf6def1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CRUDCardComponents/EditableCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CRUDCardComponents/EditableCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/CRUDPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/CRUDPage.tsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,15 +15,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CSS/Profile.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="23" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/DashboardHeader.tsx">
           <provider selected="true" editor-type-id="text-editor">
@@ -64,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardForm.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+            <state relative-caret-position="1680">
+              <caret line="206" column="45" lean-forward="true" selection-start-line="206" selection-start-column="45" selection-end-line="206" selection-end-column="45" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -73,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
+            <state relative-caret-position="349">
+              <caret line="57" column="28" selection-end-line="94" selection-end-column="24" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -109,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pages/CRUDPage.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="369">
-              <caret line="114" column="145" selection-start-line="114" selection-start-column="145" selection-end-line="114" selection-end-column="145" />
+              <caret line="114" column="48" selection-start-line="114" selection-start-column="48" selection-end-line="114" selection-end-column="48" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -124,8 +111,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/ToggleableCardForm.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+            <state relative-caret-position="152">
+              <caret line="58" column="25" lean-forward="true" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardCopy.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -173,6 +172,7 @@
       <find>histo</find>
       <find>emai</find>
       <find>onCopyClick</find>
+      <find>onCardCreate</find>
     </findStrings>
     <replaceStrings>
       <replace>fullName</replace>
@@ -208,7 +208,6 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/CSS/Base.scss" />
         <option value="$PROJECT_DIR$/src/CSS/Card.scss" />
-        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/ToggleableCardForm.tsx" />
         <option value="$PROJECT_DIR$/src/Components/ProfileComponents/ChangePassword.tsx" />
         <option value="$PROJECT_DIR$/src/App.tsx" />
         <option value="$PROJECT_DIR$/src/Pages/Login1.tsx" />
@@ -224,8 +223,10 @@
         <option value="$PROJECT_DIR$/src/Pages/Login.tsx" />
         <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/EditableCard.tsx" />
         <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardList.tsx" />
-        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx" />
         <option value="$PROJECT_DIR$/src/Pages/CRUDPage.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/ToggleableCardForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardCopy.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx" />
       </list>
     </option>
   </component>
@@ -314,7 +315,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Actions" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/CRUDCardComponents" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -323,10 +324,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\src\Components\CRUDCardComponents" />
       <recent name="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\src\Actions" />
       <recent name="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\src\Pages" />
       <recent name="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\src\CSS" />
-      <recent name="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\src\Components\CRUDCardComponents" />
       <recent name="D:\Projects\JuDI-front\JuDI-front\JuDI-Front\judi-front\src\Models" />
     </key>
   </component>
@@ -366,18 +367,18 @@
       <workItem from="1605253088434" duration="12330000" />
       <workItem from="1605278094057" duration="1624000" />
       <workItem from="1605787985754" duration="2485000" />
-      <workItem from="1605943264633" duration="1427000" />
+      <workItem from="1605943264633" duration="2811000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173681000" />
+    <option name="totallyTimeSpent" value="175065000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="840" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.117962465" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.117962465" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -392,7 +393,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="TypeScript" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.21892655" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.21892655" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Tool Output" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -686,12 +687,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardForm.tsx">
+    <entry file="file://$PROJECT_DIR$/src/Actions/UserActions.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+        <state relative-caret-position="927">
+          <caret line="135" column="18" lean-forward="true" selection-start-line="135" selection-start-column="18" selection-end-line="135" selection-end-column="18" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#1#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -706,20 +707,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/ToggleableCardForm.tsx">
+    <entry file="file://$PROJECT_DIR$/src/Pages/CRUDPage.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
+        <state relative-caret-position="369">
+          <caret line="114" column="48" selection-start-line="114" selection-start-column="48" selection-end-line="114" selection-end-column="48" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -736,20 +727,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Actions/UserActions.ts">
+    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardCopy.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="927">
-          <caret line="135" column="18" lean-forward="true" selection-start-line="135" selection-start-column="18" selection-end-line="135" selection-end-column="18" />
+        <state relative-caret-position="357">
+          <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
           <folding>
-            <element signature="e#1#49#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pages/CRUDPage.tsx">
+    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/ToggleableCardForm.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="114" column="145" selection-start-line="114" selection-start-column="145" selection-end-line="114" selection-end-column="145" />
+        <state relative-caret-position="152">
+          <caret line="58" column="25" lean-forward="true" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1680">
+          <caret line="206" column="45" lean-forward="true" selection-start-line="206" selection-start-column="45" selection-end-line="206" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CRUDCardComponents/CardBase.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="57" column="28" selection-end-line="94" selection-end-column="24" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
