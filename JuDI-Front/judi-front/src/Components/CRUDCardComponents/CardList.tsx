@@ -9,6 +9,7 @@ interface CardListProps {
     cards: Card[],
     onDeleteClick: Function,
     onUpdateClick: Function,
+    onCopyClick: Function
 }
 
 
@@ -20,6 +21,7 @@ class CardList extends React.Component<CardListProps> {
                 card={card}
                 onDeleteClick={this.props.onDeleteClick}
                 onUpdateClick={this.props.onUpdateClick}
+                onCopyClick={this.props.onCopyClick}
             ></EditableCard>
         ));
         return (

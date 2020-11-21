@@ -11,6 +11,7 @@ interface EditableCardProps {
     card: Card,
     onDeleteClick: Function,
     onUpdateClick: Function,
+    onCopyClick: Function
 }
 
 interface IEditableCardState{
@@ -49,7 +50,7 @@ class EditableCard extends React.Component<EditableCardProps, IEditableCardState
                     <CardForm card={this.props.card} onCancelClick={this.leaveEditMode} onFormSubmit={this.handleUpdate}/>
 
                     : (
-                    <CardBase card={this.props.card} onEditClick={this.enterEditMode} onDeleteClick={this.handleDelete}/>
+                    <CardBase card={this.props.card} onEditClick={this.enterEditMode} onDeleteClick={this.handleDelete} onCopyClick={this.props.onCopyClick}/>
                     )
                 }
             </div>

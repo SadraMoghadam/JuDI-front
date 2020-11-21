@@ -99,6 +99,10 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
         this.setState({cards: this.state.cards.filter(card => card.id !== cardID)})
     }
 
+    copyCard = (card: Card) => {
+        card.id = Math.floor(Math.random() * 1000);
+        this.setState({cards: this.state.cards.concat([card])});
+    }
 
 
 
@@ -108,7 +112,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
             <DashboardHeader state={"CRUDCard"}/>
             <main className="d-flex justify-content-center my-4">
                 <div className="col-6" style={{alignContent:"center", margin: "auto"}}>
-                    <CardList cards={this.state.cards} onDeleteClick={this.deleteCard} onUpdateClick={this.updateCard}/>
+                    <CardList cards={this.state.cards} onDeleteClick={this.deleteCard} onUpdateClick={this.updateCard} onCopyClick={this.copyCard}/>
                     <ToggleableCardForm onCardCreate={this.createNewCard}/>
                 </div>
             </main>;

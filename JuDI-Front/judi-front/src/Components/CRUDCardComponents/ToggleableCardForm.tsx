@@ -58,7 +58,6 @@ class ToggleableCardForm extends React.Component<ToggleableCardFormProps, IToggl
                 <div className="mb-3 p-4" style={{boxShadow: '0 0 10px #ccc'}} >
                     <CardForm card={card} onFormSubmit={this.handleFormSubmit} onCancelClick={this.handleCancleClick}/>
                 </div>
-
             )
         }
         return (

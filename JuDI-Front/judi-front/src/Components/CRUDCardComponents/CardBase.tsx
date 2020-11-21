@@ -6,11 +6,14 @@ import {Card} from "../../Models/Card";
 import "../../CSS/Card.scss"
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import CardForm from "./CardForm";
+import ToggleableCardForm from "./ToggleableCardForm";
 
 interface CardBaseProps {
     card: Card,
     onEditClick: Function,
     onDeleteClick: Function,
+    onCopyClick: Function
 }
 
 
@@ -50,6 +53,10 @@ class CardBase extends React.Component<CardBaseProps> {
                     </span>
                     <div>
                         <span onClick={() => this.props.onEditClick()} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-edit"></i></span>
+
+                        <span onClick={() => {this.props.onCopyClick}} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-copy"></i>
+                            {/*<ToggleableCardForm onCardCreate={this.props.onCopyClick}/>*/}
+                        </span>
                         <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i className="fa fa-trash-o"></i></span>
                     </div>
                 </div>
