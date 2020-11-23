@@ -6,25 +6,46 @@ import {createRef, RefObject} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
 import "../CSS/schedule.css"
-
-
+//import { Table} from 'antd';
 
 
 //const history = useHistory();
 //const handleClick = () => history.push('/profile');
 
-  var d = new Date();
-  var weekday = new Array(7);
-  weekday[0] = "Sunday";
-  weekday[1] = "Monday";
-  weekday[2] = "Tuesday";
-  weekday[3] = "Wednesday";
-  weekday[4] = "Thursday";
-  weekday[5] = "Friday";
-  weekday[6] = "Saturday";
 
-  var n = weekday[d.getDay()];
-
+// const columns = [
+//     {
+//       title: 'Day',
+//       dataIndex: 'day',
+//     },
+//     {
+//       title: 'Task',
+//       dataIndex: 'task',
+//     },
+//   ];
+//   const data = [
+//     {
+//       key: '1',
+//       day: 'Sunday',
+//       task: 'ADD'
+//     },
+//     {
+//       key: '2',
+//       day: 'Monday',
+//       task: 'ADD'
+//     },
+//     {
+//       key: '2',
+//       day: 'Tuesday',
+//       task: 'ADD'
+//     },
+//     {
+//       key: '2',
+//       day: 'Thursday',
+//       task: 'ADD'
+//     }
+  
+//   ];
 
 class Dashboard extends React.Component<RouteComponentProps> {
 
@@ -36,117 +57,96 @@ class Dashboard extends React.Component<RouteComponentProps> {
         return(
             <div>
             <DashboardHeader state={"dashboard"}/>
-         
-            <div className="container">
-
-                <table className="_table">
-                    <thead className="_thead">
-                        <div >
-            
-                        </div>
+            <div className="form-tbl">
+            <div className="tbl-header">
+            <table>
+                <thead>
                         <tr>
-                            <th> Sunday </th>
-                            <th> Monday </th>
-                            <th> Tuesday </th>
-                            <th> Wednesday </th>
-                            <th> Thursday </th>
-                            <th> Friday </th>
+                            <th>Day</th>
+                            <th> Task1 </th>
+                            <th> Task2 </th>
+                            <th> Task3 </th>
+                            <th> Task4 </th>
+                            <th> Task5 </th>
                         </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+            </table>
+            </div>
+            <div className="tbl-content">
+            <table>
+                <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>Sunday</td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                 
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>Monday</td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                       
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>Tuesday</td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>Wednesday</td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                           
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>Thursday</td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                      
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>Friday</td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                 
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>Saturday</td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                   
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-    
-            </tbody>
-        </table>
-    </div>
-</div>
+                </tbody>
+            </table>
+            <div className="Add-btn-tbl"><button className= "icon-btn add-btn">
+                                    <div className="add-icon"></div>
+                                    <div className="btn-txt">Add Card</div>
+                                </button></div>
+            </div>
+            </div>
+            </div>
           
         );
     }
