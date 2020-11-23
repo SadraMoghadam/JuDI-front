@@ -2,7 +2,7 @@ import * as React from "react";
 import {createRef, RefObject} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
-import {Card} from "../../Models/Card";
+import {Card, Categories, ConvertId2Category} from "../../Models/Card";
 import "../../CSS/Card.scss"
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -18,12 +18,31 @@ interface CardBaseProps {
 
 
 
+interface ICardBaseState{
+    card: Card
+    inCreateMode: boolean
+}
 
-class CardBase extends React.Component<CardBaseProps> {
+const newcard: Card ={
+    id: 0,
+    title: "",
+    description: "",
+    due: new Date(),
+    category_id: 4,
+    label: "",
+    with_star: false,
+    reminder: false,
+    is_done: false,
+    is_repetitive: false,
+    repeat_days: []
+}
+
+class CardBase extends React.Component<CardBaseProps, ICardBaseState> {
     constructor(props: CardBaseProps) {
         super(props);
         this.state= {
             card: props.card,
+            inCreateMode: false
             //date: (props.card.due.getFullYear() + '-' + ((props.card.due.getMonth() + 1)) + '-' + props.card.due.getDate() + ' ' +props.card.due.getHours() + ':' + props.card.due.getMinutes()+ ':' + props.card.due.getSeconds())
         }
     }
@@ -44,22 +63,44 @@ class CardBase extends React.Component<CardBaseProps> {
     }
 
 
+
+
+    handleCreateClick = () => {
+        this.setState({inCreateMode: true});
+    }
+    leaveCreateMode = () => {
+        this.setState({inCreateMode: false});
+    }
+    handleCancleClick = () => {
+        this.leaveCreateMode();
+    }
+    handleFormSubmit = (card: Card) => {
+        this.leaveCreateMode();
+        var id = Math.floor(Math.random() * 1000)
+        this.props.onCopyClick(card, id);
+    }
+
+
+
+
     render() {
+        if (this.state.inCreateMode) {
+            return (
+                <div className="mb-3 p-4" style={{boxShadow: '0 0 10px #ccc'}} >
+                    <CardForm card={newcard} onFormSubmit={this.handleFormSubmit} onCancelClick={this.handleCancleClick}/>
+                </div>
+            )
+        }
         return (
             <div className="card">
-                <div className="card-header d-flex justify-content-between" style={{backgroundColor: this.renderSwitch(this.props.card.category_id)}}>
+                <div className="card-header d-flex justify-content-between" style={{backgroundColor: this.renderSwitch(ConvertId2Category(this.props.card.category_id))}}>
                     <span>
                         <strong>Title: </strong>{this.props.card.title}
                     </span>
                     <div>
                         <span onClick={() => this.props.onEditClick()} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-edit"></i></span>
 
-                        <span onClick={() => {
-                            this.props.onCopyClick();
-                            window.location.reload();
-                        }} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-copy"></i>
-                            {/*<ToggleableCardForm onCardCreate={this.props.onCopyClick}/>*/}
-                        </span>
+                        <span onClick={() => this.handleCreateClick()} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-copy"></i></span>
                         <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i className="fa fa-trash-o"></i></span>
                     </div>
                 </div>
@@ -74,14 +115,14 @@ class CardBase extends React.Component<CardBaseProps> {
                     {this.props.card.description}
                 </div>
                 <div className="row card-body" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
-                    <div className="col-lg-6 col-md-6 col-sm-12">{this.props.card.isRepetitive ? "Is" : "Is not"} repetitive{this.props.card.isRepetitive ? ": [" : ""} {this.props.card.isRepetitive ? this.props.card.weekDays.map(day => {
+                    <div className="col-lg-6 col-md-6 col-sm-12">{this.props.card.is_repetitive ? "Is" : "Is not"} repetitive{this.props.card.is_repetitive ? ": [" : ""} {this.props.card.is_repetitive ? this.props.card.repeat_days.map(day => {
                         return <span> {day} </span>
-                    }) : ""}{this.props.card.isRepetitive ? "]" : ""}</div>
+                    }) : ""}{this.props.card.is_repetitive ? "]" : ""}</div>
 
                     <div className="col-lg-6 col-md-6 col-sm-12">reminder: {this.props.card.reminder ? "On" : "Off"}</div>
                 </div>
                 <div className="row card-body" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
-                    <div className="col-lg-12 col-md-12 col-sm-12">Due date: {this.props.card.isRepetitive ? "already assigned" : this.props.card.due == null ? "not assigned" : this.props.card.due.toLocaleString()}</div>
+                    <div className="col-lg-12 col-md-12 col-sm-12">Due date: {this.props.card.is_repetitive ? "already assigned" : this.props.card.due == null ? "not assigned" : this.props.card.due.toLocaleString()}</div>
                 </div>
                 <div className="card-footer" style={{backgroundColor: this.props.card.is_done ? "#3EECAC" : "lightgray"}}>
                     <div>{this.props.card.is_done ? "is_done" : "Ongoing"}</div>
