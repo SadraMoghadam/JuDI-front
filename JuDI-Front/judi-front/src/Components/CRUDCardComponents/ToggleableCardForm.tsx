@@ -19,13 +19,13 @@ const card: Card ={
     title: "",
     description: "",
     due: new Date(),
-    category_id: Categories[4],
+    category_id: 4,
     label: "",
     with_star: false,
     reminder: false,
     is_done: false,
-    isRepetitive: false,
-    weekDays: []
+    is_repetitive: false,
+    repeat_days: []
 }
 
 class ToggleableCardForm extends React.Component<ToggleableCardFormProps, IToggleableCardFormState> {
