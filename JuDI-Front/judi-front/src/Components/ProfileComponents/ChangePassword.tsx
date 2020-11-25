@@ -12,7 +12,7 @@ import {RouteComponentProps, withRouter} from "react-router";
 import createChainedFunction from "@material-ui/core/utils/createChainedFunction";
 import {ChangeEvent} from "react";
 import {User} from "../../Models/user";
-import {userProfileUpdate} from "../../Actions/UserActions";
+import {getPassword, passwordUpdate, userProfileUpdate} from "../../Actions/UserActions";
 
 
 // interface PasswordProps {
@@ -48,6 +48,16 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
             correctPassword: true,
             canSubmit: false
         }
+    }
+
+    componentWillMount =  async() => {
+        // if(!this.state.email.match(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
+        //     this.setState({correctEmail: true})
+        var user = await getPassword();
+        console.log(this.state.password)
+        this.setState({
+            password: this.state.password
+        })
     }
 
 
@@ -121,7 +131,7 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
             password: this.state.password,
         }
 
-        //var userProfileResponse: number = await userProfileUpdate(newPassword)
+        var passwordResponse: number = await passwordUpdate(this.state.password)
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {

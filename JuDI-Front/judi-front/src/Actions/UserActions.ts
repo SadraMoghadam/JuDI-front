@@ -26,6 +26,8 @@ export const userProfileUpdate = async (user: UserProfile) : Promise<number> => 
     })
 
 }
+
+
 export const postImage = async (image: string) : Promise<string> => {
     let config: AxiosRequestConfig = {
         method: "post",
@@ -152,4 +154,51 @@ export const getUserProfile = async () : Promise<UserProfile> => {
 
 }
 
+
+export const getPassword = async () : Promise<string> => {
+    let config: AxiosRequestConfig = {
+        // method: "get",
+        // url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}`,
+        headers: {
+            "Content-Type": "application/json",
+            // "X-Requested-With": "XMLHttpRequest",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+    return axios.get(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, config).then((res) => {
+        if (res.status == 200) {
+            console.log(res.data.user.original)
+            return res.data
+        }
+        return null as any;
+    }).catch((e) => {
+        console.log("problem with get password")
+    })
+
+}
+
+
+export const passwordUpdate = async (password: string) : Promise<number> => {
+    let config: AxiosRequestConfig = {
+        //method: "put",
+        //url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}`,
+        headers: {
+            "Content-Type": "application/json",
+            //"X-Requested-With": "XMLHttpRequest",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+    return axios.put(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, password, config).then((res) => {
+        console.log(res.data)
+        if (res.status == 200) {
+            return 1
+        }
+        return 0;
+    }).catch(e => {
+
+        console.log(localStorage.getItem("user_name") + "------" +  localStorage.getItem("token"))
+        return 0
+    })
+
+}
 
