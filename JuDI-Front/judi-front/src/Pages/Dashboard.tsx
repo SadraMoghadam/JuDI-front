@@ -6,46 +6,23 @@ import {createRef, RefObject} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
 import "../CSS/schedule.css"
-//import { Table} from 'antd';
 
 
-//const history = useHistory();
-//const handleClick = () => history.push('/profile');
-
-
-// const columns = [
-//     {
-//       title: 'Day',
-//       dataIndex: 'day',
-//     },
-//     {
-//       title: 'Task',
-//       dataIndex: 'task',
-//     },
-//   ];
-//   const data = [
-//     {
-//       key: '1',
-//       day: 'Sunday',
-//       task: 'ADD'
-//     },
-//     {
-//       key: '2',
-//       day: 'Monday',
-//       task: 'ADD'
-//     },
-//     {
-//       key: '2',
-//       day: 'Tuesday',
-//       task: 'ADD'
-//     },
-//     {
-//       key: '2',
-//       day: 'Thursday',
-//       task: 'ADD'
-//     }
-  
-//   ];
+{/* <div>
+<div>
+    <span>
+        <button>
+        &laquo;
+        </button>
+    </span>
+    <input type="text" className="form-control week-picker" placeholder="Select a Week"></input>
+    <span>
+        <button>
+        &raquo;
+        </button>
+    </span>
+</div>
+</div> */}
 
 class Dashboard extends React.Component<RouteComponentProps> {
 
@@ -53,21 +30,33 @@ class Dashboard extends React.Component<RouteComponentProps> {
         window.scrollTo(0, 0)
     }
 
+    printFunction = () => {
+        window.print();
+    }
+
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <div>
             <DashboardHeader state={"dashboard"}/>
+            <div>
+                <form>
             <div className="form-tbl">
             <div className="tbl-header">
             <table>
                 <thead>
                         <tr>
-                            <th>Day</th>
-                            <th> Task1 </th>
-                            <th> Task2 </th>
-                            <th> Task3 </th>
-                            <th> Task4 </th>
-                            <th> Task5 </th>
+                            <th>
+                                <div className="week-cal">
+                            <input id="week" type="week" name="week" ></input>
+                            </div>
+                            </th>
+                            <th> Task </th>
+                            <th> Task </th>
+                            <th> Task </th>
+                            <th> Task </th>
+                            <th> Task </th>
+                            <th> Task </th>
+
                         </tr>
                 </thead>
             </table>
@@ -82,6 +71,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                             <td> </td>
                             <td> </td>
                             <td> </td>
+                            <td> </td>
+                   
                  
                         </tr>
                         <tr>
@@ -91,6 +82,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                             <td> </td>
                             <td> </td>
                             <td> </td>
+                            <td> </td>
+                         
                        
                         </tr>
                         <tr>
@@ -100,6 +93,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                             <td> </td>
                             <td> </td>
                             <td> </td>
+                            <td> </td>
+                           
                         
                         </tr>
                         <tr>
@@ -109,6 +104,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                             <td> </td>
                             <td> </td>
                             <td> </td>
+                            <td> </td>
+                        
                            
                         </tr>
                         <tr>
@@ -118,6 +115,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                             <td> </td>
                             <td> </td>
                             <td> </td>
+                            <td> </td>
+                       
                       
                         </tr>
                         <tr>
@@ -127,6 +126,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                             <td> </td>
                             <td> </td>
                             <td> </td>
+                            <td> </td>
+              
                  
                         </tr>
                         <tr>
@@ -136,15 +137,24 @@ class Dashboard extends React.Component<RouteComponentProps> {
                             <td> </td>
                             <td> </td>
                             <td> </td>
+                            <td> </td>
+                     
                    
                         </tr>
                 </tbody>
             </table>
-            <div className="Add-btn-tbl"><button className= "icon-btn add-btn">
+            <div className="set-btn-tbl">
+            
+                <button className= "icon-btn add-btn">
                                     <div className="add-icon"></div>
                                     <div className="btn-txt">Add Card</div>
-                                </button></div>
+                </button>
+                <button onClick={this.printFunction} className="print-button" ><span className="print-icon"></span></button>
             </div>
+                               
+            </div>
+            </div>
+            </form>
             </div>
             </div>
           
