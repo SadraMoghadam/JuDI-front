@@ -11,7 +11,7 @@ interface EditableCardProps {
     card: Card,
     onDeleteClick: Function,
     onUpdateClick: Function,
-    onCopyClick: Function
+    onCopyClick: () => void
 }
 
 interface IEditableCardState{

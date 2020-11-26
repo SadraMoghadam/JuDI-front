@@ -13,7 +13,7 @@ interface CardBaseProps {
     card: Card,
     onEditClick: Function,
     onDeleteClick: Function,
-    onCopyClick: Function
+    onCopyClick: () => void
 }
 
 
@@ -77,7 +77,7 @@ class CardBase extends React.Component<CardBaseProps, ICardBaseState> {
     handleFormSubmit = (card: Card) => {
         this.leaveCreateMode();
         var id = Math.floor(Math.random() * 1000)
-        this.props.onCopyClick(card, id);
+        this.props.onCopyClick();
     }
 
 
@@ -100,7 +100,7 @@ class CardBase extends React.Component<CardBaseProps, ICardBaseState> {
                     <div>
                         <span onClick={() => this.props.onEditClick()} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-edit"></i></span>
 
-                        <span onClick={() => this.handleCreateClick()} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-copy"></i></span>
+                        <span onClick={() => this.props.onCopyClick()} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-copy"></i></span>
                         <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i className="fa fa-trash-o"></i></span>
                     </div>
                 </div>

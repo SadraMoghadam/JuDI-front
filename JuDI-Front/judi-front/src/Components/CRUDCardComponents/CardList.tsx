@@ -12,8 +12,25 @@ interface CardListProps {
     onCopyClick: Function
 }
 
+interface ICardListState {
+    cards: Card[]
+}
 
-class CardList extends React.Component<CardListProps> {
+class CardList extends React.Component<CardListProps, ICardListState> {
+    constructor(props: any) {
+        super(props)
+        this.state = {
+            cards: this.props.cards
+        }
+    }
+
+    copyCard = (card: Card) => {
+        this.state.cards.push(card)
+        this.setState({
+            cards: this.state.cards
+        })
+    }
+
     render() {
         const cards = this.props.cards.map(card => (
             <EditableCard
@@ -21,7 +38,7 @@ class CardList extends React.Component<CardListProps> {
                 card={card}
                 onDeleteClick={this.props.onDeleteClick}
                 onUpdateClick={this.props.onUpdateClick}
-                onCopyClick={this.props.onCopyClick}
+                onCopyClick={() => this.copyCard(card)}
             ></EditableCard>
         ));
         return (
