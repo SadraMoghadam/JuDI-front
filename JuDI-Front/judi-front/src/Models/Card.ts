@@ -13,6 +13,12 @@ export interface Card {
     weekDays: string[]
 }
 
+export interface miniCard{
+    id: number,
+    title: string,
+    with_star: boolean
+}
+
 export const WeekDays = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
 
 export const Categories = ["sport", "work", "study", "educational", "others"]
