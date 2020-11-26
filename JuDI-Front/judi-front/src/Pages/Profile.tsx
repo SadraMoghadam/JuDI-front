@@ -54,7 +54,7 @@ class Profile extends React.Component<RouteComponentProps, IProfileState> {
                             <div className="row">
                                 <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("account", accountRef)} className={this.state.profileState==="account" ? "active" : ""}>Account</a></div>
                                 <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("avatar", avatarRef)} className={this.state.profileState==="avatar" ? "active" : ""}>Avatar</a></div>
-                                <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("change password", passwordRef)} className={this.state.profileState==="change password" ? "active" : ""} >ChangePassword</a></div>
+                                <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("change password", passwordRef)} className={this.state.profileState==="change password" ? "active" : ""} >Change Password</a></div>
                                 <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("score", scoreRef)} className={this.state.profileState==="score" ? "active" : ""} >Score and XP</a></div>
 
                             </div>

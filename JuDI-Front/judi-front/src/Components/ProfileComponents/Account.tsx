@@ -30,10 +30,10 @@ interface IAccountState {
 }
 
 
-class Account extends React.Component<AccountProps, IAccountState>
+class Account extends React.Component<RouteComponentProps & AccountProps, IAccountState>
 {
 
-    constructor(props: AccountProps) {
+    constructor(props: AccountProps & RouteComponentProps) {
         super(props);
         this.state = {
             changePassword: false,
@@ -46,17 +46,18 @@ class Account extends React.Component<AccountProps, IAccountState>
         }
     }
 
-    // componentWillMount =  async() => {
-    //     // if(!this.state.email.match(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
-    //     //     this.setState({correctEmail: true})
-    //     var user = await getUserProfile();
-    //     console.log(user.user_name)
-    //     this.setState({
-    //         user_name: user.user_name,
-    //         email: user.email,
-    //         full_name: user.full_name
-    //     })
-    // }
+    componentWillMount =  async() => {
+        // if(!this.state.email.match(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
+        //     this.setState({correctEmail: true})
+        var user = await getUserProfile();
+        //console.log(user.user_name)
+
+        this.setState({
+            user_name: user.user_name,
+            email: user.email,
+            full_name: user.full_name
+        })
+    }
 
 
     onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -99,14 +100,13 @@ class Account extends React.Component<AccountProps, IAccountState>
 
 
     submit = async () => {
-
-        var user: User = {
+        this.props.history.push("/dashboard")
+        var user: UserProfile = {
             user_name: this.state.user_name,
             email: this.state.email,
-            password: this.state.password,
             full_name: this.state.full_name,
         }
-
+        console.log(user)
         var userProfileResponse: number = await userProfileUpdate(user)
     }
 
@@ -144,7 +144,9 @@ class Account extends React.Component<AccountProps, IAccountState>
                     {/*    this.state.changePassword == true ? <ChangePassword onChangePassword={this.passSet} passwordCheck={this.currentPassCheck}/> : null*/}
                     {/*}*/}
 
-                    <a href="/dashboard"> <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit && this.state.correctEmail ? false : true} style={{backgroundColor: this.state.canSubmit  && this.state.correctEmail ? "" : "gray"}}>Save Changes</button></a>
+
+                    <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit && this.state.correctEmail ? false : true} style={{backgroundColor: this.state.canSubmit  && this.state.correctEmail ? "" : "gray"}}>Save Changes</button>
+
                 </div>
 
         )
@@ -154,4 +156,4 @@ class Account extends React.Component<AccountProps, IAccountState>
 
 
 
-export default Account;
+export default withRouter(Account);

@@ -16,6 +16,7 @@ export const userProfileUpdate = async (user: UserProfile) : Promise<number> => 
     return axios.put(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, user, config).then((res) => {
         console.log(res.data)
         if (res.status == 200) {
+            localStorage.setItem("user_name", user.user_name)
             return 1
         }
         return 0;
