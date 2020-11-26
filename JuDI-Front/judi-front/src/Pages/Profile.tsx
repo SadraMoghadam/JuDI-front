@@ -10,10 +10,12 @@ import "../CSS/Base.scss"
 import Account from "../Components/ProfileComponents/Account";
 import Avatar from "../Components/ProfileComponents/Avatar";
 import Score from "../Components/ProfileComponents/Score";
+import ChangePassword from "../Components/ProfileComponents/ChangePassword";
 
 export const accountRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const avatarRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const scoreRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
+export const passwordRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 
 interface IProfileState {
     profileState: string
@@ -52,7 +54,9 @@ class Profile extends React.Component<RouteComponentProps, IProfileState> {
                             <div className="row">
                                 <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("account", accountRef)} className={this.state.profileState==="account" ? "active" : ""}>Account</a></div>
                                 <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("avatar", avatarRef)} className={this.state.profileState==="avatar" ? "active" : ""}>Avatar</a></div>
+                                <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("change password", passwordRef)} className={this.state.profileState==="change password" ? "active" : ""} >Change Password</a></div>
                                 <div className="col-lg-12 col-md-12 col-sm-4 alt" style={{fontSize:25}}><a onClick={() => this.setProfileState("score", scoreRef)} className={this.state.profileState==="score" ? "active" : ""} >Score and XP</a></div>
+
                             </div>
                         </div>
                         <div className="col-lg-1 col-md-1 col-sm-12" style={{height:"10px"}}></div>
@@ -64,7 +68,10 @@ class Profile extends React.Component<RouteComponentProps, IProfileState> {
                                 this.state.profileState == "avatar" ?
                                 <Avatar avatarRef={avatarRef}/>
                                 :
+                                this.state.profileState == "score" ?
                                 <Score scoreRef={scoreRef}/>
+                                :
+                                <ChangePassword passwordRef={passwordRef}/>
                             }
                             
                             

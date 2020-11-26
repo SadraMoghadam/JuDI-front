@@ -30,10 +30,10 @@ interface IAccountState {
 }
 
 
-class Account extends React.Component<AccountProps, IAccountState>
+class Account extends React.Component<RouteComponentProps & AccountProps, IAccountState>
 {
 
-    constructor(props: AccountProps) {
+    constructor(props: AccountProps & RouteComponentProps) {
         super(props);
         this.state = {
             changePassword: false,
@@ -50,7 +50,8 @@ class Account extends React.Component<AccountProps, IAccountState>
         // if(!this.state.email.match(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
         //     this.setState({correctEmail: true})
         var user = await getUserProfile();
-        console.log(user.user_name)
+        //console.log(user.user_name)
+
         this.setState({
             user_name: user.user_name,
             email: user.email,
@@ -58,11 +59,6 @@ class Account extends React.Component<AccountProps, IAccountState>
         })
     }
 
-    setPasswordState = (bool:boolean) => {
-        this.setState({
-            changePassword: bool
-        })    
-    }
 
     onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
@@ -102,36 +98,15 @@ class Account extends React.Component<AccountProps, IAccountState>
     //         })
     // }
 
-    passSet = (pass: string, isConfirmed: boolean) => {
-        this.setState({
-            password: pass,
-            canSubmit: isConfirmed
-        })
-    }
-
-    currentPassCheck = (pass: string) => {
-        console.log(this.state.password + "------" + pass)
-        if(pass == this.state.password)
-            this.setState({
-                canSubmit: true
-            })
-        else {
-            alert("current password is incorrect")
-            this.setState({
-                canSubmit: false
-            })
-        }
-    }
 
     submit = async () => {
-
-        var user: User = {
+        this.props.history.push("/dashboard")
+        var user: UserProfile = {
             user_name: this.state.user_name,
             email: this.state.email,
-            password: this.state.password,
             full_name: this.state.full_name,
         }
-
+        console.log(user)
         var userProfileResponse: number = await userProfileUpdate(user)
     }
 
@@ -154,22 +129,24 @@ class Account extends React.Component<AccountProps, IAccountState>
                     <input placeholder="write your Email here ..." value={this.state.email} onChange={(e: ChangeEvent<HTMLInputElement>) => this.onChangeEmail(e)}></input>
                     <div style={{color: "red", fontSize: 10}}>{this.state.correctEmail ? "" : "Email is not correct"}</div>
                     <div style={{color: "#404040", margin:20}}>not verified yet? <a style={{fontSize:20, color:"#3EECAC"}}>Verify</a></div>
-                    <div style={{margin:20}}><a style={{color:"#3EECAC"}} onClick={() => {
-                        if(this.state.changePassword==true) {
-                            this.setState({canSubmit: true})
-                            this.setPasswordState(false)
-                        }
-                        else {
-                            this.setState({canSubmit: false})
-                            this.setPasswordState(true)
-                        }
-                        }}>
-                            Change password</a></div>
-                    {
-                        this.state.changePassword == true ? <ChangePassword onChangePassword={this.passSet} passwordCheck={this.currentPassCheck}/> : null
-                    }
+                    {/*<div style={{margin:20}}><a style={{color:"#3EECAC"}} onClick={() => {*/}
+                    {/*    if(this.state.changePassword==true) {*/}
+                    {/*        this.setState({canSubmit: true})*/}
+                    {/*        this.setPasswordState(false)*/}
+                    {/*    }*/}
+                    {/*    else {*/}
+                    {/*        this.setState({canSubmit: false})*/}
+                    {/*        this.setPasswordState(true)*/}
+                    {/*    }*/}
+                    {/*    }}>*/}
+                    {/*        Change password</a></div>*/}
+                    {/*{*/}
+                    {/*    this.state.changePassword == true ? <ChangePassword onChangePassword={this.passSet} passwordCheck={this.currentPassCheck}/> : null*/}
+                    {/*}*/}
 
-                    <a href="/dashboard"> <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit && this.state.correctEmail ? false : true} style={{backgroundColor: this.state.canSubmit  && this.state.correctEmail ? "" : "gray"}}>Save Changes</button></a>
+
+                    <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit && this.state.correctEmail ? false : true} style={{backgroundColor: this.state.canSubmit  && this.state.correctEmail ? "" : "gray"}}>Save Changes</button>
+
                 </div>
 
         )
@@ -179,4 +156,4 @@ class Account extends React.Component<AccountProps, IAccountState>
 
 
 
-export default Account;
+export default withRouter(Account);

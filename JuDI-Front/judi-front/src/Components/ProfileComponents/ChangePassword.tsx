@@ -11,18 +11,26 @@ import { accountRef } from "../../Pages/Profile";
 import {RouteComponentProps, withRouter} from "react-router";
 import createChainedFunction from "@material-ui/core/utils/createChainedFunction";
 import {ChangeEvent} from "react";
+import {User} from "../../Models/user";
+import {getPassword, passwordUpdate, userProfileUpdate} from "../../Actions/UserActions";
 
+
+// interface PasswordProps {
+//     onChangePassword: (newPass: string, isConfirmed: boolean) => void,
+//     passwordCheck: (pass: string) => void
+// }
 
 interface PasswordProps {
-    onChangePassword: (newPass: string, isConfirmed: boolean) => void,
-    passwordCheck: (pass: string) => void
+    passwordRef: RefObject<HTMLDivElement>
 }
 
 interface IPasswordState {
+    password: string,
     currentPasswordState: string,
     newPasswordState: string,
     showMessage: boolean,
-    correctPassword: boolean
+    correctPassword: boolean,
+    canSubmit: boolean
 }
 var changePassword: boolean;
 
@@ -33,10 +41,45 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
     constructor(props: PasswordProps) {
         super(props);
         this.state = {
+            password: "SSS333",
             currentPasswordState: "",
             newPasswordState: "",
             showMessage:false,
-            correctPassword: true
+            correctPassword: true,
+            canSubmit: false
+        }
+    }
+
+    componentWillMount =  async() => {
+        // if(!this.state.email.match(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))
+        //     this.setState({correctEmail: true})
+        var user = await getPassword();
+        console.log(this.state.password)
+        this.setState({
+            password: this.state.password
+        })
+    }
+
+
+
+    passSet = (pass: string, isConfirmed: boolean) => {
+        this.setState({
+            password: pass,
+            canSubmit: isConfirmed
+        })
+    }
+
+    currentPassCheck = (pass: string) => {
+        console.log(this.state.password + "------" + pass)
+        if(pass == this.state.password && this.state.newPasswordState != "")
+            this.setState({
+                canSubmit: true
+            })
+        else if (pass != this.state.password) {
+            alert("current password is incorrect")
+            this.setState({
+                canSubmit: false
+            })
         }
     }
 
@@ -45,11 +88,11 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
         this.setState({newPasswordState: e.target.value})
         if(reg.test(e.target.value)) {
             this.setState({correctPassword: true})
-            this.props.onChangePassword(this.state.newPasswordState, false)
+            this.passSet(this.state.newPasswordState, false)
         }
         else {
             this.setState({correctPassword: false})
-            this.props.onChangePassword(this.state.newPasswordState, false)
+            this.passSet(this.state.newPasswordState, false)
         }
 
     }
@@ -57,15 +100,15 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
     handleCurrentPassword = (e: ChangeEvent<HTMLInputElement>): void => {
         //this.setState({currentPasswordState: e.target.value})
         //console.log(this.state.currentPasswordState + "-------" +  e.target.value)
-        this.props.passwordCheck(e.target.value)
+        this.currentPassCheck(e.target.value)
     }
 
     handleconfirmPasswordState = (e: ChangeEvent<HTMLInputElement>) => {
         if (this.state.newPasswordState == e.target.value) {
             this.setState({showMessage: false})
-            this.props.onChangePassword(this.state.newPasswordState, true)
+            this.passSet(this.state.newPasswordState, true)
         } else {
-            this.props.onChangePassword(this.state.newPasswordState, false)
+            this.passSet(this.state.newPasswordState, false)
             this.setState({showMessage: true})
         }
         //
@@ -82,9 +125,19 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
 
     }
 
+    submit = async () => {
+
+        var newPassword = {
+            password: this.state.password,
+        }
+
+        var passwordResponse: number = await passwordUpdate(this.state.password)
+    }
+
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
-            <div>
+            <div ref={this.props.passwordRef}>
+                <h2>Score and XP</h2>
                 <div className="inside-profile-alt">
                     Current Password
                 </div>
@@ -102,6 +155,7 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
                     // this.props.onChangePassword(this.state.newPasswordState, this.state.confirmPasswordState);
                 }}/>
                 <div style={{color: "red", fontSize: 10}}>{this.state.showMessage ? "password is not the same" : ""}</div>
+                <a href="/dashboard"> <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit ? false : true} style={{backgroundColor: this.state.canSubmit ? "" : "gray"}}>Save Changes</button></a>
             </div>
         )
     }
