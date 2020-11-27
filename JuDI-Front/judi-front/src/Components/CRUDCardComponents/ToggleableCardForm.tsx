@@ -62,9 +62,11 @@ class ToggleableCardForm extends React.Component<ToggleableCardFormProps, IToggl
             )
         }
         return (
+          
             <button onClick={this.handleCreateClick} className="createbtn">
                 <i className="fa fa-plus"></i>
             </button>
+            
         );
     }
 }

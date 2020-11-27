@@ -20,20 +20,20 @@
       color: black;
   }
 
-  div.gallery {
+  .gallery {
     border: 1.5px solid #777;
   }
   
-  div.gallery:hover {
+.gallery:hover {
     border: 1.75px solid #001100;
   }
   
-  div.gallery img {
+  .gallery img {
     width: 30%;
     height: 200px;
   }
   
-  div.desc {
+  .desc {
     padding: 15px;
     text-align: center;
     font-size: small;
@@ -43,19 +43,27 @@
     font-size: medium;
   }
   
-  * {
-    box-sizing: border-box;
-  }
-  
+
   .responsive {
     background-color: #F3F1EB;
     padding: 0 6px;
     float: center;
     width: 65%;
+    height: 75%;
     margin: auto;
+    overflow: scroll;
+  }
+
+  .main-hdr-news{
+    padding: 40px;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+    background-color: #3EECAC ;
   }
 
   .hdr-news{
+    font-size: large;
     padding: 20px;
     text-align: center;
     background-color: rgb(197, 193, 193);

@@ -39,7 +39,8 @@ class MainPage extends React.Component<RouteComponentProps> {
                     <div className="responsive">
                       
                         <div className="gallery">
-                        <h3 className="hdr-news">HOW TO MANAGE YOUR STRESS ?!</h3>
+                            <p className="main-hdr-news">**NEW ARTICLES**</p>
+                        <p className="hdr-news">HOW TO MANAGE YOUR STRESS ?!</p>
                             <a>
                                 <img className="img-news" src={p5} alt="stress1"></img>
                                 <img className="img-news" src={p4} alt="stress"></img>
@@ -72,24 +73,18 @@ class MainPage extends React.Component<RouteComponentProps> {
                                     However, it can also lead to depression, heart disease and obesity. Considering all this, it is important to take stress 
                                     seriously and start changing some of our actions in order to prevent it. If you seek help on how to manage stress, you can 
                                     ask one our top doctors. Your health is our priority.</p>
+                                    <h4>Causes and symptoms of stress</h4>
+                                    <p>Symptoms vary from one person to another, some of them can be physical, experiencing back pain, headaches, indigestion or heart palpitations. 
+                                        But others can involve our mental and emotional sphere. In this second group we find symptoms such as irritability, 
+                                        being constantly crying, impatience, anger, dysfunctional sleep or communication problems. It is important to be able to 
+                                        identify these symptoms to start feeling better. Therefore, here you can find some of the most common ones: feeling pressured or 
+                                        overwhelmed, being impatient, experiencing physical pain, communication problems and sleep deprivation.</p>
                         </div>
                         </div>
                         </div>
                 </div>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
+              
+             
                 {/** footer **/}
                 <Footer aboutUsRef={aboutUsRef}
                         aboutSiteRef={aboutSiteRef}
