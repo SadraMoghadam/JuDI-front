@@ -15,6 +15,14 @@ export interface Card {
 
 export const repeat_days = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
 
+export interface miniCard{
+    id: number,
+    title: string,
+    with_star: boolean
+}
+
+export const WeekDays = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
+
 export const Categories = ["sport", "work", "study", "educational", "others"]
 
 export var ConvertId2Category = (categoryId:number) : string => {

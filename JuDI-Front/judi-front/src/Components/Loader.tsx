@@ -20,6 +20,11 @@ class Loader extends React.Component<any>{
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <div>
+                       <div>
+                <a href="https://instagram.com/judi_project?igshid=dacwoztchc9u" className="fa fa-instagram"></a>
+                <a href="https://t.me/joinchat/AAAAAE-8TQU2AfyOECQRsg" className="fa fa-telegram"></a>
+                <a href="https://join.skype.com/invite/b48TuGRchogR" className="fa fa-skype"></a>
+                </div>
                 <p>{/** Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. **/}
                     Copyright &copy;
                     All rights reserved | Developed by JuDI team

@@ -42,6 +42,9 @@ class Dashboard extends React.Component<RouteComponentProps> {
                 <form>
             <div className="form-tbl">
             <div className="tbl-header">
+                <div>
+                    <h1>*** Week Board ***</h1>
+                </div>
             <table>
                 <thead>
                         <tr>
@@ -66,88 +69,88 @@ class Dashboard extends React.Component<RouteComponentProps> {
                 <tbody>
                         <tr>
                             <td>Sunday</td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                    
                  
                         </tr>
                         <tr>
                             <td>Monday</td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                          
                        
                         </tr>
                         <tr>
                             <td>Tuesday</td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                            
                         
                         </tr>
                         <tr>
                             <td>Wednesday</td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                         
                            
                         </tr>
                         <tr>
                             <td>Thursday</td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                        
                       
                         </tr>
                         <tr>
                             <td>Friday</td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
               
                  
                         </tr>
                         <tr>
                             <td>Saturday</td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                      
                    
                         </tr>
                 </tbody>
             </table>
             <div className="set-btn-tbl">
-            
-                <button className= "icon-btn add-btn">
+               
+                <button className= "icon-btn add-btn" ref="#popup1">
                                     <div className="add-icon"></div>
-                                    <div className="btn-txt">Add Card</div>
+                                    <div className="btn-txt">Add Week</div>
                 </button>
                 <button onClick={this.printFunction} className="print-button" ><span className="print-icon"></span></button>
             </div>

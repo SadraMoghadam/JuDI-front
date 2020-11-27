@@ -20,4 +20,80 @@
       color: black;
   }
 
+  .gallery {
+    border: 1.5px solid #777;
+  }
+  
+.gallery:hover {
+    border: 1.75px solid #001100;
+  }
+  
+  .gallery img {
+    width: 30%;
+    height: 200px;
+  }
+  
+  .desc {
+    padding: 15px;
+    text-align: center;
+    font-size: small;
+  }
+
+  .pdd-res{
+    font-size: medium;
+  }
+  
+
+  .responsive {
+    background-color: #F3F1EB;
+    padding: 0 6px;
+    float: center;
+    width: 65%;
+    height: 75%;
+    margin: auto;
+    overflow: scroll;
+  }
+
+  .main-hdr-news{
+    padding: 40px;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+    background-color: #3EECAC ;
+  }
+
+  .hdr-news{
+    font-size: large;
+    padding: 20px;
+    text-align: center;
+    background-color: rgb(197, 193, 193);
+  }
+  
+  .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 75px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+
+  .fa-instagram {
+    background: #125688;
+    color: white;
+  }
+  .fa-telegram{
+    font-size: 30px;
+    background: #125688;
+    color: white;
+  }
+  .fa-skype{
+    background: #125688;
+    color: white;
+  }
   
