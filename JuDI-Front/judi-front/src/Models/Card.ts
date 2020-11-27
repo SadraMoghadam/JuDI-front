@@ -21,7 +21,7 @@ export interface miniCard{
     with_star: boolean
 }
 
-export const WeekDays = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
+export const WeekDays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
 export const Categories = ["sport", "work", "study", "educational", "others"]
 
@@ -58,3 +58,55 @@ export var ConvertCategory2Id = (category:string) : number => {
             return 4
     }
 }
+
+export var ConvertTodayDate = () : string => {
+    var day:string = "";
+    switch (new Date().getDay()) {
+        case 0:
+            day = "sun";
+            break;
+        case 1:
+            day = "mon";
+            break;
+        case 2:
+            day = "tue";
+            break;
+        case 3:
+            day = "wed";
+            break;
+        case 4:
+            day = "thu";
+            break;
+        case 5:
+            day = "fri";
+            break;
+        case 6:
+            day = "sat";
+            break;
+        default:
+            day = "fri";
+            break;
+    }
+    return day;
+}
+
+
+export var GetRepetitiveDate = (date: Date, day: string) : Date => {
+    var newDate: Date =date
+    var today: string = ConvertTodayDate();
+    var id: number = 0
+    for (let i = 0; i < 7; i++) {
+        if(today == WeekDays[i])
+            id = i
+    }
+    for (let i = id; i < 7; i++) {
+        if(day == WeekDays[i])
+            newDate.setDate(newDate.getDate() + (i - id))
+    }
+    for (let i = 0; i < id; i++) {
+        if(day == WeekDays[i])
+            newDate.setDate(newDate.getDate() + (id - i))
+    }
+    return newDate
+}
+

@@ -1,7 +1,7 @@
 
 import axios, {AxiosRequestConfig} from "axios";
 import {User, userRegister, userLogin} from "../Models/user";
-import {Card} from "../Models/Card";
+import {Card, CardGet} from "../Models/Card";
 
 
 export const createCard = async (card: Card) : Promise<number> => {
@@ -50,7 +50,7 @@ export const updateCard = async (card: Card) : Promise<number> => {
 
 }
 
-export const getCards = async () : Promise<Card[]> => {
+export const getCards = async () : Promise<CardGet[]> => {
     let config: AxiosRequestConfig = {
         method: "get",
         url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}/cards/get`,
