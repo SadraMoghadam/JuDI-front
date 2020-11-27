@@ -1,6 +1,6 @@
 
 import axios, {AxiosRequestConfig} from "axios";
-import {User, userRegister, userLogin, UserProfile} from "../Models/user";
+import {User, userRegister, userLogin, UserProfile, Password} from "../Models/user";
 
 
 export const userProfileUpdate = async (user: UserProfile) : Promise<number> => {
@@ -17,6 +17,31 @@ export const userProfileUpdate = async (user: UserProfile) : Promise<number> => 
         console.log(res.data)
         if (res.status == 200) {
             localStorage.setItem("user_name", user.user_name)
+            return 1
+        }
+        return 0;
+    }).catch(e => {
+
+        console.log(localStorage.getItem("user_name") + "------" +  localStorage.getItem("token"))
+        return 0
+    })
+
+}
+
+
+export const passwordUpdate = async (password: Password) : Promise<number> => {
+    let config: AxiosRequestConfig = {
+        //method: "put",
+        //url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}`,
+        headers: {
+            "Content-Type": "application/json",
+            //"X-Requested-With": "XMLHttpRequest",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+    return axios.put(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/change_password`, password, config).then((res) => {
+        console.log(res.data)
+        if (res.status == 200) {
             return 1
         }
         return 0;
@@ -179,27 +204,4 @@ export const getPassword = async () : Promise<string> => {
 }
 
 
-export const passwordUpdate = async (password: string) : Promise<number> => {
-    let config: AxiosRequestConfig = {
-        //method: "put",
-        //url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}`,
-        headers: {
-            "Content-Type": "application/json",
-            //"X-Requested-With": "XMLHttpRequest",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        }
-    }
-    return axios.put(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, password, config).then((res) => {
-        console.log(res.data)
-        if (res.status == 200) {
-            return 1
-        }
-        return 0;
-    }).catch(e => {
-
-        console.log(localStorage.getItem("user_name") + "------" +  localStorage.getItem("token"))
-        return 0
-    })
-
-}
 
