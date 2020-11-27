@@ -7,7 +7,8 @@ import CardForm from "./CardForm";
 import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 interface ToggleableCardFormProps {
-    onCardCreate: Function
+    onCardCreate: Function,
+    onCopyClick: Function
 }
 
 interface IToggleableCardFormState{

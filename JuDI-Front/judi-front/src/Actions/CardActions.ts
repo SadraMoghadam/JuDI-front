@@ -1,10 +1,10 @@
 
 import axios, {AxiosRequestConfig} from "axios";
 import {User, userRegister, userLogin} from "../Models/user";
-import {Card} from "../Models/Card";
+import {Card, CardPost, CardGet} from "../Models/Card";
 
 
-export const createCard = async (card: Card) : Promise<number> => {
+export const createCard = async (card: CardPost) : Promise<number> => {
     let config: AxiosRequestConfig = {
         method: "post",
         url: "http://localhost:8000/api/users/signout",
@@ -21,7 +21,7 @@ export const createCard = async (card: Card) : Promise<number> => {
         }
         return 0;
     }).catch(e => {
-        console.log("problem with update user")
+        console.log("problem with card create")
         return 0
     })
 
@@ -50,23 +50,23 @@ export const updateCard = async (card: Card) : Promise<number> => {
 
 }
 
-export const getCards = async () : Promise<Card[]> => {
+export const getCards = async () : Promise<CardGet[]> => {
     let config: AxiosRequestConfig = {
         method: "get",
-        url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}/cards/get`,
+        url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/get`,
         headers: {
             "Content-Type": "application/json",
             "X-Requested-With": "XMLHttpRequest",
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }
-    return axios.post(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/cards`, config).then((res) => {
+    return axios.post(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards`, config).then((res) => {
         if (res.status == 200) {
-            var cards: Card[] = res.data;
+            var cards: CardGet[] = res.data.cards;
             return cards
         }
         return null as any;
-    }).catch(()=>{
+    }).catch((e)=>{
         console.log("problem with get cards")
     })
 

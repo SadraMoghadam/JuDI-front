@@ -15,6 +15,12 @@ export interface UserProfile {
     full_name: string,
 }
 
+export interface Password {
+    old_password: string,
+    new_password: string,
+    new_password_confirmation: string,
+}
+
 export interface UserAvatar {
     image: string
 }

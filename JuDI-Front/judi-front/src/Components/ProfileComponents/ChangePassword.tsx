@@ -11,7 +11,7 @@ import { accountRef } from "../../Pages/Profile";
 import {RouteComponentProps, withRouter} from "react-router";
 import createChainedFunction from "@material-ui/core/utils/createChainedFunction";
 import {ChangeEvent} from "react";
-import {User} from "../../Models/user";
+import {Password, User} from "../../Models/user";
 import {getPassword, passwordUpdate, userProfileUpdate} from "../../Actions/UserActions";
 
 
@@ -25,6 +25,7 @@ interface PasswordProps {
 }
 
 interface IPasswordState {
+    oldPassword: string
     password: string,
     currentPasswordState: string,
     newPasswordState: string,
@@ -36,12 +37,13 @@ var changePassword: boolean;
 
 
 
-class ChangePassword extends React.Component<PasswordProps, IPasswordState>
+class ChangePassword extends React.Component<RouteComponentProps & PasswordProps, IPasswordState>
 {
-    constructor(props: PasswordProps) {
+    constructor(props: RouteComponentProps & PasswordProps) {
         super(props);
         this.state = {
-            password: "SSS333",
+            oldPassword: "",
+            password: "",
             currentPasswordState: "",
             newPasswordState: "",
             showMessage:false,
@@ -55,9 +57,6 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
         //     this.setState({correctEmail: true})
         var user = await getPassword();
         console.log(this.state.password)
-        this.setState({
-            password: this.state.password
-        })
     }
 
 
@@ -103,6 +102,13 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
         this.currentPassCheck(e.target.value)
     }
 
+    handleOldPassword = (e: ChangeEvent<HTMLInputElement>) : void => {
+        var oldPassword1 = e.target.value
+        this.setState({
+            oldPassword: oldPassword1
+        })
+    }
+
     handleconfirmPasswordState = (e: ChangeEvent<HTMLInputElement>) => {
         if (this.state.newPasswordState == e.target.value) {
             this.setState({showMessage: false})
@@ -126,12 +132,21 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
     }
 
     submit = async () => {
+        var newPassword: Password = {
+            old_password: this.state.oldPassword,
+            new_password: this.state.newPasswordState,
+            new_password_confirmation: this.state.newPasswordState
 
-        var newPassword = {
-            password: this.state.password,
         }
+        console.log(newPassword.new_password)
+        console.log(newPassword.old_password)
 
-        var passwordResponse: number = await passwordUpdate(this.state.password)
+        var passwordResponse: number = await passwordUpdate(newPassword)
+        //this.props.history.push("/")
+        if(passwordResponse == 1){
+            localStorage.setItem("token", "")
+            this.props.history.push("/")
+        }
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
@@ -141,7 +156,7 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
                 <div className="inside-profile-alt">
                     Current Password
                 </div>
-                <input type="password" onBlur={this.handleCurrentPassword}/>
+                <input type="password" onChange={this.handleOldPassword}/>
                 <div className="inside-profile-alt" >
                     New Password
                 </div>
@@ -155,7 +170,7 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
                     // this.props.onChangePassword(this.state.newPasswordState, this.state.confirmPasswordState);
                 }}/>
                 <div style={{color: "red", fontSize: 10}}>{this.state.showMessage ? "password is not the same" : ""}</div>
-                <a href="/dashboard"> <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit ? false : true} style={{backgroundColor: this.state.canSubmit ? "" : "gray"}}>Save Changes</button></a>
+                <button type="submit" onClick={this.submit} className="button" disabled={this.state.canSubmit ? false : true} style={{backgroundColor: this.state.canSubmit ? "" : "gray"}}>Save Changes</button>
             </div>
         )
     }
@@ -163,4 +178,4 @@ class ChangePassword extends React.Component<PasswordProps, IPasswordState>
 
 
 
-export default ChangePassword;
+export default withRouter(ChangePassword);

@@ -100,7 +100,9 @@ class CardBase extends React.Component<CardBaseProps, ICardBaseState> {
                     <div>
                         <span onClick={() => this.props.onEditClick()} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-edit"></i></span>
 
-                        <span onClick={() => this.props.onCopyClick()} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-copy"></i></span>
+                        <span onClick={() => {
+                            this.props.onCopyClick()
+                        }} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-copy"></i></span>
                         <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i className="fa fa-trash-o"></i></span>
                     </div>
                 </div>

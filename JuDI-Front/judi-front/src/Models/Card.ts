@@ -13,6 +13,37 @@ export interface Card {
     repeat_days: string[]
 }
 
+export interface CardPost {
+    id: number,
+    title: string,
+    description: string,
+    due: string,
+    category_id: number,
+    label: string,
+    with_star: boolean,
+    reminder: boolean,
+    is_done: boolean,
+    is_repetitive: boolean,
+    repeat_days: string[]
+}
+
+export interface CardGet {
+    id: number,
+    title: string,
+    user_id: number
+    description: string,
+    due: string,
+    category_id: number,
+    created_at: string,
+    updated_at: string,
+    // label: string,
+    with_star: boolean,
+    reminder: boolean,
+    is_done: boolean,
+    is_repetitive: boolean,
+    repeat_id: number
+}
+
 export const repeat_days = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
 
 export interface miniCard{
@@ -24,6 +55,10 @@ export interface miniCard{
 export const WeekDays = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
 
 export const Categories = ["sport", "work", "study", "educational", "others"]
+
+export var ConvertDate = (date:Date) : string =>{
+    return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay() + "T" + date.getHours() + ":" + date.getMinutes()
+}
 
 export var ConvertId2Category = (categoryId:number) : string => {
     switch (categoryId) {
