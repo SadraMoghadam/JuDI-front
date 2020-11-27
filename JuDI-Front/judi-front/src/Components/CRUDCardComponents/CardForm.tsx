@@ -2,7 +2,7 @@ import * as React from "react";
 import {ButtonHTMLAttributes, createRef, DetailedHTMLProps, RefObject, TextareaHTMLAttributes} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
-import {Card, Categories, ConvertCategory2Id, ConvertId2Category} from "../../Models/Card";
+import {Card, CardPost, Categories, ConvertCategory2Id, ConvertId2Category, ConvertDate} from "../../Models/Card";
 import {ChangeEvent} from "react"
 import "../../CSS/Card.scss"
 import "../../CSS/Base.scss"
@@ -52,10 +52,29 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         }
     }
 
-    handleFormSubmit = (e: ChangeEvent<HTMLFormElement>): void => {
+    handleFormSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
         console.log("-----------------")
         e.preventDefault();
         this.props.onFormSubmit({...this.state});
+        var newCard: CardPost ={
+            id: this.props.card.id,
+            title: this.state.title,
+            description: this.state.description,
+            due: ConvertDate(this.state.due),
+            //due: this.state.due,
+            category_id: this.state.category_id,
+            label: this.state.label,
+            with_star: this.state.with_star,
+            reminder: this.state.reminder,
+            is_done: this.state.is_done,
+            is_repetitive: this.state.is_repetitive,
+            repeat_days: this.state.repeat_days
+        }
+        var cardCreateResponse : number = await createCard(newCard)
+        if(cardCreateResponse == 0)
+            alert("card didnt saved to database successfully")
+        console.log(newCard)
+        console.log(cardCreateResponse)
     }
 
 
@@ -106,13 +125,13 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
 
             //(Number(newDate[0]) == nowDate.getFullYear() && Number(newDate[1]) == nowDate.getMonth()-1 && Number(newDate[2]) == nowDate.getDay() && Number(newDate[3]) < nowDate.getHours()) ||
             //(Number(newDate[0]) == nowDate.getFullYear() && Number(newDate[1]) == nowDate.getMonth()-1 && Number(newDate[2]) == nowDate.getDay() && Number(newDate[3]) == nowDate.getHours() && Number(newDate[4]) < nowDate.getMinutes())
-        if(Number(newDate[0]) < nowDate.getFullYear() || Number(newDate[1]) < nowDate.getMonth()-1 || Number(newDate[2]) < nowDate.getDay() || Number(newDate[3]) < nowDate.getHours() || Number(newDate[4]) < nowDate.getMinutes()){
-            this.setState({due: null as any})
-        }
-        else {
+        // if(Number(newDate[0]) < nowDate.getFullYear() || Number(newDate[1]) < nowDate.getMonth()-1 || Number(newDate[2]) < nowDate.getDay() || Number(newDate[3]) < nowDate.getHours() || Number(newDate[4]) < nowDate.getMinutes()){
+        //     this.setState({due: null as any})
+        // }
+        // else {
 
             this.setState({due: new Date(Number(newDate[0]), Number(newDate[1]) - 1, Number(newDate[2]), Number(newDate[3]), Number(newDate[4]))})
-        }
+        // }
 
     }
     handleisDoneUpdate = async () => {
