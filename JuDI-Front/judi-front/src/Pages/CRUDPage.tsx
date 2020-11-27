@@ -59,6 +59,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
     }
 
 
+
     componentWillMount = async() =>{
         console.log(localStorage.getItem("token"))
         var newCards: CardGet[] = await getCards();
@@ -74,7 +75,8 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
     createNewCard = (card: Card) => {
         card.id = Math.floor(Math.random() * 1000);
-        this.setState({cards: this.state.cards.concat([card])});
+        this.state.cards.push(card)
+        this.setState({cards: this.state.cards});
     }
 
     updateCard = async (newCard: Card) => {
@@ -101,12 +103,12 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
         this.setState({cards: this.state.cards.filter(card => card.id !== cardID)})
     }
 
-    copyCard = (card: Card, id: number) => {
-        card.id = id;
-        this.setState({cards: this.state.cards.concat([card])});
+    copyCard = (card: Card) => {
+        this.state.cards.push(card)
+        this.setState({
+            cards: this.state.cards
+        })
     }
-
-
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
@@ -114,8 +116,8 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
             <DashboardHeader state={"CRUDCard"}/>
             <main className="d-flex justify-content-center my-4">
                 <div className="col-6" style={{alignContent:"center", margin: "auto"}}>
-                    <CardList cards={this.state.cards} onDeleteClick={this.deleteCard} onUpdateClick={this.updateCard} onCopyClick={this.createNewCard}/>
-                    <ToggleableCardForm onCardCreate={this.createNewCard}/>
+                    <CardList cards={this.state.cards} onDeleteClick={this.deleteCard} onUpdateClick={this.updateCard} onCopyClick={this.copyCard}/>
+                    <ToggleableCardForm onCardCreate={this.createNewCard} onCopyClick={this.createNewCard}/>
                 </div>
             </main>;
         </div>

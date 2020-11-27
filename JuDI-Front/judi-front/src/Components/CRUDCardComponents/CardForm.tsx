@@ -70,6 +70,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
             is_repetitive: this.state.is_repetitive,
             repeat_days: this.state.repeat_days
         }
+        // console.log("id ==== " + this.props.card.id)
         var cardCreateResponse : number = await createCard(newCard)
         if(cardCreateResponse == 0)
             alert("card didnt saved to database successfully")
