@@ -5,10 +5,10 @@ import Loader from "../Components/Loader";
 import {createRef, RefObject} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
-import {Card, Categories, repeat_days, CardGet} from "../Models/Card";
+import {Card, Categories, repeat_days, CardGet, CardPost, ConvertDate} from "../Models/Card";
 import CardList from "../Components/CRUDCardComponents/CardList";
 import ToggleableCardForm from "../Components/CRUDCardComponents/ToggleableCardForm";
-import {updateCard, createCard, getCards} from "../Actions/CardActions";
+import { createCard, getCards, deleteCard, updateCardGet} from "../Actions/CardActions";
 import {async} from "q";
 import {UserProfile} from "../Models/user";
 import {getUserProfile} from "../Actions/UserActions";
@@ -63,7 +63,25 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
     componentWillMount = async() =>{
         console.log(localStorage.getItem("token"))
         var newCards: CardGet[] = await getCards();
-        this.setState({cards:[]})
+        var cardForm: Card[] = []
+        for (let i = 0; i < newCards.length; i++)
+        {
+            var c: Card = {
+                id: newCards[i].id,
+                due: new Date(),
+                is_done: newCards[i].is_done,
+                reminder: newCards[i].reminder,
+                with_star: newCards[i].with_star,
+                label: "",
+                category_id: newCards[i].category_id,
+                description: newCards[i].description,
+                title: newCards[i].title,
+                is_repetitive: newCards[i].is_repetitive,
+                repeat_days: []
+            }
+            cardForm.push(c)
+        }
+        this.setState({cards:cardForm})
         window.scrollTo(0, 0)
     }
 
@@ -73,10 +91,30 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
     //    }
     //}
 
-    createNewCard = (card: Card) => {
+    createNewCard = async(card: Card) => {
+        console.log("----//////////aaaaaaaaaaaa")
         card.id = Math.floor(Math.random() * 1000);
         this.state.cards.push(card)
         this.setState({cards: this.state.cards});
+
+        var newCard: CardPost ={
+            id: card.id,
+            title: card.title,
+            description: card.description,
+            due: ConvertDate(card.due),
+            //due: this.state.due,
+            category_id: card.category_id,
+            label: card.label,
+            with_star: card.with_star,
+            reminder: card.reminder,
+            is_done: card.is_done,
+            is_repetitive: card.is_repetitive,
+            repeat_days: card.repeat_days
+        }
+        // console.log("id ==== " + this.props.card.id)
+        var cardCreateResponse : number = await createCard(newCard)
+        if(cardCreateResponse == 0)
+            alert("card didnt saved to database successfully")
     }
 
     updateCard = async (newCard: Card) => {
@@ -88,26 +126,68 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
                 //var cardUpdateResponse : number = await updateCard(card)
                 return card;
             }
+
         });
+        console.log(newCard.id)
+        //var cardDeleteResponse = await updateCardGet(newCard.id)
+
+        if(newCard != null) {
+            this.setState({cards: newCards});
+        }
+        //if(cardDeleteResponse == 0)
+            //alert("card is not updated")
         //const n: Card[] = [];
         //for (let k of Array.from(newCards.values())) {
         //    let card: Card = await k;
         //    n.push(card)
         //}
-        if(newCard != null) {
-            this.setState({cards: newCards});
+    }
+
+    deleteCard = async(cardID: number) => {
+        var cardDeleteResponse = await deleteCard(cardID)
+        if(cardDeleteResponse == 1)
+            this.setState({cards: this.state.cards.filter(card => card.id !== cardID)})
+        else
+            alert("card is not deleted")
+    }
+
+    copyCard = async(card: Card) => {
+        var c: Card = {
+            id: card.id + 101,
+            due: new Date(),
+            is_done: card.is_done,
+            reminder: card.reminder,
+            with_star: card.with_star,
+            label: "",
+            category_id: card.category_id,
+            description: card.description,
+            title: card.title,
+            is_repetitive: card.is_repetitive,
+            repeat_days: []
         }
-    }
-
-    deleteCard = (cardID: number) => {
-        this.setState({cards: this.state.cards.filter(card => card.id !== cardID)})
-    }
-
-    copyCard = (card: Card) => {
-        this.state.cards.push(card)
+        this.state.cards.push(c)
         this.setState({
             cards: this.state.cards
         })
+        var newCard: CardPost ={
+            id: card.id,
+            title: card.title,
+            description: card.description,
+            due: ConvertDate(card.due),
+            //due: this.state.due,
+            category_id: card.category_id,
+            label: card.label,
+            with_star: card.with_star,
+            reminder: card.reminder,
+            is_done: card.is_done,
+            is_repetitive: card.is_repetitive,
+            repeat_days: card.repeat_days
+        }
+        // console.log("id ==== " + this.props.card.id)
+        var cardCreateResponse : number = await createCard(newCard)
+        if(cardCreateResponse == 0)
+            alert("card didnt saved to database successfully")
+
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {

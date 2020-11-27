@@ -98,17 +98,17 @@ class CardBase extends React.Component<CardBaseProps, ICardBaseState> {
                         <strong>Title: </strong>{this.props.card.title}
                     </span>
                     <div>
-                        <span onClick={() => this.props.onEditClick()} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-edit"></i></span>
+                        <span onClick={() => this.props.onEditClick()} className="mr-2" style={{cursor:"pointer"}}><i style={{fontSize:11, margin: 0, marginRight: -35, padding: 0}} className="fa fa-edit"></i></span>
 
                         <span onClick={() => {
                             this.props.onCopyClick()
-                        }} className="mr-2" style={{cursor:"pointer"}}><i className="fa fa-copy"></i></span>
-                        <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i className="fa fa-trash-o"></i></span>
+                        }} className="mr-2" style={{cursor:"pointer"}}><i style={{fontSize:11, margin: 0, marginRight: -35, padding: 0}} className="fa fa-copy"></i></span>
+                        <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i style={{fontSize:11, margin: 0, marginRight: -35, padding: 0}} className="fa fa-trash-o"></i></span>
                     </div>
                 </div>
                 <div className="card-header d-flex justify-content-between" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
                     <div>Label: {this.props.card.label}</div>
-                    <span><i className="fa fa-star" style={{color: this.props.card.with_star ? "gold" : "black"}}></i></span>
+                    <span><i className="fa fa-star" style={{color: this.props.card.with_star ? "gold" : "black", fontSize:10, margin: "0px -50px", padding: 0, right:0, left:0}}></i></span>
                 </div>
                 <div className="card-body"  style={{textDecoration: "underline", height: 15}}>
                     Description

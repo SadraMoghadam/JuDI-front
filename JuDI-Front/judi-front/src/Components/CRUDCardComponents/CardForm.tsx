@@ -9,7 +9,7 @@ import "../../CSS/Base.scss"
 import {DetailedArguments} from "yargs-parser";
 import {number} from "prop-types";
 import {getUserLogin} from "../../Actions/UserActions";
-import {updateCard, createCard, getCards} from "../../Actions/CardActions";
+import { createCard, getCards} from "../../Actions/CardActions";
 import Popup from "reactjs-popup";
 import * as ReactModal from 'react-modal';
 
@@ -56,26 +56,8 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         console.log("-----------------")
         e.preventDefault();
         this.props.onFormSubmit({...this.state});
-        var newCard: CardPost ={
-            id: this.props.card.id,
-            title: this.state.title,
-            description: this.state.description,
-            due: ConvertDate(this.state.due),
-            //due: this.state.due,
-            category_id: this.state.category_id,
-            label: this.state.label,
-            with_star: this.state.with_star,
-            reminder: this.state.reminder,
-            is_done: this.state.is_done,
-            is_repetitive: this.state.is_repetitive,
-            repeat_days: this.state.repeat_days
-        }
-        // console.log("id ==== " + this.props.card.id)
-        var cardCreateResponse : number = await createCard(newCard)
-        if(cardCreateResponse == 0)
-            alert("card didnt saved to database successfully")
-        console.log(newCard)
-        console.log(cardCreateResponse)
+        // console.log(newCard)
+        // console.log(cardCreateResponse)
     }
 
 
