@@ -5,7 +5,7 @@ import {Card, CardPost, CardGet} from "../Models/Card";
 import {number} from "prop-types";
 
 
-export const createCard = async (card: CardPost) : Promise<number> => {
+export const createCard = async (card: CardPost) : Promise<CardGet> => {
     let config: AxiosRequestConfig = {
         method: "post",
         url: "http://localhost:8000/api/users/signout",
@@ -18,12 +18,12 @@ export const createCard = async (card: CardPost) : Promise<number> => {
     return axios.post(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/cards`, card, config).then((res) => {
         console.log(res.data)
         if (res.status == 200 || res.status == 201) {
-            return 1
+            return res.data.user
         }
-        return 0;
+        return null as any;
     }).catch(e => {
         console.log("problem with card create")
-        return 0
+        return null as any
     })
 
 }
@@ -75,7 +75,7 @@ export const deleteCard = async (id : number) : Promise<number> => {
 }
 
 
-export const updateCardGet = async (id : number) : Promise<number> => {
+export const updateCard = async (id : number) : Promise<number> => {
     let config: AxiosRequestConfig = {
         method: "put",
         url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/update/${id}`,
@@ -85,8 +85,11 @@ export const updateCardGet = async (id : number) : Promise<number> => {
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }
+    console.log(localStorage.getItem("token"))
+    console.log(localStorage.getItem("user_name"))
+
     return axios.put(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/update/${id}`, config).then((res) => {
-        console.log(res.data.msg)
+        console.log(res.data)
         if (res.status == 200) {
             return 1
         }

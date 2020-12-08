@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import {Card, Categories, repeat_days, CardGet, CardPost, ConvertDate} from "../Models/Card";
 import CardList from "../Components/CRUDCardComponents/CardList";
 import ToggleableCardForm from "../Components/CRUDCardComponents/ToggleableCardForm";
-import { createCard, getCards, deleteCard, updateCardGet} from "../Actions/CardActions";
+import { createCard, getCards, deleteCard, updateCard} from "../Actions/CardActions";
 import {async} from "q";
 import {UserProfile} from "../Models/user";
 import {getUserProfile} from "../Actions/UserActions";
@@ -93,9 +93,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
     createNewCard = async(card: Card) => {
         console.log("----//////////aaaaaaaaaaaa")
-        card.id = Math.floor(Math.random() * 1000);
-        this.state.cards.push(card)
-        this.setState({cards: this.state.cards});
+        // card.id = Math.floor(Math.random() * 1000);
 
         var newCard: CardPost ={
             id: card.id,
@@ -112,9 +110,12 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
             repeat_days: card.repeat_days
         }
         // console.log("id ==== " + this.props.card.id)
-        var cardCreateResponse : number = await createCard(newCard)
-        if(cardCreateResponse == 0)
-            alert("card didnt saved to database successfully")
+        var cardCreateResponse : CardGet = await createCard(newCard)
+        card.id = cardCreateResponse.id
+        this.state.cards.push(card)
+        this.setState({cards: this.state.cards});
+        // if(cardCreateResponse == 0)
+        //     alert("card didnt saved to database successfully")
     }
 
     updateCard = async (newCard: Card) => {
@@ -129,13 +130,13 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
         });
         console.log(newCard.id)
-        //var cardDeleteResponse = await updateCardGet(newCard.id)
+        var cardDeleteResponse = await updateCard(newCard.id)
 
         if(newCard != null) {
             this.setState({cards: newCards});
         }
-        //if(cardDeleteResponse == 0)
-            //alert("card is not updated")
+        if(cardDeleteResponse == 0)
+            alert("card is not updated")
         //const n: Card[] = [];
         //for (let k of Array.from(newCards.values())) {
         //    let card: Card = await k;
@@ -152,8 +153,24 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
     }
 
     copyCard = async(card: Card) => {
+
+        var newCard: CardPost ={
+            id: card.id,
+            title: card.title,
+            description: card.description,
+            due: ConvertDate(card.due),
+            //due: this.state.due,
+            category_id: card.category_id,
+            label: card.label,
+            with_star: card.with_star,
+            reminder: card.reminder,
+            is_done: card.is_done,
+            is_repetitive: card.is_repetitive,
+            repeat_days: card.repeat_days
+        }
+        var cardCreateResponse : CardGet = await createCard(newCard)
         var c: Card = {
-            id: card.id + 101,
+            id: cardCreateResponse.id,
             due: new Date(),
             is_done: card.is_done,
             reminder: card.reminder,
@@ -169,24 +186,9 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
         this.setState({
             cards: this.state.cards
         })
-        var newCard: CardPost ={
-            id: card.id,
-            title: card.title,
-            description: card.description,
-            due: ConvertDate(card.due),
-            //due: this.state.due,
-            category_id: card.category_id,
-            label: card.label,
-            with_star: card.with_star,
-            reminder: card.reminder,
-            is_done: card.is_done,
-            is_repetitive: card.is_repetitive,
-            repeat_days: card.repeat_days
-        }
+        // if(cardCreateResponse == 0)
+        //     alert("card didnt saved to database successfully")
         // console.log("id ==== " + this.props.card.id)
-        var cardCreateResponse : number = await createCard(newCard)
-        if(cardCreateResponse == 0)
-            alert("card didnt saved to database successfully")
 
     }
 

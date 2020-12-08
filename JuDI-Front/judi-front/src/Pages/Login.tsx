@@ -91,7 +91,7 @@ class Login extends React.Component<RouteComponentProps, ILoginState> {
             this.setState({
                 loggedIn: true
             })
-
+            console.log(localStorage.getItem("token"))
             this.props.history.push("/dashboard")
 
         } else {
