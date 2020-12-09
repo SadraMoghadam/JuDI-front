@@ -66,32 +66,35 @@ class Dashboard extends React.Component<RouteComponentProps> {
                             <input id="week" type="week" name="week" ></input>
                             </div>
                 </div>
-                <div className="tbl-content">
-                    <div id="Sun">
+                <div className="row">
+                    <div className="col-lg-3 col-md-3 col-sm-6" id="Sun">
                         <p style={{fontSize: '1.5rem'}}>Sunday</p>
           
                     </div>
-                    <div id="Mon">
+                    <div className="col-lg-3 col-md-3 col-sm-6" id="Mon">
                         <p style={{fontSize: '1.5rem'}}>Monday</p>
           
                     </div>
-                    <div id="Tue">
+                    <div className="col-lg-3 col-md-3 col-sm-6" id="Tue">
                         <p style={{fontSize: '1.5rem'}}>Tuesday</p>
          
                     </div>
-                    <div id="Wed">
+                    <div className="col-lg-3 col-md-3 col-sm-6" id="Wed">
                         <p style={{fontSize: '1.5rem'}}>Wednesday</p>
          
                     </div>
-                    <div id="Thu">
+                </div>
+                <div className="row">
+                    <div className="col-lg-4 col-md-4 col-sm-6" id="Thu">
                         <p style={{fontSize: '1.5rem'}}>Thursday</p>
          
                     </div>
-                    <div id="Fri">
+
+                    <div className="col-lg-4 col-md-4 col-sm-6" id="Fri">
                         <p style={{fontSize: '1.5rem'}}>Friday</p>
          
                     </div>
-                    <div id="Sat">
+                    <div className="col-lg-4 col-md-4 col-sm-6" id="Sat">
                         <p style={{fontSize: '1.5rem'}}>Saturday</p>
          
                     </div>
