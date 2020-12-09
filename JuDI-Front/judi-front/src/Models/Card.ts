@@ -145,3 +145,9 @@ export var GetRepetitiveDate = (date: Date, day: string) : Date => {
     return newDate
 }
 
+
+
+export interface Label {
+    id: number
+    title: string
+}
