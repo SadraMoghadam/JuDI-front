@@ -46,11 +46,6 @@ export interface CardGet {
 
 export const repeat_days = ["sat", "sun", "mon", "tue", "wed", "thu", "fri"];
 
-export interface miniCard{
-    id: number,
-    title: string,
-    with_star: boolean
-}
 
 export const WeekDays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 

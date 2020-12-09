@@ -7,6 +7,10 @@ import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
 import "../CSS/schedule.css"
 import { faDivide } from "@fortawesome/free-solid-svg-icons";
+import CardBase from "../Components/CRUDCardComponents/CardBase";
+import MiniCardBase from "../Components/CRUDCardComponents/miniCardBase";
+import { title } from "process";
+import { miniCard } from "../Models/miniCard";
 
 
 var dragula = require('react-dragula');
@@ -27,7 +31,10 @@ var dragula = require('react-dragula');
     </span>
 </div>
 </div> */}
-
+const newcard: miniCard ={
+    id: 0,
+    title: "dtahadt",
+}
 class Dashboard extends React.Component<RouteComponentProps> {
 
     componentWillMount = async () => {
@@ -51,10 +58,12 @@ class Dashboard extends React.Component<RouteComponentProps> {
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
+            
             <div>
             <DashboardHeader state={"dashboard"}/>
-
+            
             <form>
+                
             <div className="form-tbl">
                 <div className="tbl-header">
                     <div>
@@ -69,7 +78,7 @@ class Dashboard extends React.Component<RouteComponentProps> {
                 <div className="row">
                     <div className="col-lg-3 col-md-3 col-sm-6" id="Sun">
                         <p style={{fontSize: '1.5rem'}}>Sunday</p>
-          
+                        <MiniCardBase mcard={newcard} />
                     </div>
                     <div className="col-lg-3 col-md-3 col-sm-6" id="Mon">
                         <p style={{fontSize: '1.5rem'}}>Monday</p>
@@ -85,16 +94,16 @@ class Dashboard extends React.Component<RouteComponentProps> {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-lg-4 col-md-4 col-sm-6" id="Thu">
+                    <div className="col-lg-3 col-md-4 col-sm-6" id="Thu">
                         <p style={{fontSize: '1.5rem'}}>Thursday</p>
          
                     </div>
 
-                    <div className="col-lg-4 col-md-4 col-sm-6" id="Fri">
+                    <div className="col-lg-3 col-md-4 col-sm-6" id="Fri">
                         <p style={{fontSize: '1.5rem'}}>Friday</p>
          
                     </div>
-                    <div className="col-lg-4 col-md-4 col-sm-6" id="Sat">
+                    <div className="col-lg-3 col-md-4 col-sm-6" id="Sat">
                         <p style={{fontSize: '1.5rem'}}>Saturday</p>
          
                     </div>

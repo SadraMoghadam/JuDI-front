@@ -10,7 +10,6 @@ import {DetailedArguments} from "yargs-parser";
 import {number} from "prop-types";
 import {getUserLogin} from "../../Actions/UserActions";
 import { createCard, getCards} from "../../Actions/CardActions";
-import Popup from "reactjs-popup";
 import * as ReactModal from 'react-modal';
 
 interface CardFormProps {
