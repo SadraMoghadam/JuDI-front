@@ -6,6 +6,10 @@ import {createRef, RefObject} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
 import "../CSS/schedule.css"
+import { faDivide } from "@fortawesome/free-solid-svg-icons";
+
+
+var dragula = require('react-dragula');
 
 
 {/* <div>
@@ -34,11 +38,77 @@ class Dashboard extends React.Component<RouteComponentProps> {
         window.print();
     }
 
+    componentDidMount () {
+        let Sun = document.getElementById('Sun');
+        let Mon= document.getElementById('Mon');
+        let Tue = document.getElementById('Tue');
+        let Wed = document.getElementById('Wed');
+        let Thu = document.getElementById('Thu');
+        let Fri = document.getElementById('Fri');
+        let Sat = document.getElementById('Sat');
+        dragula([Sun, Mon,Tue,Wed,Thu,Fri,Sat]);
+      }
+
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
             <div>
             <DashboardHeader state={"dashboard"}/>
-            <div>
+
+            <form>
+            <div className="form-tbl">
+                <div className="tbl-header">
+                    <div>
+                        <h1>
+                            *** WEEK BOARD ***
+                        </h1>
+                    </div>
+                    <div className="week-cal">
+                            <input id="week" type="week" name="week" ></input>
+                            </div>
+                </div>
+                <div className="tbl-content">
+                    <div id="Sun">
+                        <p style={{fontSize: '1.5rem'}}>Sunday</p>
+          
+                    </div>
+                    <div id="Mon">
+                        <p style={{fontSize: '1.5rem'}}>Monday</p>
+          
+                    </div>
+                    <div id="Tue">
+                        <p style={{fontSize: '1.5rem'}}>Tuesday</p>
+         
+                    </div>
+                    <div id="Wed">
+                        <p style={{fontSize: '1.5rem'}}>Wednesday</p>
+         
+                    </div>
+                    <div id="Thu">
+                        <p style={{fontSize: '1.5rem'}}>Thursday</p>
+         
+                    </div>
+                    <div id="Fri">
+                        <p style={{fontSize: '1.5rem'}}>Friday</p>
+         
+                    </div>
+                    <div id="Sat">
+                        <p style={{fontSize: '1.5rem'}}>Saturday</p>
+         
+                    </div>
+                </div>
+                <div className="set-btn-tbl">
+               
+                <button className= "icon-btn add-btn">
+                                    <div className="add-icon"></div>
+                                    <div className="btn-txt">Add Card</div>
+                </button>
+                <button onClick={this.printFunction} className="print-button" ><span className="print-icon"></span></button>
+            </div>
+            </div>
+            
+            </form>
+
+            {/* <div>
                 <form>
             <div className="form-tbl">
             <div className="tbl-header">
@@ -53,12 +123,13 @@ class Dashboard extends React.Component<RouteComponentProps> {
                             <input id="week" type="week" name="week" ></input>
                             </div>
                             </th>
-                            <th> Task </th>
-                            <th> Task </th>
-                            <th> Task </th>
-                            <th> Task </th>
-                            <th> Task </th>
-                            <th> Task </th>
+                            <th> Sunday </th>
+                            <th> Monday </th>
+                            <th> Tuesday </th>
+                            <th> Wednesday </th>
+                            <th> Thursday </th>
+                            <th> Friday </th>
+                            <th> Saturday </th>
 
                         </tr>
                 </thead>
@@ -68,7 +139,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
             <table>
                 <tbody>
                         <tr>
-                            <td>Sunday</td>
+                            <td>Task</td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
@@ -79,7 +151,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                  
                         </tr>
                         <tr>
-                            <td>Monday</td>
+                            <td>Task</td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
@@ -90,7 +163,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                        
                         </tr>
                         <tr>
-                            <td>Tuesday</td>
+                            <td>Task</td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
@@ -101,7 +175,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                         
                         </tr>
                         <tr>
-                            <td>Wednesday</td>
+                            <td>Task</td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
@@ -112,7 +187,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                            
                         </tr>
                         <tr>
-                            <td>Thursday</td>
+                            <td>Task</td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
@@ -123,7 +199,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                       
                         </tr>
                         <tr>
-                            <td>Friday</td>
+                            <td>Task</td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
@@ -134,7 +211,8 @@ class Dashboard extends React.Component<RouteComponentProps> {
                  
                         </tr>
                         <tr>
-                            <td>Saturday</td>
+                            <td>Task</td>
+                            <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
                             <td className="cell-inp"><a className="button_ten" href="/dashboard/crudcard" target="_blank"></a></td>
@@ -148,9 +226,9 @@ class Dashboard extends React.Component<RouteComponentProps> {
             </table>
             <div className="set-btn-tbl">
                
-                <button className= "icon-btn add-btn" ref="#popup1">
+                <button className= "icon-btn add-btn">
                                     <div className="add-icon"></div>
-                                    <div className="btn-txt">Add Week</div>
+                                    <div className="btn-txt">Add Task</div>
                 </button>
                 <button onClick={this.printFunction} className="print-button" ><span className="print-icon"></span></button>
             </div>
@@ -158,7 +236,7 @@ class Dashboard extends React.Component<RouteComponentProps> {
             </div>
             </div>
             </form>
-            </div>
+            </div> */}
             </div>
           
         );

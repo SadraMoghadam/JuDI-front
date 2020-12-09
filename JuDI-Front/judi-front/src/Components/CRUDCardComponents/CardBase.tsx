@@ -14,8 +14,6 @@ interface CardBaseProps {
 }
 
 
-
-
 class CardBase extends React.Component<CardBaseProps> {
     constructor(props: CardBaseProps) {
         super(props);
