@@ -6,6 +6,8 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import CRUDPage from "./Pages/CRUDPage";
+import Stress from "./Pages/Stress";
+import ManageTime from "./Pages/ManageTime";
 
 const App: React.FC = () => {
     return (
@@ -19,6 +21,8 @@ const App: React.FC = () => {
                     <Route exact path="/dashboard/profile"  component={Profile}/>
                     <Route exact path="/dashboard/crudcard"  component={CRUDPage}/>
                     <Route exact path="/MainPage"  component={MainPage}/>
+                    <Route exact path="/Stress" component={Stress}/>
+                    <Route exact path="/ManageTime" component={ManageTime}/>
                 </Switch>
             </Router>
         </div>
