@@ -12,9 +12,11 @@ import { createCard, getCards, deleteCard, updateCard} from "../Actions/CardActi
 import {async} from "q";
 import {UserProfile} from "../Models/user";
 import {getUserProfile} from "../Actions/UserActions";
+import AddLabel from "../Components/CRUDCardComponents/AddLabel";
 
 interface ICRUDPageState {
-    cards: Card[]
+    cards: Card[],
+    addLabel: boolean
 }
 
 
@@ -26,6 +28,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
         super(props);
         //new Date(2020, 0O5, 0O5, 17, 23, 42)
         this.state = {
+            addLabel: false,
             cards: []
             // cards: [
             //     {
@@ -62,7 +65,8 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
     componentWillMount = async() =>{
         console.log(localStorage.getItem("token"))
-        var newCards: CardGet[] = await getCards();
+        //var newCards: CardGet[] = await getCards();
+        var newCards: CardGet[] = []
         var cardForm: Card[] = []
         for (let i = 0; i < newCards.length; i++)
         {
@@ -192,9 +196,27 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
     }
 
+    handleLabelButton = (): void => {
+        console.log("-----------" + this.state.addLabel)
+        if(this.state.addLabel == false)
+        {
+            this.setState({
+                addLabel: true
+            })
+        }
+        else
+        {
+            this.setState({
+                addLabel: false
+            })
+        }
+    }
+
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
         <div>
+            <div className="labels_button" onClick={() => this.handleLabelButton()}>Labels</div>
+            {this.state.addLabel ? <AddLabel /> : ""}
             <DashboardHeader state={"CRUDCard"}/>
             <main className="d-flex justify-content-center my-4">
                 <div className="col-6" style={{alignContent:"center", margin: "auto"}}>
