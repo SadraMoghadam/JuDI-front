@@ -3,7 +3,7 @@ export interface Card {
     id: number,
     title: string,
     description: string,
-    due: Date,
+    due: string,
     category_id: number,
     label: string,
     with_star: boolean,
@@ -52,7 +52,12 @@ export const WeekDays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 export const Categories = ["sport", "work", "study", "educational", "others"]
 
 export var ConvertDate = (date:Date) : string =>{
-    return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay() + "T" + date.getHours() + ":" + date.getMinutes()
+    var month = date.getUTCMonth() + 1;
+    var day = date.getUTCDate();
+    var year = date.getUTCFullYear();
+    //new Date(Number(newDate[0]), Number(newDate[1]) - 1, Number(newDate[2]), Number(newDate[3]), Number(newDate[4]))
+    //return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay() + "T" + date.getHours() + ":" + date.getMinutes()
+    return year + "-" + month + "-" + day
 }
 
 export var ConvertId2Category = (categoryId:number) : string => {
@@ -89,9 +94,11 @@ export var ConvertCategory2Id = (category:string) : number => {
     }
 }
 
+var today: Date = new Date();
+
 export var ConvertTodayDate = () : string => {
     var day:string = "";
-    switch (new Date().getDay()) {
+    switch (today.getDay()) {
         case 0:
             day = "sun";
             break;
@@ -121,23 +128,36 @@ export var ConvertTodayDate = () : string => {
 }
 
 
-export var GetRepetitiveDate = (date: Date, day: string) : Date => {
-    var newDate: Date =date
+export var GetRepetitiveDate = (day: string) : string => {
+    var newDate: Date = new Date()
     var today: string = ConvertTodayDate();
     var id: number = 0
     for (let i = 0; i < 7; i++) {
-        if(today == WeekDays[i])
-            id = i
+        if(today == WeekDays[i]) {
+            id = i;
+            break;
+        }
     }
+    //console.log("id======" + id)
     for (let i = id; i < 7; i++) {
-        if(day == WeekDays[i])
-            newDate.setDate(newDate.getDate() + (i - id))
+        if(day == WeekDays[i]) {
+            var temp1: number = (i - id)
+            newDate.setDate(newDate.getDate() + temp1)
+            //console.log("i1======" + i)
+        }
     }
+    console.log("___________"+newDate.getUTCDate())
+    //console.log("day2========"+newDate.getDay())
     for (let i = 0; i < id; i++) {
-        if(day == WeekDays[i])
-            newDate.setDate(newDate.getDate() + (id - i))
+        var temp2: number = (id + i - 1)
+        if(day == WeekDays[i]){
+            newDate.setDate(newDate.getDate() + temp2)
+            //console.log("i2======" + i)
+        }
     }
-    return newDate
+    //console.log("day2========"+newDate.getDay())
+    console.log("++++++++++++" + newDate)
+    return ConvertDate(newDate)
 }
 
 
