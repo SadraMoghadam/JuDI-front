@@ -54,8 +54,8 @@ class ToggleableLabelForm extends React.Component<ToggleableCardFormProps, ITogg
         }
         return (
           
-            <button onClick={this.handleCreateClick} className="createbtn" style={{width: 70, margin: "auto", height: 25}}>
-                <i style={{fontSize:13, right: "23%", position: "relative", padding: 0}} className="fa fa-plus"></i>
+            <button onClick={this.handleCreateClick} className="createbtn" style={{width: 100, margin: "auto", height: 25, borderRadius: 5}}>
+                <i style={{fontSize:10, padding: 0, margin: "auto"}}>New Label</i>
             </button>
             
         );

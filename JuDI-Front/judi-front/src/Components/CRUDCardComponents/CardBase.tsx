@@ -8,6 +8,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import CardForm from "./CardForm";
 import ToggleableCardForm from "./ToggleableCardForm";
+import {faBold} from "@fortawesome/free-solid-svg-icons/faBold";
 
 interface CardBaseProps {
     card: Card,
@@ -27,7 +28,7 @@ const newcard: Card ={
     id: 0,
     title: "",
     description: "",
-    due: new Date(),
+    due: "",
     category_id: 4,
     label: "",
     with_star: false,
@@ -94,21 +95,21 @@ class CardBase extends React.Component<CardBaseProps, ICardBaseState> {
         return (
             <div className="card">
                 <div className="card-header d-flex justify-content-between" style={{backgroundColor: this.renderSwitch(ConvertId2Category(this.props.card.category_id))}}>
-                    <span>
+                    <span style={{height:25}}>
                         <strong>Title: </strong>{this.props.card.title}
                     </span>
                     <div>
-                        <span onClick={() => this.props.onEditClick()} className="mr-2" style={{cursor:"pointer"}}><i style={{fontSize:11, margin: 0, marginRight: -35, padding: 0}} className="fa fa-edit"></i></span>
+                        <span onClick={() => this.props.onEditClick()} className="mr-2" style={{cursor:"pointer"}}><i style={{fontSize:13, margin: 0, marginRight: -35, padding: 0}} className="fa fa-edit"></i></span>
 
                         <span onClick={() => {
                             this.props.onCopyClick()
                         }} className="mr-2" style={{cursor:"pointer"}}><i style={{fontSize:11, margin: 0, marginRight: -35, padding: 0}} className="fa fa-copy"></i></span>
-                        <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i style={{fontSize:11, margin: 0, marginRight: -35, padding: 0}} className="fa fa-trash-o"></i></span>
+                        <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i style={{fontSize:11, margin: 0, marginRight: -30, padding: 0}} className="fa fa-trash-o"></i></span>
                     </div>
                 </div>
                 <div className="card-header d-flex justify-content-between" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
                     <div>Label: {this.props.card.label}</div>
-                    <span><i className="fa fa-star" style={{color: this.props.card.with_star ? "gold" : "black", fontSize:10, margin: "0px -50px", padding: 0, right:0, left:0}}></i></span>
+                    <span><i className="fa fa-star" style={{color: this.props.card.with_star ? "gold" : "black", fontSize:10, margin: "0px -30px", padding: 0, right:0, left:0}}></i></span>
                 </div>
                 <div className="card-body"  style={{textDecoration: "underline", height: 15}}>
                     Description
@@ -124,7 +125,7 @@ class CardBase extends React.Component<CardBaseProps, ICardBaseState> {
                     <div className="col-lg-6 col-md-6 col-sm-12">reminder: {this.props.card.reminder ? "On" : "Off"}</div>
                 </div>
                 <div className="row card-body" style={{borderBottom: "solid", borderWidth: 1, borderColor: "#3EECAC"}}>
-                    <div className="col-lg-12 col-md-12 col-sm-12">Due date: {this.props.card.is_repetitive ? "already assigned" : this.props.card.due == null ? "not assigned" : this.props.card.due.toLocaleString()}</div>
+                    <div className="col-lg-12 col-md-12 col-sm-12">Due date: {this.props.card.is_repetitive ? "already assigned" : this.props.card.due == null ? "not assigned" : this.props.card.due.replace("00:00:00", "")}</div>
                 </div>
                 <div className="card-footer" style={{backgroundColor: this.props.card.is_done ? "#3EECAC" : "lightgray"}}>
                     <div>{this.props.card.is_done ? "is_done" : "Ongoing"}</div>

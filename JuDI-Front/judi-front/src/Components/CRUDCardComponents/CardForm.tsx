@@ -2,7 +2,15 @@ import * as React from "react";
 import {ButtonHTMLAttributes, createRef, DetailedHTMLProps, RefObject, TextareaHTMLAttributes} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
-import {Card, CardPost, Categories, ConvertCategory2Id, ConvertId2Category, ConvertDate} from "../../Models/Card";
+import {
+    Card,
+    CardPost,
+    Categories,
+    ConvertCategory2Id,
+    ConvertId2Category,
+    ConvertDate,
+    GetRepetitiveDate, ConvertTodayDate
+} from "../../Models/Card";
 import {ChangeEvent} from "react"
 import "../../CSS/Card.scss"
 import "../../CSS/Base.scss"
@@ -21,7 +29,7 @@ interface CardFormProps {
 interface ICardFormState {
     title: string,
     description : string,
-    due: Date,
+    due: string,
     category_id: number,
     label: string,
     labels: string[],
@@ -40,12 +48,12 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
     constructor(props: CardFormProps) {
         super(props);
         this.state = {
-            labels: ["a", "b", "c"],
+            labels: ["none", "b", "c"],
             title: this.props.card.title || "" as string,
             description: this.props.card.description || "" as string,
             category_id: this.props.card.category_id || 4,
             is_done: this.props.card.is_done || false,
-            due: this.props.card.due || new Date(),
+            due: this.props.card.due || "",
             with_star: this.props.card.with_star || false,
             is_repetitive: this.props.card.is_repetitive || false,
             label: this.props.card.label || "" as string,
@@ -114,8 +122,8 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         //     this.setState({due: null as any})
         // }
         // else {
-
-            this.setState({due: new Date(Number(newDate[0]), Number(newDate[1]) - 1, Number(newDate[2]), Number(newDate[3]), Number(newDate[4]))})
+        var d: string = String(newDate[0]).concat("-").concat(String(Number(newDate[1]))).concat("-").concat(String(newDate[2]))
+            this.setState({due: d})
         // }
 
     }
@@ -148,6 +156,14 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
             repeat_days.splice(index, 1)
         }
         this.setState({ repeat_days: repeat_days })
+        var temp: string[] = []
+        for(var i = 0; i < repeat_days.length; i++)
+            temp.push(GetRepetitiveDate(repeat_days[i]))
+
+        this.setState({
+            repeat_days: temp
+        })
+        //console.log("----------->>" + ConvertTodayDate())
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
@@ -314,7 +330,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                         {/*<label className="col-lg-1" style={{paddingTop: 8}}>Time:</label>*/}
 
                         <label className="col-lg-4"></label>
-                        <input className="col-lg-4" type="datetime-local" onChange={this.handleDateUpdate} style={{height: 30}}/>
+                        <input className="col-lg-4" type="date" onChange={this.handleDateUpdate} style={{height: 30}}/>
                         <label className="col-lg-4"></label>
                     </div>
                 </div>
