@@ -18,6 +18,8 @@ interface IminiCardBaseState{
 const newcard: miniCard ={
     id: 0,
     title: "",
+    due: new Date(),
+    label: "",
 }
 
 class MiniCardBase extends React.Component<miniCardBaseProps, IminiCardBaseState> {
@@ -41,10 +43,11 @@ class MiniCardBase extends React.Component<miniCardBaseProps, IminiCardBaseState
         return(
             <div className="card">
             <div className="card-header">
-              <h3>Example Card</h3>
+              <h3>{this.props.mcard.title}</h3>
             </div>
             <div className="card-body">
-              <p>{this.props.mcard.title}</p>
+              <p></p>
+              <p>{this.props.mcard.label}</p>
             </div>
           </div>
         );
