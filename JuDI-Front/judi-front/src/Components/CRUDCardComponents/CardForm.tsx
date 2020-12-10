@@ -25,6 +25,7 @@ interface ICardFormState {
     due: Date,
     category_id: number,
     label: string,
+    labels: string[],
     with_star: boolean,
     reminder: boolean,
     is_done: boolean,
@@ -33,12 +34,14 @@ interface ICardFormState {
 }
 
 
+
 class CardForm extends React.Component<CardFormProps, ICardFormState> {
 
 
     constructor(props: CardFormProps) {
         super(props);
         this.state = {
+            labels: ["a", "b", "c"],
             title: this.props.card.title || "" as string,
             description: this.props.card.description || "" as string,
             category_id: this.props.card.category_id || 4,
@@ -78,7 +81,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
     handleTitleUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
         this.setState({title: e.target.value});
     }
-    handleLabelUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
+    handleLabelUpdate = (e: ChangeEvent<HTMLSelectElement>): void => {
         this.setState({label: e.target.value});
     }
     handleReminderUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -166,10 +169,17 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     <label style={{textDecoration:"underline"}}>
                         Label
                     </label>
-                    <input type="text" placeholder="Enter a Label"
-                           value={this.state.label} onChange={this.handleLabelUpdate}
-                           className="form-control"
-                    />
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                        <label className="col-lg-4"></label>
+                        <select defaultValue={this.props.card.label} value={this.state.label} onChange={this.handleLabelUpdate} className="col-lg-4" name="category_id" style={{height: 30, borderRadius: 5, marginBottom: 30, cursor: "pointer"}}>
+                            {
+                                this.state.labels.map(label => {
+                                    return <option value={label}>{label}</option>
+                                })
+                            }
+                        </select>
+                        <label className="col-lg-4"></label>
+                    </div>
                 </div>
 
                 <div className="row" style={{marginBottom:30, marginTop:30}}>
@@ -282,7 +292,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     </label>
                     <div className="col-lg-12 col-md-12 col-sm-12">
                         <label className="col-lg-4"></label>
-                        <select defaultValue={ConvertId2Category(this.props.card.category_id)} onChange={this.handlecategory_idUpdate} className="col-lg-4" name="category_id" style={{height: 30, borderRadius: 5, cursor: "pointer"}}>
+                        <select defaultValue={ConvertId2Category(this.props.card.category_id)} value={ConvertId2Category(this.props.card.category_id)} onChange={this.handlecategory_idUpdate} className="col-lg-4" name="category_id" style={{height: 30, borderRadius: 5, cursor: "pointer"}}>
                             <option value="others" style={{backgroundColor: "lightgray"}}>others</option>
                             <option value="sport" style={{backgroundColor: "lightgreen"}}>Sport</option>
                             <option value="work" style={{backgroundColor: "lightpink"}}>Work</option>
