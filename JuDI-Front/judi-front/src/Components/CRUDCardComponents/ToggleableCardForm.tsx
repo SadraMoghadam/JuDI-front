@@ -19,7 +19,7 @@ const card: Card ={
     id: 0,
     title: "",
     description: "",
-    due: new Date(),
+    due: "",
     category_id: 4,
     label: "",
     with_star: false,

@@ -65,14 +65,14 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
     componentWillMount = async() =>{
         console.log(localStorage.getItem("token"))
-        //var newCards: CardGet[] = await getCards();
-        var newCards: CardGet[] = []
+        var newCards: CardGet[] = await getCards();
+        //var newCards: CardGet[] = []
         var cardForm: Card[] = []
         for (let i = 0; i < newCards.length; i++)
         {
             var c: Card = {
                 id: newCards[i].id,
-                due: new Date(),
+                due: newCards[i].due,
                 is_done: newCards[i].is_done,
                 reminder: newCards[i].reminder,
                 with_star: newCards[i].with_star,
@@ -103,7 +103,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
             id: card.id,
             title: card.title,
             description: card.description,
-            due: ConvertDate(card.due),
+            due: card.due,
             //due: this.state.due,
             category_id: card.category_id,
             label: card.label,
@@ -113,13 +113,19 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
             is_repetitive: card.is_repetitive,
             repeat_days: card.repeat_days
         }
+        console.log(card.due)
         // console.log("id ==== " + this.props.card.id)
         var cardCreateResponse : CardGet = await createCard(newCard)
+
+        console.log("Res ========== " + cardCreateResponse);
+        console.log("CardID ========== " + card.id);
+        console.log("repeatDays ========== " + card.repeat_days);
+
         card.id = cardCreateResponse.id
         this.state.cards.push(card)
         this.setState({cards: this.state.cards});
-        // if(cardCreateResponse == 0)
-        //     alert("card didnt saved to database successfully")
+        if(cardCreateResponse == null)
+            alert("card didnt saved to database successfully")
     }
 
     updateCard = async (newCard: Card) => {
@@ -162,7 +168,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
             id: card.id,
             title: card.title,
             description: card.description,
-            due: ConvertDate(card.due),
+            due: card.due,
             //due: this.state.due,
             category_id: card.category_id,
             label: card.label,
@@ -175,7 +181,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
         var cardCreateResponse : CardGet = await createCard(newCard)
         var c: Card = {
             id: cardCreateResponse.id,
-            due: new Date(),
+            due: card.due,
             is_done: card.is_done,
             reminder: card.reminder,
             with_star: card.with_star,
