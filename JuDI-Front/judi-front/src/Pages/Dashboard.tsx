@@ -7,6 +7,10 @@ import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
 import "../CSS/schedule.css"
 import { faDivide } from "@fortawesome/free-solid-svg-icons";
+import CardBase from "../Components/CRUDCardComponents/CardBase";
+import MiniCardBase from "../Components/CRUDCardComponents/miniCardBase";
+import { title } from "process";
+import { miniCard } from "../Models/miniCard";
 
 
 var dragula = require('react-dragula');
@@ -27,6 +31,33 @@ var dragula = require('react-dragula');
     </span>
 </div>
 </div> */}
+const newcard: miniCard ={
+    id: 0,
+    title: "Reading book",
+    due: new Date(),
+    label: "Study",
+}
+
+const newcard2: miniCard ={
+    id: 1,
+    title: "Go Shopping",
+    due: new Date(),
+    label: "Hobby",
+} 
+
+const newcard3: miniCard ={
+    id: 1,
+    title: "Basketball Class",
+    due: new Date(),
+    label: "Sport",
+} 
+
+const newcard4: miniCard ={
+    id: 1,
+    title: "Do Homework",
+    due: new Date(),
+    label: "Study",
+} 
 
 class Dashboard extends React.Component<RouteComponentProps> {
 
@@ -51,10 +82,12 @@ class Dashboard extends React.Component<RouteComponentProps> {
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
+            
             <div>
             <DashboardHeader state={"dashboard"}/>
-
+            
             <form>
+                
             <div className="form-tbl">
                 <div className="tbl-header">
                     <div>
@@ -63,40 +96,70 @@ class Dashboard extends React.Component<RouteComponentProps> {
                         </h1>
                     </div>
                     <div className="week-cal">
-                            <input id="week" type="week" name="week" ></input>
+                            <input id="week" type="week" name="week" value="2020-W50" ></input>
                             </div>
                 </div>
+                <div className="tbl-content">
                 <div className="row">
-                    <div className="col-lg-3 col-md-3 col-sm-6" id="Sun">
-                        <p style={{fontSize: '1.5rem'}}>Sunday</p>
-          
+                    <div className="total-hdr col-lg-3 col-md-3 col-sm-6">
+                    <div className="hdr-minicard">
+                                <p style={{fontSize: '1.5rem'}}>Sunday</p>
                     </div>
-                    <div className="col-lg-3 col-md-3 col-sm-6" id="Mon">
-                        <p style={{fontSize: '1.5rem'}}>Monday</p>
-          
+                    <div id="Sun" >
+                        <MiniCardBase mcard={newcard} />
+                        <MiniCardBase mcard={newcard2} />
                     </div>
-                    <div className="col-lg-3 col-md-3 col-sm-6" id="Tue">
-                        <p style={{fontSize: '1.5rem'}}>Tuesday</p>
-         
                     </div>
-                    <div className="col-lg-3 col-md-3 col-sm-6" id="Wed">
-                        <p style={{fontSize: '1.5rem'}}>Wednesday</p>
-         
+                    <div className="total-hdr col-lg-3 col-md-3 col-sm-6">
+                    <div className="hdr-minicard">
+                                <p style={{fontSize: '1.5rem'}}>Monday</p>
+                    </div>
+                    <div id="Mon" >
+        
+                    </div>
+                    </div>
+                    <div className="total-hdr col-lg-3 col-md-3 col-sm-6">
+                    <div className="hdr-minicard">
+                                <p style={{fontSize: '1.5rem'}}>Tuesday</p>
+                    </div>
+                    <div id="Tue" >
+
+                    </div>
+                    </div>
+                    <div className="total-hdr col-lg-3 col-md-3 col-sm-6">
+                    <div className="hdr-minicard">
+                                <p style={{fontSize: '1.5rem'}}>Wednesday</p>
+                    </div>
+                    <div id="Wed" >
+
+                    </div>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-lg-4 col-md-4 col-sm-6" id="Thu">
-                        <p style={{fontSize: '1.5rem'}}>Thursday</p>
-         
+                <div className="total-hdr col-lg-3 col-md-4 col-sm-6">
+                    <div className="hdr-minicard">
+                                <p style={{fontSize: '1.5rem'}}>Thursday</p>
+                    </div>
+                    <div id="Thu" >
+                        <MiniCardBase mcard={newcard3} />
+                    </div>
                     </div>
 
-                    <div className="col-lg-4 col-md-4 col-sm-6" id="Fri">
-                        <p style={{fontSize: '1.5rem'}}>Friday</p>
-         
+                    <div className="total-hdr col-lg-3 col-md-4 col-sm-6">
+                    <div className="hdr-minicard">
+                                <p style={{fontSize: '1.5rem'}}>Friday</p>
                     </div>
-                    <div className="col-lg-4 col-md-4 col-sm-6" id="Sat">
-                        <p style={{fontSize: '1.5rem'}}>Saturday</p>
-         
+                    <div id="Fri" >
+               
+                    </div>
+                    </div>
+                    <div className="total-hdr col-lg-3 col-md-4 col-sm-6">
+                    <div className="hdr-minicard">
+                                <p style={{fontSize: '1.5rem'}}>Saturday</p>
+                    </div>
+                    <div id="Sat" >
+                        <MiniCardBase mcard={newcard4} />
+                    </div>
                     </div>
                 </div>
                 <div className="set-btn-tbl">
@@ -106,6 +169,7 @@ class Dashboard extends React.Component<RouteComponentProps> {
                                     <div className="btn-txt">Add Card</div>
                 </button>
                 <button onClick={this.printFunction} className="print-button" ><span className="print-icon"></span></button>
+            </div>
             </div>
             </div>
             

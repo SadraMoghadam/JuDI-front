@@ -7,7 +7,7 @@ import Register from "./Pages/Register";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import CRUDPage from "./Pages/CRUDPage";
 import Stress from "./Pages/Stress";
-import ManageTime from "./Pages/ManageTime";
+import ManageTime from "./Pages/TimeArticle";
 
 const App: React.FC = () => {
     return (

@@ -293,16 +293,14 @@ button.print-button {
   
   
 #Sun, #Mon , #Tue, #Thu,#Wed, #Fri, #Sat{
-	margin-top: 10px;
-	padding-top: 10px;
-	background-color : #DAF7A6 ;
+	background-color : #D1FBEB ;
 	height: 300px;
-	width: 20%;
 	display: inline-block;
-	overflow-y: scroll
+	overflow-y: scroll ;
+	width: 100%;
   }
-  
 
+ 
   
   .card {
 	background-color: #fff;
@@ -329,3 +327,9 @@ button.print-button {
 	margin: auto;
 }
   
+.hdr-minicard{
+	font-weight: bold;
+	text-align: center;
+  background-color: #cdcdcd;
+color: black;
+ }
