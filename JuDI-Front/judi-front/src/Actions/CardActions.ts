@@ -1,7 +1,7 @@
 
 import axios, {AxiosRequestConfig} from "axios";
 import {User, userRegister, userLogin} from "../Models/user";
-import {Card, CardPost, CardGet, Label} from "../Models/Card";
+import {Card, CardPost, CardGet, Label, LabelPost} from "../Models/Card";
 import {number} from "prop-types";
 
 
@@ -17,7 +17,8 @@ export const createCard = async (card: CardPost) : Promise<CardGet> => {
     return axios.post(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/cards`, card, config).then((res) => {
         console.log(res.data)
         if (res.status == 200 || res.status == 201) {
-            return res.data.user
+            console.log(res.data.card)
+            return res.data.card
         }
         return null as any;
     }).catch(e => {
@@ -52,7 +53,7 @@ export const getCards = async () : Promise<CardGet[]> => {
 
 export const deleteCard = async (id : number) : Promise<number> => {
     let config: AxiosRequestConfig = {
-        method: "get",
+        method: "delete",
         url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/remove/${id}`,
         headers: {
             "Content-Type": "application/json",
@@ -60,7 +61,7 @@ export const deleteCard = async (id : number) : Promise<number> => {
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }
-    return axios.get(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/remove/${id}`, config).then((res) => {
+    return axios.delete(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/remove/${id}`, config).then((res) => {
         if (res.status == 200) {
             return 1
         }
@@ -102,7 +103,7 @@ export const updateCard = async (id : number) : Promise<number> => {
 }
 
 
-export const createLabel = async (label: Label) : Promise<number> => {
+export const createLabel = async (label: LabelPost) : Promise<Label> => {
     let config: AxiosRequestConfig = {
         method: "post",
         headers: {
@@ -114,11 +115,12 @@ export const createLabel = async (label: Label) : Promise<number> => {
     return axios.post(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/labels`, label, config).then((res) => {
         console.log(res.data)
         if (res.status == 200 || res.status == 201) {
-            return 1
+            console.log(res.data.label)
+            return res.data.label
         }
         return 0;
     }).catch(e => {
-        console.log("problem with card create")
+        console.log("problem with label create")
         return 0
     })
 
@@ -128,14 +130,15 @@ export const createLabel = async (label: Label) : Promise<number> => {
 export const getLabels = async () : Promise<Label[]> => {
     let config: AxiosRequestConfig = {
         method: "get",
-        url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels/get`,
+        url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels`,
         headers: {
             "Content-Type": "application/json",
             "X-Requested-With": "XMLHttpRequest",
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }
-    return axios.get(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels/get`, config).then((res) => {
+    return axios.get(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels`, config).then((res) => {
+        console.log("--------" + res.data)
         if (res.status == 200) {
             var labels: Label[] = res.data.labels;
             return labels
@@ -150,15 +153,15 @@ export const getLabels = async () : Promise<Label[]> => {
 
 export const deleteLabel = async (id : number) : Promise<number> => {
     let config: AxiosRequestConfig = {
-        method: "get",
-        url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels/remove/${id}`,
+        method: "delete",
+        url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels/${id}`,
         headers: {
             "Content-Type": "application/json",
             "X-Requested-With": "XMLHttpRequest",
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }
-    return axios.get(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels/remove/${id}`, config).then((res) => {
+    return axios.delete(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels/${id}`, config).then((res) => {
         if (res.status == 200) {
             return 1
         }

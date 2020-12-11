@@ -10,7 +10,7 @@ import CardList from "./CardList";
 import ToggleableCardForm from "./ToggleableCardForm";
 import LabelList from "./LabelList";
 import ToggleableLabelForm from "./ToggleableLabelForm";
-import {createCard} from "../../Actions/CardActions";
+import {createCard, createLabel, deleteLabel, getCards, getLabels} from "../../Actions/CardActions";
 
 
 interface IAddLabelState {
@@ -60,11 +60,24 @@ class AddLabel extends React.Component<any, IAddLabelState> {
 
 
     componentWillMount = async() =>{
-
+        var newLabels: Label[] = await getLabels();
+        console.log(newLabels)
+        //var newCards: CardGet[] = []
+        var labelForm: Label[] = []
+        for (let i = 0; i < newLabels.length; i++)
+        {
+            var l: Label = {
+                id: newLabels[i].id,
+                title: newLabels[i].title,
+            }
+            labelForm.push(l)
+        }
+        this.setState({labels:labelForm})
+        window.scrollTo(0, 0)
     }
 
     deleteCard = async(labelID: number) => {
-        //var cardDeleteResponse = await deleteCard(labelID)
+        var cardDeleteResponse = await deleteLabel(labelID)
         var cardDeleteResponse = 1;
         if(cardDeleteResponse == 1)
             this.setState({labels: this.state.labels.filter(label => label.id !== labelID)})
@@ -83,8 +96,8 @@ class AddLabel extends React.Component<any, IAddLabelState> {
             title: label.title
         }
         // console.log("id ==== " + this.props.card.id)
-        //var labelCreateResponse : CardGet = await createLabel(newLabel)
-        //label.id = cardCreateResponse.id
+        var labelCreateResponse : Label = await createLabel(newLabel)
+        label.id = labelCreateResponse.id
         this.state.labels.push(label)
         this.setState({labels: this.state.labels});
         // if(cardCreateResponse == 0)
