@@ -123,7 +123,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         // }
         // else {
         var d: string = String(newDate[0]).concat("-").concat(String(Number(newDate[1]))).concat("-").concat(String(newDate[2]))
-            this.setState({due: d})
+        this.setState({due: d})
         // }
 
     }
@@ -146,23 +146,32 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         //var cardUpdateResponse : number = await updateCard(updatedCard)
     }
     handlerepeat_daysUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
-        const repeat_days = this.state.repeat_days
-        let index
+        let repeat_days: string[] = this.state.repeat_days
+        var temp: string[] = []
+        // for(var i = 0; i < repeat_days.length; i++)
+        // {
+        //     repeat_days[i] = GetRepetitiveDate(repeat_days[i]);
+        // }
+        // console.log("///////////" + repeat_days);
+        let index: number = 0
 
+        this.state.repeat_days.push(GetRepetitiveDate(e.target.value))
+        // console.log("11111111111111" + this.state.repeat_days)
         if (e.target.checked) {
-            repeat_days.push(e.target.value)
+            this.setState({
+                repeat_days: this.state.repeat_days
+            })
         } else {
             index = repeat_days.indexOf(e.target.value)
             repeat_days.splice(index, 1)
         }
-        this.setState({ repeat_days: repeat_days })
-        var temp: string[] = []
-        for(var i = 0; i < repeat_days.length; i++)
-            temp.push(GetRepetitiveDate(repeat_days[i]))
+        // this.setState({ repeat_days: repeat_days })
+        // temp.push(GetRepetitiveDate(repeat_days[i]))
 
-        this.setState({
-            repeat_days: temp
-        })
+        // this.setState({
+        //     repeat_days: temp
+        // })
+
         //console.log("----------->>" + ConvertTodayDate())
     }
 
@@ -307,7 +316,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     </label>
                     <div className="col-lg-12 col-md-12 col-sm-12">
                         <label className="col-lg-4"></label>
-                        <select defaultValue={ConvertId2Category(this.props.card.category_id)} value={ConvertId2Category(this.props.card.category_id)} onChange={this.handlecategory_idUpdate} className="col-lg-4" name="category_id" style={{height: 30, borderRadius: 5, cursor: "pointer"}}>
+                        <select defaultValue={ConvertId2Category(this.props.card.category_id)} value={ConvertId2Category(this.state.category_id)} onChange={this.handlecategory_idUpdate} className="col-lg-4" name="category_id" style={{height: 30, borderRadius: 5, cursor: "pointer"}}>
                             <option value="others" style={{backgroundColor: "lightgray"}}>others</option>
                             <option value="sport" style={{backgroundColor: "lightgreen"}}>Sport</option>
                             <option value="work" style={{backgroundColor: "lightpink"}}>Work</option>

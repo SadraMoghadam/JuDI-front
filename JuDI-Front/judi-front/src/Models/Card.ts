@@ -128,7 +128,7 @@ export var ConvertTodayDate = () : string => {
 }
 
 
-export var GetRepetitiveDate = (day: string) : string => {
+export var GetRepetitiveDate1 = (day: string) : string => {
     var newDate: Date = new Date()
     var today: string = ConvertTodayDate();
     var id: number = 0
@@ -138,25 +138,63 @@ export var GetRepetitiveDate = (day: string) : string => {
             break;
         }
     }
-    //console.log("id======" + id)
+    console.log("id======" + id)
     for (let i = id; i < 7; i++) {
         if(day == WeekDays[i]) {
             var temp1: number = (i - id)
             newDate.setDate(newDate.getDate() + temp1)
-            //console.log("i1======" + i)
+            console.log("i1======" + i)
         }
     }
     console.log("___________"+newDate.getUTCDate())
-    //console.log("day2========"+newDate.getDay())
+    console.log("day2========"+newDate.getDay())
     for (let i = 0; i < id; i++) {
         var temp2: number = (id + i - 1)
         if(day == WeekDays[i]){
             newDate.setDate(newDate.getDate() + temp2)
-            //console.log("i2======" + i)
+            console.log("i2======" + i)
         }
     }
-    //console.log("day2========"+newDate.getDay())
+    console.log("day2========"+newDate.getDay())
     console.log("++++++++++++" + newDate)
+    return ConvertDate(newDate)
+}
+
+export var GetRepetitiveDate = (day: string) : string => {
+    var counter: number = 0;
+    var newDate: Date = new Date()
+    var today: string = ConvertTodayDate();
+    var hasFound: boolean = false
+    var id: number = 0
+    for (let i = 0; i < 7; i++) {
+        if(today == WeekDays[i]) {
+            id = i;
+            break;
+        }
+    }
+    console.log("id======" + id)
+    for (let i = id + 1; i < 7; i++) {
+        if(day == WeekDays[i]) {
+            hasFound = true;
+            counter++;
+            break
+        }
+        else
+            counter++;
+    }
+    if(!hasFound)
+    {
+        for (let i = 0; i <= id; i++) {
+            if(day == WeekDays[i]) {
+                hasFound = true;
+                counter++;
+                break
+            }
+            else
+                counter++;
+        }
+    }
+    newDate.setDate(newDate.getDate() + ++counter)
     return ConvertDate(newDate)
 }
 
@@ -164,5 +202,9 @@ export var GetRepetitiveDate = (day: string) : string => {
 
 export interface Label {
     id: number
+    title: string
+}
+
+export interface LabelPost {
     title: string
 }

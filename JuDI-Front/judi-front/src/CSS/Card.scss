@@ -85,7 +85,7 @@ label.css-label {
 
 .Label_popup{
   background-color: #dedede;
-  position: absolute;
+  position: fixed;
   overflow-y: auto;
   margin: 195px 0;
   height: 55%;
@@ -111,7 +111,7 @@ label.css-label {
   height: 30px;
   width: 7%;
   z-index: 8;
-  position: absolute;
+  position: fixed;
   border: #333333 solid 2px;
 }
 
