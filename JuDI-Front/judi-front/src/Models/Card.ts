@@ -202,9 +202,9 @@ export var GetRepetitiveDate = (day: string) : string => {
 
 export interface Label {
     id: number
-    title: string
+    name: string
 }
 
 export interface LabelPost {
-    title: string
+    name: string
 }

@@ -38,7 +38,7 @@ class LabelForm extends React.Component<CardFormProps, ILabelFormState> {
     constructor(props: CardFormProps) {
         super(props);
         this.state = {
-            title: this.props.label.title || "" as string
+            title: this.props.label.name || "" as string
         }
     }
 
@@ -53,7 +53,7 @@ class LabelForm extends React.Component<CardFormProps, ILabelFormState> {
 
     c: Label = {
         id: this.props.label.id,
-        title: this.props.label.title,
+        name: this.props.label.name,
     }
 
     handleTitleUpdate = (e: ChangeEvent<HTMLInputElement>): void => {

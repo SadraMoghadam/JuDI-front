@@ -2,7 +2,7 @@ import * as React from "react";
 import {createRef, RefObject} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
-import {Card, Categories, repeat_days, CardGet, CardPost, ConvertDate, Label} from "../../Models/Card";
+import {Card, Categories, repeat_days, CardGet, CardPost, ConvertDate, Label, LabelPost} from "../../Models/Card";
 import {async} from "q";
 
 import "../../CSS/Card.scss"
@@ -60,7 +60,8 @@ class AddLabel extends React.Component<any, IAddLabelState> {
 
 
     componentWillMount = async() =>{
-        var newLabels: Label[] = await getLabels();
+        // var newLabels: Label[] = await getLabels();
+        var newLabels: Label[] = [];
         console.log(newLabels)
         //var newCards: CardGet[] = []
         var labelForm: Label[] = []
@@ -68,7 +69,7 @@ class AddLabel extends React.Component<any, IAddLabelState> {
         {
             var l: Label = {
                 id: newLabels[i].id,
-                title: newLabels[i].title,
+                name: newLabels[i].name,
             }
             labelForm.push(l)
         }
@@ -88,12 +89,10 @@ class AddLabel extends React.Component<any, IAddLabelState> {
 
 
     createNewLabel = async(label: Label) => {
-        console.log("----//////////aaaaaaaaaaaa")
-        label.id = Math.floor(Math.random() * 1000);
+        //label.id = Math.floor(Math.random() * 1000);
 
-        var newLabel: Label ={
-            id: label.id,
-            title: label.title
+        var newLabel: LabelPost ={
+            name: label.name
         }
         // console.log("id ==== " + this.props.card.id)
         var labelCreateResponse : Label = await createLabel(newLabel)

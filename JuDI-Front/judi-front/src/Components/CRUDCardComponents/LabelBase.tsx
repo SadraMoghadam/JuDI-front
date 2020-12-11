@@ -24,7 +24,7 @@ interface ICardBaseState{
 
 const newlabel: Label ={
     id: 0,
-    title: ""
+    name: ""
 }
 
 class LabelBase extends React.Component<CardBaseProps, ICardBaseState> {
@@ -84,7 +84,7 @@ class LabelBase extends React.Component<CardBaseProps, ICardBaseState> {
             <div className="card">
                 <div className="card-header d-flex justify-content-between" >
                     <span>
-                        <strong style={{fontSize: 12}}>{this.props.label.title}</strong>
+                        <strong style={{fontSize: 12}}>{this.props.label.name}</strong>
                     </span>
                     <div>
                         <span onClick={() => this.props.onDeleteClick()} style={{cursor:"pointer"}}><i style={{fontSize:14, margin: 0, marginRight: -30, padding: 0}} className="fa fa-trash-o"></i></span>

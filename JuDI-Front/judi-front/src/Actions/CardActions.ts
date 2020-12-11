@@ -113,7 +113,7 @@ export const createLabel = async (label: LabelPost) : Promise<Label> => {
         }
     }
     return axios.post(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/labels`, label, config).then((res) => {
-        console.log(res.data)
+        console.log(res.status)
         if (res.status == 200 || res.status == 201) {
             console.log(res.data.label)
             return res.data.label
@@ -125,6 +125,30 @@ export const createLabel = async (label: LabelPost) : Promise<Label> => {
     })
 
 }
+
+//
+// export const getLabels = async () : Promise<Label[]> => {
+//     let config: AxiosRequestConfig = {
+//         method: "get",
+//         url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels`,
+//         headers: {
+//             "Content-Type": "application/json",
+//             "X-Requested-With": "XMLHttpRequest",
+//             "Authorization": `Bearer ${localStorage.getItem("token")}`
+//         }
+//     }
+//     return axios.get(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels`, config).then((res) => {
+//         console.log("--------" + res.data)
+//         if (res.status == 200) {
+//             var labels: Label[] = res.data.labels;
+//             return labels
+//         }
+//         return null as any;
+//     }).catch((e)=>{
+//         console.log("problem with get cards")
+//     })
+//
+// }
 
 
 export const getLabels = async () : Promise<Label[]> => {

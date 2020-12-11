@@ -17,7 +17,7 @@ interface IToggleableCardFormState{
 
 const label: Label ={
     id: 0,
-    title: ""
+    name: ""
 }
 
 class ToggleableLabelForm extends React.Component<ToggleableCardFormProps, IToggleableCardFormState> {
