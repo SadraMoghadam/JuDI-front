@@ -28,7 +28,7 @@ interface CardFormProps {
 }
 
 interface ILabelFormState {
-    title: string
+    name: string
 }
 
 
@@ -38,7 +38,7 @@ class LabelForm extends React.Component<CardFormProps, ILabelFormState> {
     constructor(props: CardFormProps) {
         super(props);
         this.state = {
-            title: this.props.label.name || "" as string
+            name: this.props.label.name || "" as string
         }
     }
 
@@ -57,7 +57,7 @@ class LabelForm extends React.Component<CardFormProps, ILabelFormState> {
     }
 
     handleTitleUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
-        this.setState({title: e.target.value});
+        this.setState({name: e.target.value});
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
@@ -69,13 +69,13 @@ class LabelForm extends React.Component<CardFormProps, ILabelFormState> {
                         Label Name
                     </label>
                     <input type="text" placeholder="Enter a title"
-                           value={this.state.title} onChange={this.handleTitleUpdate}
+                           value={this.state.name} onChange={this.handleTitleUpdate}
                            className="form-control"
                     />
                 </div>
 
                 <div className="form-group d-flex justify-content-between">
-                    <button type="submit" className="createbtn" disabled={this.state.title == "" ? true : false} style={{width: "30%", backgroundColor: this.state.title == "" ? "lightgray" : ""}}>
+                    <button type="submit" className="createbtn" disabled={this.state.name == "" ? true : false} style={{width: "30%", backgroundColor: this.state.name == "" ? "lightgray" : ""}}>
                         {buttonText}
                     </button>
                     <button type="button" className="canclebtn" onClick={() => this.props.onCancelClick()} style={{width: "30%"}}>
