@@ -7,7 +7,7 @@ import {RouteComponentProps, withRouter} from "react-router";
 import "../CSS/randText.css";
 import p4 from "../CSS/stress.jpg";
 import p7 from "../CSS/time2.jpg";
-import p6 from "../CSS/stress3.jpg";
+import p6 from "../CSS/g2.png";
 
 export const menuSectionRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
 export const aboutUsRef: RefObject<HTMLDivElement> = createRef<HTMLDivElement>()
@@ -42,7 +42,7 @@ class MainPage extends React.Component<RouteComponentProps> {
 	                    <div id="proparallax">
 		                <a href="/Stress"><img className="one" src={p4} /> </a>
 		                <a href="/ManageTime"><img className="two" src={p7} /> </a>
-		                <a href=""><img className="three" src={p6} /> </a>
+		                <a href="/GoalsArticle"><img className="three" src={p6} /> </a>
 	                    </div>
                     </div>
                     </div>

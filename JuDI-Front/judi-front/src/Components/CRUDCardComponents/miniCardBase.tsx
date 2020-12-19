@@ -32,6 +32,7 @@ class MiniCardBase extends React.Component<miniCardBaseProps, IminiCardBaseState
     //     }
     // }
 
+
     constructor (props: miniCardBaseProps) {
         super(props);
         this.state={

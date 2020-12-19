@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import CRUDPage from "./Pages/CRUDPage";
 import Stress from "./Pages/Stress";
 import ManageTime from "./Pages/TimeArticle";
+import GoalsArticle from "./Pages/GoalsArticle";
 
 const App: React.FC = () => {
     return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
                     <Route exact path="/MainPage"  component={MainPage}/>
                     <Route exact path="/Stress" component={Stress}/>
                     <Route exact path="/ManageTime" component={ManageTime}/>
+                    <Route exact path="/GoalsArticle" component={GoalsArticle}/>
                 </Switch>
             </Router>
         </div>
