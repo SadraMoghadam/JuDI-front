@@ -36,7 +36,7 @@ export interface CardGet {
     category_id: number,
     created_at: string,
     updated_at: string,
-    // label: string,
+    label_name: string,
     with_star: boolean,
     reminder: boolean,
     is_done: boolean,
@@ -205,6 +205,8 @@ export interface Label {
     name: string
 }
 
-export interface LabelPost {
+export interface LabelGet {
+    id: number,
+    user_id: number,
     name: string
 }

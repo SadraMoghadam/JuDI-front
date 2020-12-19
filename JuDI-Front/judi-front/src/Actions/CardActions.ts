@@ -1,7 +1,7 @@
 
 import axios, {AxiosRequestConfig} from "axios";
 import {User, userRegister, userLogin} from "../Models/user";
-import {Card, CardPost, CardGet, Label, LabelPost} from "../Models/Card";
+import {Card, CardPost, CardGet, Label, LabelGet} from "../Models/Card";
 import {number} from "prop-types";
 
 
@@ -75,10 +75,10 @@ export const deleteCard = async (id : number) : Promise<number> => {
 }
 
 
-export const updateCard = async (id : number) : Promise<number> => {
+export const updateCard = async (card: Card) : Promise<number> => {
     let config: AxiosRequestConfig = {
         method: "put",
-        url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/update/${id}`,
+        url: `http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/update/${card.id}`,
         headers: {
             "Content-Type": "application/json",
             "X-Requested-With": "XMLHttpRequest",
@@ -88,7 +88,7 @@ export const updateCard = async (id : number) : Promise<number> => {
     console.log(localStorage.getItem("token"))
     console.log(localStorage.getItem("user_name"))
 
-    return axios.put(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/update/${id}`, config).then((res) => {
+    return axios.put(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/cards/update/${card.id}`, card, config).then((res) => {
         console.log(res.data)
         if (res.status == 200) {
             return 1
@@ -103,7 +103,7 @@ export const updateCard = async (id : number) : Promise<number> => {
 }
 
 
-export const createLabel = async (label: LabelPost) : Promise<Label> => {
+export const createLabel = async (label: Label) : Promise<Label> => {
     let config: AxiosRequestConfig = {
         method: "post",
         headers: {
@@ -162,10 +162,10 @@ export const getLabels = async () : Promise<Label[]> => {
         }
     }
     return axios.get(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels`, config).then((res) => {
-        console.log("--------" + res.data)
+        console.log(res.data)
         if (res.status == 200) {
-            var labels: Label[] = res.data.labels;
-            return labels
+            var labels: Label[] = res.data;
+            return labels;
         }
         return null as any;
     }).catch((e)=>{
