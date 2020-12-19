@@ -9,7 +9,7 @@ import {
     ConvertCategory2Id,
     ConvertId2Category,
     ConvertDate,
-    GetRepetitiveDate, ConvertTodayDate
+    GetRepetitiveDate, ConvertTodayDate, Label
 } from "../../Models/Card";
 import {ChangeEvent} from "react"
 import "../../CSS/Card.scss"
@@ -17,7 +17,7 @@ import "../../CSS/Base.scss"
 import {DetailedArguments} from "yargs-parser";
 import {number} from "prop-types";
 import {getUserLogin} from "../../Actions/UserActions";
-import { createCard, getCards} from "../../Actions/CardActions";
+import {createCard, getCards, getLabels} from "../../Actions/CardActions";
 import * as ReactModal from 'react-modal';
 
 interface CardFormProps {
@@ -32,7 +32,7 @@ interface ICardFormState {
     due: string,
     category_id: number,
     label: string,
-    labels: string[],
+    labels: Label[],
     with_star: boolean,
     reminder: boolean,
     is_done: boolean,
@@ -40,15 +40,17 @@ interface ICardFormState {
     repeat_days: string[]
 }
 
-
+//const getLabels : Label[] = await getLabels();
 
 class CardForm extends React.Component<CardFormProps, ICardFormState> {
+
+
 
 
     constructor(props: CardFormProps) {
         super(props);
         this.state = {
-            labels: ["none", "b", "c"],
+            labels: [],
             title: this.props.card.title || "" as string,
             description: this.props.card.description || "" as string,
             category_id: this.props.card.category_id || 4,
@@ -56,16 +58,33 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
             due: this.props.card.due || "",
             with_star: this.props.card.with_star || false,
             is_repetitive: this.props.card.is_repetitive || false,
-            label: this.props.card.label || "" as string,
+            label: this.props.card.label == "" ? "none" : this.props.card.label,
             reminder: this.props.card.reminder || false,
             repeat_days: this.props.card.repeat_days || []
         }
+    }
+
+    componentWillMount = async () => {
+        var firstLabel: Label[] = [{
+            id: 1000000000000,
+            name: "none"
+        }]
+        var newLabels: Label[] = await getLabels();
+        //var getLabels : Label[] = await getLabels();
+        for(var i = 0; i < newLabels.length; i++)
+        {
+            firstLabel.push(newLabels[i]);
+        }
+        this.setState({
+            labels: firstLabel
+        })
     }
 
     handleFormSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
         console.log("-----------------")
         e.preventDefault();
         this.props.onFormSubmit({...this.state});
+        alert(this.state.label)
         // console.log(newCard)
         // console.log(cardCreateResponse)
     }
@@ -135,7 +154,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
             description: this.props.card.description,
             due: this.props.card.due,
             category_id: this.props.card.category_id,
-            label: this.props.card.label,
+            label: this.props.card.label == "" ? "none" : this.props.card.label,
             with_star: this.props.card.with_star,
             reminder: this.props.card.reminder,
             is_done: this.props.card.is_done,
@@ -195,10 +214,10 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     </label>
                     <div className="col-lg-12 col-md-12 col-sm-12">
                         <label className="col-lg-4"></label>
-                        <select defaultValue={this.props.card.label} value={this.state.label} onChange={this.handleLabelUpdate} className="col-lg-4" name="category_id" style={{height: 30, borderRadius: 5, marginBottom: 30, cursor: "pointer"}}>
+                        <select defaultValue={"none"} value={this.state.label} onChange={this.handleLabelUpdate} className="col-lg-4" name="label" style={{height: 30, borderRadius: 5, marginBottom: 30, cursor: "pointer"}}>
                             {
                                 this.state.labels.map(label => {
-                                    return <option value={label}>{label}</option>
+                                    return <option value={label.name}>{label.name}</option>
                                 })
                             }
                         </select>
