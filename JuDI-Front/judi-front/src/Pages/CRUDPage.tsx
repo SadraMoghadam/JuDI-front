@@ -66,6 +66,8 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
     componentWillMount = async() =>{
         console.log(localStorage.getItem("token"))
         var newCards: CardGet[] = await getCards();
+        console.log("----------")
+        console.log(newCards)
         //var newCards: CardGet[] = []
         var cardForm: Card[] = []
         for (let i = 0; i < newCards.length; i++)
@@ -76,7 +78,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
                 is_done: newCards[i].is_done,
                 reminder: newCards[i].reminder,
                 with_star: newCards[i].with_star,
-                label: "",
+                label: newCards[i].label_name,
                 category_id: newCards[i].category_id,
                 description: newCards[i].description,
                 title: newCards[i].title,
@@ -97,7 +99,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
     createNewCard = async(card: Card) => {
         console.log("----//////////aaaaaaaaaaaa")
-        // card.id = Math.floor(Math.random() * 1000);
+         card.id = Math.floor(Math.random() * 1000);
 
         var newCard: CardPost ={
             id: card.id,
@@ -113,8 +115,11 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
             is_repetitive: card.is_repetitive,
             repeat_days: card.repeat_days
         }
-        console.log(card.due)
+        console.log("----------------");
+        console.log(newCard)
+        console.log("----------------");
         // console.log("id ==== " + this.props.card.id)
+
         var cardCreateResponse : CardGet = await createCard(newCard)
 
         console.log("Res ========== " + cardCreateResponse);
@@ -140,7 +145,7 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
 
         });
         console.log(newCard.id)
-        var cardDeleteResponse = await updateCard(newCard.id)
+        var cardDeleteResponse = await updateCard(newCard)
 
         if(newCard != null) {
             this.setState({cards: newCards});
