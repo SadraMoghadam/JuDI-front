@@ -84,7 +84,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         console.log("-----------------")
         e.preventDefault();
         this.props.onFormSubmit({...this.state});
-        alert(this.state.label)
+        // alert(this.state.label)
         // console.log(newCard)
         // console.log(cardCreateResponse)
     }

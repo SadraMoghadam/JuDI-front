@@ -28,6 +28,29 @@ export const createCard = async (card: CardPost) : Promise<CardGet> => {
 
 }
 
+export const createRepetitiveCard = async (card: CardPost) : Promise<number> => {
+    let config: AxiosRequestConfig = {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+    return axios.post(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/cards`, card, config).then((res) => {
+        console.log(res.data)
+        if (res.status == 200 || res.status == 201) {
+            console.log(res.data.card)
+            return 1
+        }
+        return 0;
+    }).catch(e => {
+        console.log("problem with card create")
+        return 0
+    })
+
+}
+
 
 export const getCards = async () : Promise<CardGet[]> => {
     let config: AxiosRequestConfig = {
