@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import {Card, Categories, repeat_days, CardGet, CardPost, ConvertDate} from "../Models/Card";
 import CardList from "../Components/CRUDCardComponents/CardList";
 import ToggleableCardForm from "../Components/CRUDCardComponents/ToggleableCardForm";
-import { createCard, getCards, deleteCard, updateCard} from "../Actions/CardActions";
+import {createCard, getCards, deleteCard, updateCard, createRepetitiveCard} from "../Actions/CardActions";
 import {async} from "q";
 import {UserProfile} from "../Models/user";
 import {getUserProfile} from "../Actions/UserActions";
@@ -120,17 +120,33 @@ class CRUDPage extends React.Component<RouteComponentProps, ICRUDPageState> {
         console.log("----------------");
         // console.log("id ==== " + this.props.card.id)
 
-        var cardCreateResponse : CardGet = await createCard(newCard)
+        if(!newCard.is_repetitive) {
+            var cardCreateResponse: CardGet = await createCard(newCard)
 
-        console.log("Res ========== " + cardCreateResponse);
-        console.log("CardID ========== " + card.id);
-        console.log("repeatDays ========== " + card.repeat_days);
+            // console.log("Res ========== " + cardCreateResponse);
+            // console.log("CardID ========== " + card.id);
+            // console.log("repeatDays ========== " + card.repeat_days);
 
-        card.id = cardCreateResponse.id
-        this.state.cards.push(card)
-        this.setState({cards: this.state.cards});
-        if(cardCreateResponse == null)
-            alert("card didnt saved to database successfully")
+            card.id = cardCreateResponse.id
+            this.state.cards.push(card)
+            this.setState({cards: this.state.cards});
+            if (cardCreateResponse == null)
+                alert("card didnt saved to database successfully")
+        }
+        else
+        {
+            var repCardCreateResponse: number = await createRepetitiveCard(newCard)
+
+            console.log("Res ========== " + repCardCreateResponse);
+            console.log("CardID ========== " + card.id);
+            console.log("repeatDays ========== " + card.repeat_days);
+
+            card.id = Math.floor(Math.random() * 1000);
+            this.state.cards.push(card)
+            this.setState({cards: this.state.cards});
+            if (repCardCreateResponse== 0)
+                alert("repetitive card didnt saved to database successfully")
+        }
     }
 
     updateCard = async (newCard: Card) => {
