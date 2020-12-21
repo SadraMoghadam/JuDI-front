@@ -21,6 +21,13 @@ export interface Password {
     new_password_confirmation: string,
 }
 
+export interface UserRanking {
+    user_name: string,
+    XP: number,
+    rank: number,
+    avatar: string
+}
+
 export interface UserAvatar {
     image: string
 }
