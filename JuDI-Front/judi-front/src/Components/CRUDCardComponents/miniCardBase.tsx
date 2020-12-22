@@ -42,7 +42,7 @@ class MiniCardBase extends React.Component<miniCardBaseProps, IminiCardBaseState
       
     render(){
         return(
-            <div className="card">
+            <div className="card" >
             <div className="card-header">
               <h3>{this.props.mcard.title}</h3>
             </div>
