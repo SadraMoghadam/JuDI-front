@@ -39,7 +39,7 @@ class RankingPage extends React.Component<RouteComponentProps, IRankPageState> {
                 {
                     rank: 2,
                     XP: 220,
-                    user_name: "mamadei",
+                    user_name: "mohammadMohammadi123",
                     avatar: ""
                 }
             ]

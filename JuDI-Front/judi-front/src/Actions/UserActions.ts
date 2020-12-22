@@ -1,6 +1,6 @@
 
 import axios, {AxiosRequestConfig} from "axios";
-import {User, userRegister, userLogin, UserProfile, Password} from "../Models/user";
+import {User, userRegister, userLogin, UserProfile, Password, UserRanking} from "../Models/user";
 
 
 export const userProfileUpdate = async (user: UserProfile) : Promise<number> => {
@@ -69,6 +69,24 @@ export const postImage = async (image: string) : Promise<string> => {
             return image
         }
         return null as any;
+    })
+
+}
+
+export const getImage = async () : Promise<string> => {
+    let config: AxiosRequestConfig = {
+        method: "get",
+        url: "http://localhost:8000/api/users/signout",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest"
+        }
+    }
+    return axios.post("http://localhost:8000/api/users/signout", config).then((res) => {
+        if (res.status == 200) {
+            return res.data
+        }
+        return "no image";
     })
 
 }
@@ -163,14 +181,15 @@ export const getUserProfile = async () : Promise<UserProfile> => {
         // url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}`,
         headers: {
             "Content-Type": "application/json",
-            // "X-Requested-With": "XMLHttpRequest",
+            "X-Requested-With": "XMLHttpRequest",
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }
     return axios.get(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, config).then((res) => {
+        console.log(res)
         if (res.status == 200) {
-            console.log(res.data.user.original)
-            var u: UserProfile = res.data.user.original;
+            console.log(res.data.user)
+            var u: UserProfile = res.data.user;
             return u
         }
         return null as any;
@@ -204,4 +223,23 @@ export const getPassword = async () : Promise<string> => {
 }
 
 
+export const getRanking = async () : Promise<UserRanking> => {
+    let config: AxiosRequestConfig = {
+        method: "get",
+        url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}`,
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+    return axios.get(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, config).then((res) => {
+        if (res.status == 200) {
+            return res.data
+        }
+        return null as any;
+    }).catch((e) => {
+        console.log("problem with get password")
+    })
 
+}
