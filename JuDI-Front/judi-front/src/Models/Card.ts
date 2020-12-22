@@ -1,3 +1,5 @@
+import {number} from "prop-types";
+
 
 export interface Card {
     id: number,
@@ -209,4 +211,34 @@ export interface LabelGet {
     id: number,
     user_id: number,
     name: string
+}
+
+export var getWeekDays = (year: number, month: number, firstDay: number) : string[] => {
+    var weekDays: string[] = [];
+    for (var i = 0; i < 7; i++)
+    {
+        weekDays.push((year.toString() + "-" + month.toString() + "-" + (firstDay + i).toString()));
+    }
+    return weekDays;
+}
+
+function getDateOfWeek(w: number, y: number) {
+    var simple = new Date(y, 0, 1 + (w - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4)
+        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else
+        ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    return ISOweekStart;
+}
+
+
+export var getFirstDayOfWeek = (week: number) : number => {
+    //var currentWeekNumber = require('week');
+    var year = new Date().getFullYear()
+    var thatdate = getDateOfWeek(week, year).toString();
+    console.log(getDateOfWeek(week,year))
+    var day = thatdate.substring(8,10);
+    return Number(day);
 }

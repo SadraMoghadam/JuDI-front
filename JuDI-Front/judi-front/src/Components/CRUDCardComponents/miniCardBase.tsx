@@ -18,7 +18,7 @@ interface IminiCardBaseState{
 const newcard: miniCard ={
     id: 0,
     title: "",
-    due: new Date(),
+    due: "",
     label: "",
 }
 

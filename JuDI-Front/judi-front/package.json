@@ -45,7 +45,8 @@
     "react-select": "^3.1.1",
     "reactjs-popup": "^2.0.4",
     "simple-react-calendar-ts": "^1.0.3",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "week": "^0.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -74,6 +75,7 @@
     "@types/react-fontawesome": "^1.6.4",
     "@types/react-modal": "^3.10.6",
     "@types/react-select": "^3.0.27",
-    "@types/react-visibility-sensor": "^5.1.0"
+    "@types/react-visibility-sensor": "^5.1.0",
+    "@types/week": "^0.2.0"
   }
 }

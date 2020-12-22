@@ -1,6 +1,6 @@
 export interface miniCard {
     id: number,
     title: string,
-    due: Date,
+    due: string,
     label: string,
 }
