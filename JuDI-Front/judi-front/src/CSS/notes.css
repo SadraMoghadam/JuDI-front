@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    outline: none;
+    resize: none;
+  }
+  
+  .note {
+    font-family: "Permanent Marker", cursive;
+    width: 400px;
+    height: 300px;
+    margin: 10px;
+    background-color: lightyellow;
+    border: 1px solid grey;
+    box-shadow: 2px 2px 3px lightgrey;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .note__description {
+    width: 100%;
+    padding: 8px 14px;
+    background: transparent;
+  }
+  
+  .note__description {
+    flex-grow: 1;
+    font-size: 14px;
+  }
+  
