@@ -18,6 +18,7 @@ import {getAvatar, getUserFullData} from "../Actions/UserActions";
 import {UserFullData} from "../Models/user";
 import {file} from "@babel/types";
 import {getWeekboardCards} from "../Actions/WeekBoardActions";
+import NoteApp from "../Components/MonthToDoListComponents/NoteApp";
 
 var dragula = require('react-dragula');
 
@@ -70,6 +71,7 @@ function getDateOfWeek(w: number, y: number) {
 
 
 class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
+
 
     constructor(props: RouteComponentProps) {
         super(props);
@@ -132,10 +134,10 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
             weekDays: wdays
         })
         console.log(this.state.cards)
-        var cardsGet: CardGet[][] = await getWeekboardCards(wdays)
-        this.setState({
-            cards: cardsGet
-        })
+        //var cardsGet: CardGet[][] = await getWeekboardCards(wdays)
+        //this.setState({
+        //    cards: cardsGet
+        //})
         console.log("============")
         console.log(this.state.cards)
         //
@@ -223,7 +225,7 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
             
             <div>
             <DashboardHeader state={"dashboard"}/>
-            
+            <NoteApp/>
             <form>
                 
             <div className="form-tbl">
