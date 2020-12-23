@@ -32,7 +32,7 @@ class UserRankShow extends React.Component<UserRankShowProps, IUserRankShowState
                     {this.state.user.rank}
                 </div>
                 <div className="col-3 user_avatar_card">
-                    <div className="circle" style={{overflow: "hidden", height:45, width:45, borderColor: "white", backgroundImage: this.state.user.avatar == "" ? `url(${profileAvatar}")` : `url("data:image/jpeg;base64,${this.state.user.avatar})`, backgroundSize: 'cover'}}>
+                    <div className="circle" style={{overflow: "hidden", height:45, width:45, borderColor: "white", backgroundImage: this.state.user.avatar == "" ? `url(${profileAvatar}")` : `url(${this.state.user.avatar})`, backgroundSize: 'cover'}}>
 
                     </div>
                 </div>
@@ -40,7 +40,7 @@ class UserRankShow extends React.Component<UserRankShowProps, IUserRankShowState
                     {this.state.user.user_name}
                 </div>
                 <div className="col-2 user_xp_card">
-                    {this.state.user.XP}
+                    {this.state.user.xp}
                 </div>
             </div>
         )

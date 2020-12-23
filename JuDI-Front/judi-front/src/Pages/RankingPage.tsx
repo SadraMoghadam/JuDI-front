@@ -11,7 +11,7 @@ import ToggleableCardForm from "../Components/CRUDCardComponents/ToggleableCardF
 import {createCard, getCards, deleteCard, updateCard, createRepetitiveCard} from "../Actions/CardActions";
 import {async} from "q";
 import {User, UserProfile, UserRanking} from "../Models/user";
-import {getUserProfile} from "../Actions/UserActions";
+import {getRanking, getUserProfile} from "../Actions/UserActions";
 import AddLabel from "../Components/CRUDCardComponents/AddLabel";
 import RankList from "../Components/RankingComponents/RankList";
 
@@ -28,48 +28,32 @@ class RankingPage extends React.Component<RouteComponentProps, IRankPageState> {
         super(props);
         //new Date(2020, 0O5, 0O5, 17, 23, 42)
         this.state = {
-            //users: []
-            users: [
-                {
-                    rank: 1,
-                    XP: 250,
-                    user_name: "sadra",
-                    avatar: ""
-                },
-                {
-                    rank: 2,
-                    XP: 220,
-                    user_name: "mohammadMohammadi123",
-                    avatar: ""
-                }
-            ]
+            users: []
+            // users: [
+            //     {
+            //         rank: 1,
+            //         xp: 250,
+            //         user_name: "sadra",
+            //         avatar: ""
+            //     },
+            //     {
+            //         rank: 2,
+            //         xp: 220,
+            //         user_name: "mohammadMohammadi123",
+            //         avatar: ""
+            //     }
+            // ]
         }
     }
 
 
 
     componentWillMount = async() =>{
-        // var newCards: CardGet[] = await getCards();
-        // console.log(newCards)
-        // var cardForm: Card[] = []
-        // for (let i = 0; i < newCards.length; i++)
-        // {
-        //     var c: Card = {
-        //         id: newCards[i].id,
-        //         due: newCards[i].due,
-        //         is_done: newCards[i].is_done,
-        //         reminder: newCards[i].reminder,
-        //         with_star: newCards[i].with_star,
-        //         label: newCards[i].label_name,
-        //         category_id: newCards[i].category_id,
-        //         description: newCards[i].description,
-        //         title: newCards[i].title,
-        //         is_repetitive: newCards[i].is_repetitive,
-        //         repeat_days: []
-        //     }
-        //     cardForm.push(c)
-        // }
-        // this.setState({cards:cardForm})
+        var ranking: UserRanking[] = await getRanking()
+        this.setState({
+            users: ranking
+        })
+        console.log(this.state.users)
         window.scrollTo(0, 0)
     }
 
@@ -81,7 +65,7 @@ class RankingPage extends React.Component<RouteComponentProps, IRankPageState> {
                 <div className="col-1" style={{fontSize: 20, height: "100%"}}>
                     Rank
                 </div>
-                <div className="col-3" style={{fontSize: 20, height: "100%"}}>
+                <div className="col-3" style={{ left: "2%", fontSize: 20, height: "100%"}}>
                     Avatar
                 </div>
                 <div className="col-6" style={{fontSize: 20, height: "100%"}}>

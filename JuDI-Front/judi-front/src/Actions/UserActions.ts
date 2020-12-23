@@ -232,24 +232,26 @@ export const getPassword = async () : Promise<string> => {
 }
 
 
-export const getRanking = async () : Promise<UserRanking> => {
+export const getRanking = async () : Promise<UserRanking[]> => {
     let config: AxiosRequestConfig = {
-        method: "get",
-        url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}`,
+        method: "post",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             "X-Requested-With": "XMLHttpRequest",
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }
-    return axios.get(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, config).then((res) => {
+    return axios.post(`http://localhost:8000/api/users/ranking`, config).then((res) => {
+
         if (res.status == 200) {
-            return res.data
+            return res.data[0];
         }
-        return null as any;
-    }).catch((e) => {
-        console.log("problem with get password")
-    })
+        return 0;
+    }).catch(e => {
+            alert("ranking problem");
+            return null as any;
+        }
+    )
 
 }
 
@@ -274,5 +276,30 @@ export const getAvatar = async (url: string) : Promise<string> => {
     }).catch((e) => {
         console.log("problem with update user")
     })
+
+}
+
+
+export const removeAvatar = async () : Promise<number> => {
+    let config: AxiosRequestConfig = {
+        method: "post",
+        // url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}/upload_avatar`,
+        headers: {
+            "Content-Type": "multipart/form-data",
+            // "X-Requested-With": "XMLHttpRequest",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+    return axios.post(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/remove_avatar`, config).then((res) => {
+        console.log(res.data)
+        if (res.status == 200) {
+            return 1
+        }
+        return 0;
+    }).catch(e => {
+            alert("picture is not deleted");
+            return 0;
+        }
+    )
 
 }
