@@ -185,6 +185,8 @@ export const getLabels = async () : Promise<Label[]> => {
         }
     }
     return axios.get(`http://localhost:8000/api/users/${await localStorage.getItem("user_name")}/labels`, config).then((res) => {
+
+        console.log("++++++++++++++++++++++++++++")
         console.log(res.data)
         if (res.status == 200) {
             var labels: Label[] = res.data;

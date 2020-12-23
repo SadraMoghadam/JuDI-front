@@ -118,25 +118,29 @@ export const postRegister = async (userRegister: userRegister) : Promise<userReg
     })
 }
 
-//
-// export const getUser = async () => {
-//     let config: AxiosRequestConfig = {
-//         method: "post",
-//         url: "http://localhost:8000/api/users/signout",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "X-Requested-With": "XMLHttpRequest"
-//         }
-//     }
-//     return axios(config).then((res) => {
-//         if (res.status == 200) {
-//             var u: User = res.data;
-//             return u
-//         }
-//         return null as any;
-//     })
-//
-// }
+
+export const signOut = async (): Promise<number> => {
+    let config: AxiosRequestConfig = {
+        method: "post",
+        url: "http://localhost:8000/api/users/signout",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    }
+    return axios(config).then((res) => {
+        if (res.status == 200) {
+
+            return 1
+        }
+        return 0
+        return null as any;
+    }).catch(e => {
+        console.log("problem with signout")
+    })
+
+}
 
 
 // export const getUserLogin = async () : Promise<string> => {
