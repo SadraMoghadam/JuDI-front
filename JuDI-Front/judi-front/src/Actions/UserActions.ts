@@ -1,6 +1,6 @@
 
 import axios, {AxiosRequestConfig} from "axios";
-import {User, userRegister, userLogin, UserProfile, Password, UserRanking} from "../Models/user";
+import {User, userRegister, userLogin, UserProfile, Password, UserRanking, UserFullData} from "../Models/user";
 
 
 export const userProfileUpdate = async (user: UserProfile) : Promise<number> => {
@@ -14,7 +14,6 @@ export const userProfileUpdate = async (user: UserProfile) : Promise<number> => 
         }
     }
     return axios.put(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, user, config).then((res) => {
-        console.log(res.data)
         if (res.status == 200) {
             localStorage.setItem("user_name", user.user_name)
             return 1
@@ -40,7 +39,6 @@ export const passwordUpdate = async (password: Password) : Promise<number> => {
         }
     }
     return axios.put(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/change_password`, password, config).then((res) => {
-        console.log(res.data)
         if (res.status == 200) {
             return 1
         }
@@ -68,7 +66,6 @@ export const postImage = async (image: File) : Promise<number> => {
     formData.append("avatar", image);
 
     return axios.post(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/upload_avatar`, formData,  config).then((res) => {
-        console.log(res.status)
         if (res.status == 200) {
             return 1
         }
@@ -81,20 +78,24 @@ export const postImage = async (image: File) : Promise<number> => {
 
 }
 
-export const getImage = async () : Promise<string> => {
+export const getUserFullData = async () : Promise<UserFullData> => {
     let config: AxiosRequestConfig = {
         method: "get",
-        url: "http://localhost:8000/api/users/signout",
         headers: {
             "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest"
+            "X-Requested-With": "XMLHttpRequest",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }
-    return axios.post("http://localhost:8000/api/users/signout", config).then((res) => {
+    return axios.get(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, config).then((res) => {
+        console.log(localStorage.getItem("user_name"))
         if (res.status == 200) {
-            return res.data
+            return res.data.user
         }
-        return "no image";
+        return null as any
+    }).catch(e => {
+        console.log("cannot get user data")
+        return null as any;
     })
 
 }
@@ -117,25 +118,25 @@ export const postRegister = async (userRegister: userRegister) : Promise<userReg
     })
 }
 
-
-export const getUser = async () => {
-    let config: AxiosRequestConfig = {
-        method: "post",
-        url: "http://localhost:8000/api/users/signout",
-        headers: {
-            "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest"
-        }
-    }
-    return axios(config).then((res) => {
-        if (res.status == 200) {
-            var u: User = res.data;
-            return u
-        }
-        return null as any;
-    })
-
-}
+//
+// export const getUser = async () => {
+//     let config: AxiosRequestConfig = {
+//         method: "post",
+//         url: "http://localhost:8000/api/users/signout",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "X-Requested-With": "XMLHttpRequest"
+//         }
+//     }
+//     return axios(config).then((res) => {
+//         if (res.status == 200) {
+//             var u: User = res.data;
+//             return u
+//         }
+//         return null as any;
+//     })
+//
+// }
 
 
 // export const getUserLogin = async () : Promise<string> => {
@@ -167,7 +168,6 @@ export const getUserLogin = async (userLogin: userLogin) : Promise<number> =>{
         }
     }
     return axios.post("http://127.0.0.1:8000/api/users/signin", userLogin, config).then((res) => {
-        console.log(res.data)
         if (res.status == 200) {
             let token: string = res.data.access_token;
             console.log("---->" + token)
@@ -194,9 +194,7 @@ export const getUserProfile = async () : Promise<UserProfile> => {
         }
     }
     return axios.get(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, config).then((res) => {
-        console.log(res)
         if (res.status == 200) {
-            console.log(res.data.user)
             var u: UserProfile = res.data.user;
             return u
         }
@@ -220,7 +218,6 @@ export const getPassword = async () : Promise<string> => {
     }
     return axios.get(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}`, config).then((res) => {
         if (res.status == 200) {
-            console.log(res.data.user.original)
             return res.data
         }
         return null as any;
@@ -248,6 +245,30 @@ export const getRanking = async () : Promise<UserRanking> => {
         return null as any;
     }).catch((e) => {
         console.log("problem with get password")
+    })
+
+}
+
+
+export const getAvatar = async (url: string) : Promise<string> => {
+    let config: AxiosRequestConfig = {
+        // method: "get",
+        // url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}`,
+        headers: {
+            // "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            "Access-Control-Allow-Origin": "*"
+        }
+    }
+
+    return axios.get(url, config).then((res) => {
+        if (res.status == 200) {
+            var avatar: string = res.data;
+            return avatar
+        }
+        return null as any;
+    }).catch((e) => {
+        console.log("problem with update user")
     })
 
 }
