@@ -12,17 +12,17 @@ import MiniCardBase from "../Components/CRUDCardComponents/miniCardBase";
 import { title } from "process";
 import { miniCard } from "../Models/miniCard";
 import {ChangeEvent} from "react"
-import {ConvertDate, getFirstDayOfWeek, getWeekDays} from "../Models/Card";
+import {CardGet, ConvertDate, getFirstDayOfWeek, getWeekDays} from "../Models/Card";
 import UserRankShow from "../Components/RankingComponents/UserRankShow";
 import {getAvatar, getUserFullData} from "../Actions/UserActions";
 import {UserFullData} from "../Models/user";
 import {file} from "@babel/types";
-
+import {getWeekboardCards} from "../Actions/WeekBoardActions";
 
 var dragula = require('react-dragula');
 
 interface MiniCardsState {
-    cards: miniCard[],
+    cards: CardGet[][],
     weekDays: string[]
 }
 
@@ -73,44 +73,50 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
 
     constructor(props: RouteComponentProps) {
         super(props);
+        var cardsGet = [];
+
+        for(var i: number = 0; i < 7; i++) {
+            cardsGet[i] = [];
+        }
         this.state = {
-            cards: [
-                {
-                    id: 0,
-                    title: "Reading book",
-                    due: "2020-12-23",
-                    label: "Study",
-                },
-                {
-                    id: 1,
-                    title: "Go Shopping",
-                    due: "2020-12-23",
-                    label: "Hobby",
-                },
-                {
-                    id: 2,
-                    title: "Basketball Class",
-                    due: "2020-12-24",
-                    label: "Sport",
-                },
-                {
-                    id: 3,
-                    title: "Do Homework",
-                    due: "2020-12-26",
-                    label: "Study",
-                },
-                {
-                    id: 4,
-                    title: "play",
-                    due: "2020-12-21",
-                    label: "Game",
-                },
-                {
-                    id: 5,
-                    title: "y",
-                    due: "2020-12-30",
-                    label: "Game",
-                }],
+            cards: cardsGet,
+            // cards: [
+            //     {
+            //         id: 0,
+            //         title: "Reading book",
+            //         due: "2020-12-23",
+            //         label: "Study",
+            //     },
+            //     {
+            //         id: 1,
+            //         title: "Go Shopping",
+            //         due: "2020-12-23",
+            //         label: "Hobby",
+            //     },
+            //     {
+            //         id: 2,
+            //         title: "Basketball Class",
+            //         due: "2020-12-24",
+            //         label: "Sport",
+            //     },
+            //     {
+            //         id: 3,
+            //         title: "Do Homework",
+            //         due: "2020-12-26",
+            //         label: "Study",
+            //     },
+            //     {
+            //         id: 4,
+            //         title: "play",
+            //         due: "2020-12-21",
+            //         label: "Game",
+            //     },
+            //     {
+            //         id: 5,
+            //         title: "y",
+            //         due: "2020-12-30",
+            //         label: "Game",
+            //     }],
             weekDays: []
         }
     }
@@ -125,6 +131,13 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
         this.setState({
             weekDays: wdays
         })
+        console.log(this.state.cards)
+        var cardsGet: CardGet[][] = await getWeekboardCards(wdays)
+        this.setState({
+            cards: cardsGet
+        })
+        console.log("============")
+        console.log(this.state.cards)
         //
         // var userData: UserFullData = await getUserFullData();
         // console.log(userData.avatar)
@@ -139,7 +152,7 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
         window.print();
     }
 
-    handleWeekDate = (e: ChangeEvent<HTMLInputElement>): void=> {
+    handleWeekDate = async (e: ChangeEvent<HTMLInputElement>)=> {
         var date = e.target.value
         var newDate = date.split(/-W/)
         var year = parseInt(newDate[0])
@@ -151,6 +164,12 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
         this.setState({
             weekDays: wdays
         })
+        var cardsGet: CardGet[][] = await getWeekboardCards(wdays)
+        this.setState({
+            cards: cardsGet
+        })
+        console.log("============")
+        console.log(this.state.cards)
     }
 
     getWeek = (date: Date): number =>{
@@ -189,11 +208,12 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
 
 
     ShowMinicardsOfDate = (date: string) => {
-        this.state.cards.filter(card => card.due.includes(date)).map(card => (
-            <MiniCardBase
-                mcard={card}
-            ></MiniCardBase>)
-        )
+        // this.state.cards.filter(card => card.due.includes(date)).map(card => (
+        //     <MiniCardBase
+        //         mcard={card}
+        //     ></MiniCardBase>)
+        // )
+
     }
 
 
@@ -225,7 +245,7 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
                     </div>
                     <div id="Mon" style={{backgroundColor: ConvertDate(new Date)==this.state.weekDays[0] ? "#3EECAC" : ""}}>
                         {
-                            this.state.cards.filter(card => card.due.includes(this.state.weekDays[0])).map(card => (
+                            this.state.cards[0].map(card => (
                                 <MiniCardBase
                                     mcard={card}
                                 ></MiniCardBase>)
@@ -239,7 +259,7 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
                     </div>
                     <div id="Tue" style={{backgroundColor: ConvertDate(new Date)==this.state.weekDays[1] ? "#3EECAC" : ""}}>
                         {
-                            this.state.cards.filter(card => card.due.includes(this.state.weekDays[1])).map(card => (
+                            this.state.cards[1].map(card => (
                                 <MiniCardBase
                                     mcard={card}
                                 ></MiniCardBase>)
@@ -253,7 +273,7 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
                     </div>
                     <div id="Wed" style={{backgroundColor: ConvertDate(new Date)==this.state.weekDays[2] ? "#3EECAC" : ""}}>
                         {
-                            this.state.cards.filter(card => card.due.includes(this.state.weekDays[2])).map(card => (
+                            this.state.cards[2].map(card => (
                                 <MiniCardBase
                                     mcard={card}
                                 ></MiniCardBase>)
@@ -267,7 +287,7 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
                     </div>
                     <div id="Thu" style={{backgroundColor: ConvertDate(new Date)==this.state.weekDays[3] ? "#3EECAC" : ""}}>
                         {
-                            this.state.cards.filter(card => card.due.includes(this.state.weekDays[3])).map(card => (
+                            this.state.cards[3].map(card => (
                                 <MiniCardBase
                                     mcard={card}
                                 ></MiniCardBase>)
@@ -283,7 +303,7 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
                     </div>
                     <div id="Fri" style={{backgroundColor: ConvertDate(new Date)==this.state.weekDays[4] ? "#3EECAC" : ""}}>
                         {
-                            this.state.cards.filter(card => card.due.includes(this.state.weekDays[4])).map(card => (
+                            this.state.cards[4].map(card => (
                                 <MiniCardBase
                                     mcard={card}
                                 ></MiniCardBase>)
@@ -298,7 +318,7 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
                     </div>
                     <div id="Sat" style={{backgroundColor: ConvertDate(new Date)==this.state.weekDays[5] ? "#3EECAC" : ""}}>
                         {
-                            this.state.cards.filter(card => card.due.includes(this.state.weekDays[5])).map(card => (
+                            this.state.cards[5].map(card => (
                                 <MiniCardBase
                                     mcard={card}
                                 ></MiniCardBase>)
@@ -312,7 +332,7 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
                     </div>
                     <div id="Sun" style={{backgroundColor: ConvertDate(new Date)==this.state.weekDays[6] ? "#3EECAC" : ""}}>
                         {
-                            this.state.cards.filter(card => card.due.includes(this.state.weekDays[6])).map(card => (
+                            this.state.cards[6].map(card => (
                                 <MiniCardBase
                                     mcard={card}
                                 ></MiniCardBase>)
