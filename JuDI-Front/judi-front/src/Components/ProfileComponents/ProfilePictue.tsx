@@ -7,7 +7,8 @@ import profileAvatar from "../../Assets/Images/profile.png";
 import {postImage, userProfileUpdate} from "../../Actions/UserActions";
 
 interface IImage{
-  image: string
+    image: string,
+    imageFile: File,
 }
 
 class ProfilePicture extends React.Component<any, IImage>{
@@ -16,7 +17,8 @@ class ProfilePicture extends React.Component<any, IImage>{
   constructor(props: any) {
     super(props);
     this.state = {
-        image: ""
+        image: "",
+        imageFile: null as any,
     }
   }
 
@@ -39,7 +41,8 @@ class ProfilePicture extends React.Component<any, IImage>{
         reader.onload =  () => {
             image = reader.result != null ? reader.result.toString() : ""
             this.setState({
-                image: btoa(image)
+                image: btoa(image),
+                imageFile: file
             })
 
         };
@@ -47,8 +50,16 @@ class ProfilePicture extends React.Component<any, IImage>{
   }
 
   submit = async () => {
-      //var profileImage: string = await postImage(this.state.image)
-      localStorage.setItem("image", this.state.image)
+      let emptyFile: File = new File([] as BlobPart[], "")
+      var response: number = 0
+      if(this.state.image == "")
+          response= await postImage(emptyFile)
+      else
+          response= await postImage(this.state.imageFile)
+      localStorage.setItem("image", "")
+      if(response == 1)
+        localStorage.setItem("image", this.state.image)
+
   }
 
   onCancleClick = () => {
@@ -74,7 +85,9 @@ class ProfilePicture extends React.Component<any, IImage>{
             </div>
             {/*<a href="/dashboard"><button className="button" onClick={this.submit}>Save Changes</button></a>*/}
             <button className="canclebutton" onClick={this.onCancleClick} style={{marginRight: 5}}>Remove Image</button>
-            <a href="/dashboard"><button className="button" onClick={this.submit}  style={{marginLeft: 5}}>Save Changes</button></a>
+            {/*<a href="/dashboard">*/}
+                <button className="button" onClick={this.submit}  style={{marginLeft: 5}}>Save Changes</button>
+            {/*</a>*/}
 
 
         </div>

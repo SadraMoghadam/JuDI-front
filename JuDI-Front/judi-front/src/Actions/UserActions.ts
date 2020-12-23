@@ -54,22 +54,30 @@ export const passwordUpdate = async (password: Password) : Promise<number> => {
 }
 
 
-export const postImage = async (image: string) : Promise<string> => {
+export const postImage = async (image: File) : Promise<number> => {
     let config: AxiosRequestConfig = {
         method: "post",
-        url: "http://localhost:8000/api/users/signout",
+        // url: `http://localhost:8000/api/users/${localStorage.getItem("user_name")}/upload_avatar`,
         headers: {
-            "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest"
+            "Content-Type": "multipart/form-data",
+            // "X-Requested-With": "XMLHttpRequest",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }
-    return axios.post("http://localhost:8000/api/users/signout", image, config).then((res) => {
+    var formData = new FormData();
+    formData.append("avatar", image);
+
+    return axios.post(`http://localhost:8000/api/users/${localStorage.getItem("user_name")}/upload_avatar`, formData,  config).then((res) => {
+        console.log(res.status)
         if (res.status == 200) {
-            image = res.data;
-            return image
+            return 1
         }
-        return null as any;
-    })
+        return 0;
+    }).catch(e => {
+            alert("picture is not uploaded");
+            return 0;
+        }
+    )
 
 }
 

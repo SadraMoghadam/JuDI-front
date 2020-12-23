@@ -123,6 +123,8 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
             weekDays: wdays
         })
 
+
+
     }
 
     printFunction = () => {
