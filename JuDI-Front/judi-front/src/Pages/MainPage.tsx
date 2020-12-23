@@ -18,6 +18,7 @@ class MainPage extends React.Component<RouteComponentProps> {
 
     componentWillMount = async () => {
         window.scrollTo(0, 0)
+        localStorage.removeItem("image")
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {

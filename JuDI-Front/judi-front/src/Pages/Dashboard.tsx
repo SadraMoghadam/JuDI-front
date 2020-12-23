@@ -14,6 +14,9 @@ import { miniCard } from "../Models/miniCard";
 import {ChangeEvent} from "react"
 import {ConvertDate, getFirstDayOfWeek, getWeekDays} from "../Models/Card";
 import UserRankShow from "../Components/RankingComponents/UserRankShow";
+import {getAvatar, getUserFullData} from "../Actions/UserActions";
+import {UserFullData} from "../Models/user";
+import {file} from "@babel/types";
 
 
 var dragula = require('react-dragula');
@@ -122,10 +125,15 @@ class Dashboard extends React.Component<RouteComponentProps, MiniCardsState> {
         this.setState({
             weekDays: wdays
         })
-
-
+        //
+        // var userData: UserFullData = await getUserFullData();
+        // console.log(userData.avatar)
+        //
+        // localStorage.setItem("image", "");
+        // localStorage.setItem("image", userData.avatar);
 
     }
+
 
     printFunction = () => {
         window.print();

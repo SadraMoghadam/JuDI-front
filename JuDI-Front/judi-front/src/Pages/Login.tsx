@@ -11,8 +11,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import {createRef, RefObject} from "react";
 import axios, {AxiosRequestConfig} from "axios";
-import {userLogin} from "../Models/user";
-import {getUserLogin} from "../Actions/UserActions";
+import {UserFullData, userLogin} from "../Models/user";
+import {getUserFullData, getUserLogin} from "../Actions/UserActions";
 import {Redirect, RouteComponentProps, withRouter, WithRouterProps} from "react-router";
 import {BrowserRouterProps} from "react-router-dom";
 import "../CSS/Login.css"
@@ -75,6 +75,7 @@ class Login extends React.Component<RouteComponentProps, ILoginState> {
     }
 
 
+
     handleLogin = async() => {
 
         //var u : userLogin= await getUserLogin()
@@ -86,6 +87,11 @@ class Login extends React.Component<RouteComponentProps, ILoginState> {
         }
 
         var loginResponse : number = await getUserLogin(luser)
+
+        var userData: UserFullData = await getUserFullData();
+
+        // localStorage.setItem("image", "");
+        // localStorage.setItem("image", userData.avatar);
 
         if (loginResponse == 1) {
             this.setState({

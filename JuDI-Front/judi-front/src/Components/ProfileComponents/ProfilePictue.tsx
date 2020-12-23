@@ -4,11 +4,34 @@ import { useState } from 'react';
 import "../../CSS/Profile.scss"
 import "../../CSS/BasePage.scss"
 import profileAvatar from "../../Assets/Images/profile.png";
-import {postImage, userProfileUpdate} from "../../Actions/UserActions";
+import {getUserFullData, postImage, userProfileUpdate} from "../../Actions/UserActions";
+import {UserFullData} from "../../Models/user";
+import {withRouter} from "react-router";
+import {delay} from "q";
 
 interface IImage{
     image: string,
     imageFile: File,
+}
+
+const b64toBlob = (b64Data: string, contentType='', sliceSize=512) => {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
 }
 
 class ProfilePicture extends React.Component<any, IImage>{
@@ -23,8 +46,9 @@ class ProfilePicture extends React.Component<any, IImage>{
   }
 
     componentWillMount = async () => {
-        let img = await localStorage.getItem("image");
-        if (img != null ) {
+        let data = await getUserFullData();
+        let img = data.avatar
+        if (img != "" ) {
             this.setState({image: img})
         }
         else
@@ -49,22 +73,48 @@ class ProfilePicture extends React.Component<any, IImage>{
     }
   }
 
+
+
   submit = async () => {
-      let emptyFile: File = new File([] as BlobPart[], "")
+
       var response: number = 0
-      if(this.state.image == "")
-          response= await postImage(emptyFile)
-      else
-          response= await postImage(this.state.imageFile)
-      localStorage.setItem("image", "")
-      if(response == 1)
-        localStorage.setItem("image", this.state.image)
+      if(this.state.image == "") {
+          //var blob = b64toBlob(profileAvatar);
+
+          const byteCharacters = atob(profileAvatar);
+          const byteNumbers = new Array(byteCharacters.length);
+          for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+          }
+          const byteArray = new Uint8Array(byteNumbers);
+          const blob = new Blob([byteArray], {type: "image/jpeg"});
+
+          const blobParts: BlobPart[] = [blob];
+
+
+          let emptyFile: File = new File(blobParts, "defaultAvatar")
+          response = await postImage(emptyFile)
+
+      }
+      else {
+          console.log(this.state.imageFile)
+          response = await postImage(this.state.imageFile)
+      }
+
+      // var userData: UserFullData = await getUserFullData();
+      // localStorage.setItem("image", "")
+      // console.log(userData)
+      // if(response == 1) {
+      //
+      //     localStorage.setItem("image", userData.avatar)
+      // }
+      alert("profile avatar saved successfully")
+      //this.props.history.push("/dashboard")
 
   }
 
   onCancleClick = () => {
       this.setState({image: ""})
-      localStorage.setItem("image", this.state.image)
 
   }
   
@@ -80,7 +130,7 @@ class ProfilePicture extends React.Component<any, IImage>{
               <input type="file" style={{opacity:0, height:"100%", width:"100%", margin:0, padding:0, cursor:"pointer"}} onChange={this.handleImageChange}/>
             </div>
             <div className="circle" style={{alignItems:"center", height:200, width:200, margin:"auto", marginTop:30}}>
-              <div className="circle" style={ {backgroundImage: this.state.image == "" ? `url(${profileAvatar})` : `url("data:image/jpeg;base64,${this.state.image}")`, backgroundSize: 'cover', height: "100%", width: "100%"}}/>
+              <div className="circle" style={ {backgroundImage: this.state.image == "" ? `url(${profileAvatar})` : this.state.image.includes("http:") ? `url(${this.state.image})` : `url("data:image/jpeg;base64,${this.state.image}")`, backgroundSize: 'cover', height: "100%", width: "100%"}}/>
               {/**<img src={this.state.image != "" && this.state.image != null ? `data:image/jpeg;base64,${this.state.image}`: profileAvatar} style={{width:"100%", maxHeight:"100%"}} alt="avatar"/ **/}
             </div>
             {/*<a href="/dashboard"><button className="button" onClick={this.submit}>Save Changes</button></a>*/}
@@ -98,4 +148,4 @@ class ProfilePicture extends React.Component<any, IImage>{
 
 
 
-export default ProfilePicture
+export default withRouter(ProfilePicture)
