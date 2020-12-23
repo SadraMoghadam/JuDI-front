@@ -9,17 +9,18 @@
   
   .note {
     font-family: "Permanent Marker", cursive;
-    width: 400px;
-    height: 300px;
-    margin: 10px;
+    width: 50%;
+    height: 250px;
+    margin: 50px auto;
     background-color: lightyellow;
-    border: 1px solid grey;
+    border: 3px solid #333333;
     box-shadow: 2px 2px 3px lightgrey;
-    border-radius: 5px;
+    border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
     display: flex;
     flex-direction: column;
     position: relative;
   }
+
   
   .note__description {
     width: 100%;
@@ -30,5 +31,88 @@
   .note__description {
     flex-grow: 1;
     font-size: 14px;
+  }
+  
+
+  .c-smileyButton {
+    margin: 2.5px auto;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: black;
+    border: 0;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 1.25em;
+    padding: 0.5em 0.75em;
+    border-radius: 0.25em;
+    box-sizing: border-box;
+    background-color: rgb(208, 231, 208);
+    box-shadow: 0 0.15em 1em rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  .c-smileyButton:hover .c-smileyButton__face::before {
+    content: '\1F618';
+    animation: animate 1.05s infinite;
+  }
+  .c-smileyButton::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .c-smileyButton__face::before {
+    content: '\1F614';
+  }
+  .c-smileyButton__hoverListener {
+    position: absolute;
+    cursor: default;
+    z-index: -1;
+  }
+  .c-smileyButton__hoverListener:hover ~ .c-smileyButton__face::before {
+    animation: none;
+  }
+  .c-smileyButton__hoverListener:nth-child(1) {
+    width: 290%;
+    height: 550%;
+  }
+  .c-smileyButton__hoverListener:nth-child(1):hover ~ .c-smileyButton__face::before {
+    content: '\1F60C';
+  }
+  .c-smileyButton__hoverListener:nth-child(2) {
+    width: 190%;
+    height: 330%;
+  }
+  .c-smileyButton__hoverListener:nth-child(2):hover ~ .c-smileyButton__face::before {
+    content: '\1F61A';
+  }
+  @keyframes animate {
+    100% {
+      content: '\1F60A';
+    }
+  }
+
+  .hero-image {
+    background-color :rgb(208, 231, 208);
+    height: 12%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .hero-text {
+    text-align: center;
+    font-size: large;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
   }
   

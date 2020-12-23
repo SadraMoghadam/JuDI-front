@@ -43,15 +43,26 @@ class Note extends React.Component<NoteProps, INoteState> {
           //   />
           //     <button> Save </button>
           // </li>
-          <div className="form-group">
-          <label style={{textDecoration:"underline"}}>
-              Description
-          </label>
-          <textarea className="form-control" placeholder="Description"
+          <div className="note">
+            <div className="hero-image">
+              <div className="hero-text">
+                <label>Month Note</label>
+              </div>
+            </div>
+            
+          <textarea className="note__description" placeholder="Description..."
                     rows={5} 
                     onChange={this.handleDescriptionUpdate}>
           </textarea>
-          <button> Save </button>
+          <div className="hero-image">
+          <button className="c-smileyButton">
+          <div className="c-smileyButton__hoverListener"></div>
+          <div className="c-smileyButton__hoverListener"></div>
+          <span className="c-smileyButton__face"></span>
+
+            &nbsp;Save Me
+        </button>
+        </div>
           </div>
         );
       }
