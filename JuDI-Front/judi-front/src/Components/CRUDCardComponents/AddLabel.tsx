@@ -62,7 +62,7 @@ class AddLabel extends React.Component<any, IAddLabelState> {
     componentWillMount = async() =>{
         var newLabels: Label[] = await getLabels();
         //var newLabels: Label[] = [];
-        console.log("--------------")
+        console.log("add label page")
         console.log(newLabels)
         //var newCards: CardGet[] = []
         var labelForm: Label[] = []
@@ -78,7 +78,7 @@ class AddLabel extends React.Component<any, IAddLabelState> {
         window.scrollTo(0, 0)
     }
 
-    deleteCard = async(labelID: number) => {
+    deleteLabel = async(labelID: number) => {
         var cardDeleteResponse = await deleteLabel(labelID)
         var cardDeleteResponse = 1;
         if(cardDeleteResponse == 1)
@@ -113,7 +113,7 @@ class AddLabel extends React.Component<any, IAddLabelState> {
         <div className="Label_popup">
             <main className="d-flex justify-content-center my-4">
                 <div className="col-11" style={{alignContent:"center", margin: "auto"}}>
-                    <LabelList labels={this.state.labels} onDeleteClick={this.deleteCard}/>
+                    <LabelList labels={this.state.labels} onDeleteClick={this.deleteLabel}/>
                     <ToggleableLabelForm onLabelCreate={this.createNewLabel}/>
                 </div>
             </main>;

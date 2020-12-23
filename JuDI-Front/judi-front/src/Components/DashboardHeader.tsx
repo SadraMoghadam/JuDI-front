@@ -4,7 +4,7 @@ import {RouteComponentProps} from "react-router";
 import "../CSS/BasePage.scss"
 import {User, UserFullData} from "../Models/user";
 import profileAvatar from "../Assets/Images/profile.png";
-import {getUserFullData} from "../Actions/UserActions";
+import {getUserFullData, signOut} from "../Actions/UserActions";
 import {delay} from "q";
 
 interface HeaderProps {
@@ -40,8 +40,10 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
         //console.log(localStorage.getItem("image"))
     }
 
-    onLogoutClick = () => {
-        // localStorage.setItem("token", "")
+    onLogoutClick =async () => {
+        var response = await signOut()
+        console.log(response)
+        localStorage.setItem("token", "")
         // localStorage.removeItem("image")
     }
 
@@ -64,8 +66,10 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
                     <a className={this.props.state==="CRUDCard" ? "active" : ""} href="/dashboard/crudcard">Cards</a>
                     <a className={this.props.state==="ranking" ? "active" : ""} href="/dashboard/ranking">Ranking</a>
                     <div className="topnav-right">
-                        <a onClick={this.onLogoutClick} href="/">Logout</a>
-                        
+                        <a onClick={this.onLogoutClick} href="/">
+                            Logout
+                        </a>
+
                     </div>
                 </div>
 

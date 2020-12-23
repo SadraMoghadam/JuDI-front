@@ -6,13 +6,14 @@ import {miniCard} from "../../Models/miniCard";
 import "../../CSS/schedule.css"
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import {CardGet} from "../../Models/Card";
 
 interface miniCardBaseProps {
-    mcard: miniCard,
+    mcard: CardGet,
 }
 
 interface IminiCardBaseState{
-    mcard: miniCard
+    mcard: CardGet
 }
 
 const newcard: miniCard ={
@@ -48,7 +49,7 @@ class MiniCardBase extends React.Component<miniCardBaseProps, IminiCardBaseState
             </div>
             <div className="card-body">
               <p></p>
-              <p>{this.props.mcard.label}</p>
+              <p>{this.props.mcard.label_name}</p>
             </div>
           </div>
         );
