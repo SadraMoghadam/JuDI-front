@@ -214,10 +214,20 @@ export interface LabelGet {
 }
 
 export var getWeekDays = (year: number, month: number, firstDay: number) : string[] => {
+    var counter: number = 0;
     var weekDays: string[] = [];
     for (var i = 0; i < 7; i++)
     {
-        weekDays.push((year.toString() + "-" + month.toString() + "-" + (firstDay + i).toString()));
+        if(firstDay + i >= 32)
+        {
+            if(month == 12)
+                weekDays.push(((year+1).toString() + "-" + "1" + "-" + (1 + counter++).toString()));
+            else
+                weekDays.push((year.toString() + "-" + "1" + "-" + (1 + counter++).toString()));
+
+        }
+        else
+            weekDays.push((year.toString() + "-" + month.toString() + "-" + (firstDay + i).toString()));
     }
     return weekDays;
 }
@@ -236,7 +246,11 @@ function getDateOfWeek(w: number, y: number) {
 
 export var getFirstDayOfWeek = (week: number) : number => {
     //var currentWeekNumber = require('week');
-    var year = new Date().getFullYear()
+    var year: number;
+    if(week >50)
+        year = new Date().getFullYear()
+    else
+        year = 2021
     var thatdate = getDateOfWeek(week, year).toString();
     console.log(getDateOfWeek(week,year))
     var day = thatdate.substring(8,10);
