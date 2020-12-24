@@ -90,8 +90,9 @@ class Login extends React.Component<RouteComponentProps, ILoginState> {
 
         var userData: UserFullData = await getUserFullData();
 
-        // localStorage.setItem("image", "");
-        // localStorage.setItem("image", userData.avatar);
+        localStorage.setItem("user_name", userData.user_name)
+        localStorage.setItem("xp", userData.xp.toString())
+        localStorage.setItem("image", userData.avatar)
 
         if (loginResponse == 1) {
             this.setState({

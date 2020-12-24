@@ -24,16 +24,12 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
         }
     }
 
-    // timeout(ms:number) { //pass a time in milliseconds to this function
-    //     return new Promise(resolve => setTimeout(resolve, ms));
-    // }
 
     componentWillMount= async () => {
         // await delay(2000);
         var userData: UserFullData = await getUserFullData();
         console.log(userData)
         this.setState({profileImage: userData.avatar})
-        // localStorage.setItem("image", "")
         // localStorage.setItem("image", userData.avatar)
         // if(localStorage.getItem("image") == "")
         //     this.setState({profileImage: ""})
@@ -44,6 +40,10 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
         var response = await signOut()
         console.log(response)
         localStorage.setItem("token", "")
+        localStorage.setItem("image", "")
+        localStorage.setItem("xp", "")
+        localStorage.setItem("user_name", "")
+
         // localStorage.removeItem("image")
     }
 
@@ -53,13 +53,16 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
                 <div className="App-header-judi">
                     JuDI
                     <a className={this.props.state==="profile" ? "active" : ""} href="/dashboard/profile">
-                        <div className="circle" style={{overflow: "hidden", alignItems:"right", height:40, width:40, position:"absolute", right:20, marginTop:-50, backgroundImage: this.state.profileImage == "" ? `url(${profileAvatar}")` : `url(${this.state.profileImage})`, backgroundSize: 'cover'}}>
+                        <div className="circle" style={{overflow: "hidden", alignItems:"right", height:40, width:40, position:"absolute", right:20, marginTop:-50, backgroundImage: this.state.profileImage == "" ? `url(${profileAvatar}")` : `url(${localStorage.getItem("image")})`, backgroundSize: 'cover'}}>
 
                         </div>
-                        <div style={{overflow: "hidden", alignItems:"right", fontSize: 10, color:"#3EECAC", position:"absolute", right:65, marginTop:-40}}>
-                            profile
+                        <div style={{overflow: "hidden", alignItems:"right", fontSize: 14, color:"#3EECAC", position:"absolute", right:65, marginTop:-40}}>
+                            {localStorage.getItem("xp")}XP
                         </div>
                     </a>
+                    <div style={{overflow: "hidden", alignItems:"right", fontSize: 20, color:"#3EECAC", position:"absolute", left:10}}>
+                        {localStorage.getItem("user_name")}
+                    </div>
                 </div>
                 <div className="topnav">
                     <a className={this.props.state==="dashboard" ? "active" : ""} href="/dashboard">Dashboard</a>
@@ -78,25 +81,6 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
     }
 }
 
-// const Header: React.FC = () => {
-//     return(
-//         <div>
-//             <div className="App-header-judi">
-//                 JuDI
-//             </div>
-//             <div className="topnav">
-//                 <a className="active" href="#home">home</a>
-//                 <a href="#about_site">about website</a>
-//                 <a href="#about_us">about us</a>
-//                 <div className="topnav-right">
-//                     <a href="#login">login</a>
-//                     <a href="#register">register</a>
-//                 </div>
-//             </div>
-            
-//         </div>
-//     );
-// };
 
 
 
