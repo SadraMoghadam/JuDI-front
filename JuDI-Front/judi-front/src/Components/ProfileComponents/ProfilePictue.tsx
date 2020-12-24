@@ -4,7 +4,7 @@ import { useState } from 'react';
 import "../../CSS/Profile.scss"
 import "../../CSS/BasePage.scss"
 import profileAvatar from "../../Assets/Images/profile.png";
-import {getUserFullData, postImage, userProfileUpdate} from "../../Actions/UserActions";
+import {getUserFullData, postImage, removeAvatar, userProfileUpdate} from "../../Actions/UserActions";
 import {UserFullData} from "../../Models/user";
 import {withRouter} from "react-router";
 import {delay} from "q";
@@ -47,12 +47,21 @@ class ProfilePicture extends React.Component<any, IImage>{
 
     componentWillMount = async () => {
         let data = await getUserFullData();
+        console.log(data.avatar)
         let img = data.avatar
-        if (img != "" ) {
-            this.setState({image: img})
+        if (img == "" || img == null as any ) {
+
+            console.log("__________>" + this.state.image)
+            this.setState({image: ""})
         }
         else
-            this.setState({image: ""})
+        {
+
+            console.log("------------>" + this.state.image)
+            this.setState({image: img})
+        }
+
+
     }
 
   handleImageChange = async (input: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,23 +110,23 @@ class ProfilePicture extends React.Component<any, IImage>{
           response = await postImage(this.state.imageFile)
       }
 
-      // var userData: UserFullData = await getUserFullData();
-      // localStorage.setItem("image", "")
-      // console.log(userData)
-      // if(response == 1) {
-      //
-      //     localStorage.setItem("image", userData.avatar)
-      // }
+      var userData: UserFullData = await getUserFullData();
+      console.log(userData)
+      if(response == 1) {
+          localStorage.setItem("image", userData.avatar)
+      }
       alert("profile avatar saved successfully")
       //this.props.history.push("/dashboard")
 
   }
 
-  onCancleClick = () => {
-      this.setState({image: ""})
+  onCancleClick = async () => {
+      var response: number = await removeAvatar();
+      if(response == 1)
+        this.setState({image: ""})
 
   }
-  
+
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
 
     return(

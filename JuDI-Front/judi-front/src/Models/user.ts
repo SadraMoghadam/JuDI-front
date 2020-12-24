@@ -23,7 +23,7 @@ export interface Password {
 
 export interface UserRanking {
     user_name: string,
-    XP: number,
+    xp: number,
     rank: number,
     avatar: string
 }
