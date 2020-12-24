@@ -32,7 +32,10 @@ class MiniCardBase extends React.Component<miniCardBaseProps, IminiCardBaseState
     //         //date: (props.card.due.getFullYear() + '-' + ((props.card.due.getMonth() + 1)) + '-' + props.card.due.getDate() + ' ' +props.card.due.getHours() + ':' + props.card.due.getMinutes()+ ':' + props.card.due.getSeconds())
     //     }
     // }
-
+  componentWillMount = async () => {
+    console.log("/////////////")
+    console.log(this.props.mcard)
+  }
 
     constructor (props: miniCardBaseProps) {
         super(props);
@@ -46,7 +49,9 @@ class MiniCardBase extends React.Component<miniCardBaseProps, IminiCardBaseState
             <div className="card" >
             <div className="card-header">
               <h3>{this.props.mcard.title}</h3>
+              <p style={{width:"100%",margin:"auto",borderRadius:5, backgroundColor: this.props.mcard.is_done ? "#3EECAC" : "lightgray"}}>{this.props.mcard.is_done ? "Done" : "onGoing"}</p>
             </div>
+            
             <div className="card-body">
               <p></p>
               <p>{this.props.mcard.label_name}</p>
