@@ -58,25 +58,25 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
             due: this.props.card.due || "",
             with_star: this.props.card.with_star || false,
             is_repetitive: this.props.card.is_repetitive || false,
-            label: this.props.card.label == "" ? "none" : this.props.card.label,
+            label: this.props.card.label == "" ? "None" : this.props.card.label,
             reminder: this.props.card.reminder || false,
             repeat_days: this.props.card.repeat_days || []
         }
     }
 
     componentWillMount = async () => {
-        var firstLabel: Label[] = [{
-            id: 1000000000000,
-            name: "none"
-        }]
+        // var firstLabel: Label[] = [{
+        //     id: 1000000000000,
+        //     name: "none"
+        // }]
         var newLabels: Label[] = await getLabels();
         //var getLabels : Label[] = await getLabels();
-        for(var i = 0; i < newLabels.length; i++)
-        {
-            firstLabel.push(newLabels[i]);
-        }
+        // for(var i = 0; i < newLabels.length; i++)
+        // {
+        //     firstLabel.push(newLabels[i]);
+        // }
         this.setState({
-            labels: firstLabel
+            labels: newLabels
         })
     }
 

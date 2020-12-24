@@ -12,7 +12,8 @@ interface HeaderProps {
 }
 
 interface IHeaderState {
-    profileImage: string
+    profileImage: string,
+    xp: number
 }
 
 class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
@@ -20,7 +21,8 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
     constructor(props: HeaderProps) {
         super(props);
         this.state = {
-            profileImage: ""
+            profileImage: "",
+            xp: 0
         }
     }
 
@@ -29,7 +31,10 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
         // await delay(2000);
         var userData: UserFullData = await getUserFullData();
         console.log(userData)
-        this.setState({profileImage: userData.avatar})
+        this.setState({
+            profileImage: userData.avatar,
+            xp: userData.xp
+        })
         // localStorage.setItem("image", userData.avatar)
         // if(localStorage.getItem("image") == "")
         //     this.setState({profileImage: ""})
@@ -57,7 +62,7 @@ class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
 
                         </div>
                         <div style={{overflow: "hidden", alignItems:"right", fontSize: 14, color:"#3EECAC", position:"absolute", right:65, marginTop:-40}}>
-                            {localStorage.getItem("xp")}XP
+                            {this.state.xp}XP
                         </div>
                     </a>
                     <div style={{overflow: "hidden", alignItems:"right", fontSize: 20, color:"#3EECAC", position:"absolute", left:10}}>

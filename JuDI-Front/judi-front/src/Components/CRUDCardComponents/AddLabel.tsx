@@ -74,7 +74,7 @@ class AddLabel extends React.Component<any, IAddLabelState> {
             }
             labelForm.push(l)
         }
-        this.setState({labels:labelForm})
+        this.setState({labels:labelForm.slice(1)})
         window.scrollTo(0, 0)
     }
 
