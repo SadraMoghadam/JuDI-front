@@ -14,7 +14,7 @@ export const getNote = async () : Promise<NoteGet> => {
     return axios.get(`http://localhost:8000/api/users/${ localStorage.getItem("user_name")}/monthboard`, config).then((res) => {
         console.log(res)
         if (res.status == 200) {
-            var notes: NoteGet[] = res.data;
+            var notes: NoteGet = res.data;
             return notes
         }
         return null as any;

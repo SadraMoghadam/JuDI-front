@@ -1,7 +1,7 @@
 import * as React from "react";
-import NotesList from "./NotesList";
-import {NoteGet, stickyNote} from "../../Models/StickyNote";
-import {getNote} from "../../Actions/NoteAction";
+import {NoteGet, stickyNote, NotePost} from "../../Models/StickyNote";
+import {getNote, postNote} from "../../Actions/NoteAction";
+import "../../CSS/notes.css"
 
 interface NoteAppState {
   notes: NoteGet
@@ -62,22 +62,58 @@ class NoteApp extends React.Component<any, NoteAppState> {
   //     this.setState({ notes: savedNotes });
   //   }
   // }
-
+  
   componentWillMount = async () => {
     var note: NoteGet = await getNote() 
-    console.log(note)
+    console.log("+++" + note)
     this.setState({
       notes: note
     })
     console.log(this.state.notes)
+    let n: string = this.state.notes.note;
+    console.log(n)
   }
+
+  handleDescriptionUpdate = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    this.setState({notes: {
+      note: e.target.value
+    }});
+  }
+
+   SubmitNote = async ()  => {
+     var note: NotePost = {
+       note: this.state.notes.note
+     }
+      var response: Number = await postNote(note)
+      console.log(response)
+   }
 
   render() {
     return (
       <div>
-        <NotesList
-          notes={this.state.notes}
-        />
+         <div className="note">
+            
+            <div className="hero-image">
+              <div className="hero-text">
+                <label>Month Note {this.state.notes.note}</label>
+              </div>
+            </div>
+            
+          <textarea className="note__description" placeholder="Description..."
+                    rows={5} 
+                    onChange={this.handleDescriptionUpdate}>
+                      {this.state.notes.note}
+          </textarea>
+          <div className="hero-image">
+          <button type="submit" className="c-smileyButton" onClick={this.SubmitNote}>
+          <div className="c-smileyButton__hoverListener"></div>
+          <div className="c-smileyButton__hoverListener"></div>
+          <span className="c-smileyButton__face"></span>
+
+            &nbsp;Save Me
+        </button>
+        </div>
+          </div>
       </div>
     );
   }
