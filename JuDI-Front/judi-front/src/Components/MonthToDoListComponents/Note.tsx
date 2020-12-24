@@ -1,15 +1,14 @@
 import * as React from "react";
-import {stickyNote} from "../../Models/StickyNote";
+import {NotePost, stickyNote, NoteGet} from "../../Models/StickyNote";
 import "../../CSS/notes.css"
+import {postNote} from "../../Actions/NoteAction"
 
 interface NoteProps{
-  note: stickyNote,
-  key: number,
-  onType: Function
+  note: NoteGet,
 }
 
 interface INoteState{
-  note: stickyNote
+  note: NoteGet
 }
 
 class Note extends React.Component<NoteProps, INoteState> {
@@ -20,6 +19,10 @@ class Note extends React.Component<NoteProps, INoteState> {
     }
 }
 
+componentWillMount= async() => {
+  console.log(this.props.note)
+}
+
     // updateDescription = (e:  React.ChangeEvent<HTMLFormElement>) => {
     //     var updatedValue = e.target.value;
     //     var editMeId = this.props.note.id;
@@ -27,10 +30,17 @@ class Note extends React.Component<NoteProps, INoteState> {
     //   };
     handleDescriptionUpdate = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
       this.setState({note: {
-        id: 0,
-        description: e.target.value
+        note: e.target.value
       }});
     }
+
+     SubmitNote = async ()  => {
+       var note: NotePost = {
+         note: this.state.note.note
+       }
+        var response: Number = await postNote(note)
+        console.log(response)
+     }
       
       render() {
         return (
@@ -44,18 +54,20 @@ class Note extends React.Component<NoteProps, INoteState> {
           //     <button> Save </button>
           // </li>
           <div className="note">
+            
             <div className="hero-image">
               <div className="hero-text">
-                <label>Month Note</label>
+                <label>Month Note {this.state.note.note}</label>
               </div>
             </div>
             
           <textarea className="note__description" placeholder="Description..."
                     rows={5} 
                     onChange={this.handleDescriptionUpdate}>
+                      {this.state.note.note}
           </textarea>
           <div className="hero-image">
-          <button className="c-smileyButton">
+          <button type="submit" className="c-smileyButton" onClick={this.SubmitNote}>
           <div className="c-smileyButton__hoverListener"></div>
           <div className="c-smileyButton__hoverListener"></div>
           <span className="c-smileyButton__face"></span>

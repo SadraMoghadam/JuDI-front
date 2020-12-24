@@ -1,16 +1,15 @@
 import * as React from "react";
 import Note from "./Note";
-import {stickyNote} from "../../Models/StickyNote";
+import {NoteGet} from "../../Models/StickyNote";
 
 
 
 interface NotesListState {
-  notes: stickyNote[]
+  notes: NoteGet
 }
 
 interface INotesListProps {
-  notes: stickyNote[],
-  onType: Function
+  notes: NoteGet,
 }
 
 /* This container component manages all of the state 
@@ -20,12 +19,10 @@ class NotesList extends React.Component<INotesListProps, NotesListState> {
   constructor(props: any) {
     super(props)
     this.state = {
-      notes: [
+      notes: 
         {
-          id: Date.now(),
-          description: "",
-        }
-      ],
+          note: "",
+        },
     }
   }
 
@@ -36,16 +33,12 @@ class NotesList extends React.Component<INotesListProps, NotesListState> {
   {
     return (
       <div>
-        {
-          this.state.notes.map(note => (
+          
             <ul className="notes-list">
             <Note
-              note={note}
-              key={note.id}
-              onType={this.props.onType}
+              note={this.state.notes}
             />
-            </ul>))
-        }
+            </ul>
       </div>
     );
   }
