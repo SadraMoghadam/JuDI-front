@@ -9,7 +9,7 @@ import {
     ConvertCategory2Id,
     ConvertId2Category,
     ConvertDate,
-    GetRepetitiveDate, ConvertTodayDate, Label
+    GetRepetitiveDate, ConvertTodayDate, Label, fixRepeatitiveDates
 } from "../../Models/Card";
 import {ChangeEvent} from "react"
 import "../../CSS/Card.scss"
@@ -174,8 +174,8 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         // console.log("///////////" + repeat_days);
         let index: number = 0
 
-        this.state.repeat_days.push(GetRepetitiveDate(e.target.value))
-        // console.log("11111111111111" + this.state.repeat_days)
+        this.state.repeat_days.push(fixRepeatitiveDates(GetRepetitiveDate(e.target.value)))
+         console.log("11111111111111" + this.state.repeat_days)
         if (e.target.checked) {
             this.setState({
                 repeat_days: this.state.repeat_days

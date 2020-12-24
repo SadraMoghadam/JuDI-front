@@ -256,3 +256,25 @@ export var getFirstDayOfWeek = (week: number) : number => {
     var day = thatdate.substring(8,10);
     return Number(day);
 }
+
+
+export var fixRepeatitiveDates = (date: string) : string => {
+    var counter: number = 0;
+
+    var weekDay: string = "";
+        var newDate = date.split(/-/)
+        var day: number = Number(newDate[2])
+        var month: number = Number(newDate[1])
+        var year: number = Number(newDate[0])
+        if(day >= 32)
+        {
+            if(month == 12)
+                weekDay = (((year+1).toString() + "-" + "1" + "-" + (day - 31).toString()));
+            else
+                weekDay = ((year.toString() + "-" + "1" + "-" + (day - 31).toString()));
+
+        }
+        else
+            weekDay = ((year.toString() + "-" + month.toString() + "-" + (day).toString()));
+    return weekDay;
+}
