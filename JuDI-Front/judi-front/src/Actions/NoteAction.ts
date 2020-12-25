@@ -1,7 +1,8 @@
 import axios, {AxiosRequestConfig} from "axios";
 import {stickyNote , NoteGet, NotePost} from "../Models/StickyNote";
 
-export const getNote = async () : Promise<NoteGet> => {
+
+export const getNote = async () : Promise<string> => {
     let config: AxiosRequestConfig = {
         method: "get",
         url: `http://localhost:8000/api/users/${ localStorage.getItem("user_name")}/monthboard`,
@@ -14,7 +15,7 @@ export const getNote = async () : Promise<NoteGet> => {
     return axios.get(`http://localhost:8000/api/users/${ localStorage.getItem("user_name")}/monthboard`, config).then((res) => {
         console.log(res)
         if (res.status == 200) {
-            var notes: NoteGet = res.data;
+            var notes: string = res.data;
             return notes
         }
         return null as any;
@@ -35,8 +36,9 @@ export const postNote = async (note:NotePost) : Promise<Number> => {
         }
     }
     return axios.post(`http://localhost:8000/api/users/${ localStorage.getItem("user_name")}/monthboard/update`, note, config).then((res) => {
-       console.log(res) 
-    if (res.status == 200) {
+       console.log(res)
+        console.log(res)
+        if (res.status == 200) {
             return 1
         }
         return 0;

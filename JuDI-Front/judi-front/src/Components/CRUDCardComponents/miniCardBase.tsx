@@ -47,12 +47,15 @@ class MiniCardBase extends React.Component<miniCardBaseProps, IminiCardBaseState
     render(){
         return(
             <div className="card" >
-            <div className="card-header">
+            <div className="card-header" style={{backgroundColor: this.props.mcard.category_id == 0 ? "lightgreen" : this.props.mcard.category_id == 1 ? "lightpink" : this.props.mcard.category_id==2 ? "lightblue" : this.props.mcard.category_id ==3 ? "lightyellow" : "lightgray" }}>
               <h3>{this.props.mcard.title}</h3>
-              <p style={{width:"100%",margin:"auto",borderRadius:5, backgroundColor: this.props.mcard.is_done ? "#3EECAC" : "lightgray"}}>{this.props.mcard.is_done ? "Done" : "onGoing"}</p>
             </div>
             
             <div className="card-body">
+              <p style={{width:"30%",margin:"auto auto 5px",borderRadius:5, backgroundColor: this.props.mcard.is_done ? "#3EECAC" : "cyan"}}>{this.props.mcard.is_done ? "Done" : "onGoing"}</p>
+            </div>
+            
+            <div className="card-body" style={{backgroundColor: this.props.mcard.category_id == 0 ? "lightgreen" : this.props.mcard.category_id == 1 ? "lightpink" : this.props.mcard.category_id==2 ? "lightblue" : this.props.mcard.category_id ==3 ? "lightyellow" : "lightgray" }}>
               <p></p>
               <p>{this.props.mcard.label_name}</p>
             </div>
