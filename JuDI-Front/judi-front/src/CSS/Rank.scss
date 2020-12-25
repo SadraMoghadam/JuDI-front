@@ -1,0 +1,59 @@
+.user_card{
+  box-shadow: 0 0 10px #ccc;
+  background-color: #404040;
+  color: white;
+  margin: 20px auto;
+  text-align: center;
+  width: 100%;
+  border: solid;
+  height: 70px;
+  border-radius: 10px;
+  border-color: #3EECAC;
+  position: relative;
+}
+
+
+.user_rank_card{
+  font-size: 18px;
+  //position: absolute;
+  margin: auto;
+  width: 100%;
+  top: 25%;
+  vertical-align: center;
+  text-align: center;
+  height: 100%;
+  color: #3EECAC;
+}
+
+.user_avatar_card{
+  margin: auto;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  left: 10%;
+  color: #3EECAC;
+}
+
+.user_name_card{
+  font-size: 18px;
+  //position: absolute;
+  margin: auto;
+  width: 100%;
+  top: 25%;
+  vertical-align: center;
+  text-align: center;
+  height: 100%;
+  color: white;
+}
+
+.user_xp_card{
+  font-size: 18px;
+  //position: absolute;
+  margin: auto;
+  width: 100%;
+  top: 25%;
+  vertical-align: center;
+  text-align: center;
+  height: 100%;
+  color: #3EECAC;
+}

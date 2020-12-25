@@ -9,10 +9,23 @@ interface CardListProps {
     cards: Card[],
     onDeleteClick: Function,
     onUpdateClick: Function,
+    onCopyClick: (card: Card) => void
 }
 
+interface ICardListState {
+    cards: Card[]
+}
 
-class CardList extends React.Component<CardListProps> {
+class CardList extends React.Component<CardListProps, ICardListState> {
+    constructor(props: any) {
+        super(props)
+        this.state = {
+            cards: this.props.cards
+        }
+    }
+
+
+
     render() {
         const cards = this.props.cards.map(card => (
             <EditableCard
@@ -20,6 +33,7 @@ class CardList extends React.Component<CardListProps> {
                 card={card}
                 onDeleteClick={this.props.onDeleteClick}
                 onUpdateClick={this.props.onUpdateClick}
+                onCopyClick={() => this.props.onCopyClick(card)}
             ></EditableCard>
         ));
         return (

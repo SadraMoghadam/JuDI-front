@@ -6,12 +6,11 @@ import {Card, Categories} from "../../Models/Card";
 import CardForm from "./CardForm";
 import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
-interface ToggleableCardFormProps {
-    onCardCreate: Function,
-    onCopyClick: Function
+interface CardCopyProps {
+    onCardCreate: Function
 }
 
-interface IToggleableCardFormState{
+interface ICardCopyState{
     inCreateMode: boolean
 }
 
@@ -29,8 +28,8 @@ const card: Card ={
     repeat_days: []
 }
 
-class ToggleableCardForm extends React.Component<ToggleableCardFormProps, IToggleableCardFormState> {
-    constructor(props: ToggleableCardFormProps) {
+class CardCopy extends React.Component<CardCopyProps, ICardCopyState> {
+    constructor(props: CardCopyProps) {
         super(props);
         this.state = {
             inCreateMode: false
@@ -62,14 +61,12 @@ class ToggleableCardForm extends React.Component<ToggleableCardFormProps, IToggl
             )
         }
         return (
-          
             <button onClick={this.handleCreateClick} className="createbtn">
-                <i style={{fontSize:13, margin: 0, padding: 0}} className="fa fa-plus"></i>
+                <i className="fa fa-plus"></i>
             </button>
-            
         );
     }
 }
 
 
-export default ToggleableCardForm;
+export default CardCopy;

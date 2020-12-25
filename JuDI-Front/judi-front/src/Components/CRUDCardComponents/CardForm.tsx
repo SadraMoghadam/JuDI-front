@@ -2,12 +2,23 @@ import * as React from "react";
 import {ButtonHTMLAttributes, createRef, DetailedHTMLProps, RefObject, TextareaHTMLAttributes} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import { useHistory } from 'react-router-dom';
-import {Card, Categories} from "../../Models/Card";
+import {
+    Card,
+    CardPost,
+    Categories,
+    ConvertCategory2Id,
+    ConvertId2Category,
+    ConvertDate,
+    GetRepetitiveDate, ConvertTodayDate, Label, fixRepeatitiveDates
+} from "../../Models/Card";
 import {ChangeEvent} from "react"
 import "../../CSS/Card.scss"
 import "../../CSS/Base.scss"
 import {DetailedArguments} from "yargs-parser";
 import {number} from "prop-types";
+import {getUserLogin} from "../../Actions/UserActions";
+import {createCard, getCards, getLabels} from "../../Actions/CardActions";
+import * as ReactModal from 'react-modal';
 
 interface CardFormProps {
     card: Card,
@@ -18,39 +29,64 @@ interface CardFormProps {
 interface ICardFormState {
     title: string,
     description : string,
-    dueDate: Date,
-    category: string,
+    due: string,
+    category_id: number,
     label: string,
-    isImportant: boolean,
+    labels: Label[],
+    with_star: boolean,
     reminder: boolean,
-    done: boolean,
-    isRepetitive: boolean,
-    weekDays: string[]
+    is_done: boolean,
+    is_repetitive: boolean,
+    repeat_days: string[]
 }
 
+//const getLabels : Label[] = await getLabels();
 
 class CardForm extends React.Component<CardFormProps, ICardFormState> {
+
+
 
 
     constructor(props: CardFormProps) {
         super(props);
         this.state = {
+            labels: [],
             title: this.props.card.title || "" as string,
             description: this.props.card.description || "" as string,
-            category: this.props.card.category || "" as string,
-            done: this.props.card.done || false,
-            dueDate: this.props.card.dueDate || new Date(),
-            isImportant: this.props.card.isImportant || false,
-            isRepetitive: this.props.card.isRepetitive || false,
-            label: this.props.card.label || "" as string,
+            category_id: this.props.card.category_id || 4,
+            is_done: this.props.card.is_done || false,
+            due: this.props.card.due || "",
+            with_star: this.props.card.with_star || false,
+            is_repetitive: this.props.card.is_repetitive || false,
+            label: this.props.card.label == "" ? "None" : this.props.card.label,
             reminder: this.props.card.reminder || false,
-            weekDays: this.props.card.weekDays || []
+            repeat_days: this.props.card.repeat_days || []
         }
     }
 
-    handleFormSubmit = (e: ChangeEvent<HTMLFormElement>): void => {
+    componentWillMount = async () => {
+        // var firstLabel: Label[] = [{
+        //     id: 1000000000000,
+        //     name: "none"
+        // }]
+        var newLabels: Label[] = await getLabels();
+        //var getLabels : Label[] = await getLabels();
+        // for(var i = 0; i < newLabels.length; i++)
+        // {
+        //     firstLabel.push(newLabels[i]);
+        // }
+        this.setState({
+            labels: newLabels
+        })
+    }
+
+    handleFormSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
+        console.log("-----------------")
         e.preventDefault();
         this.props.onFormSubmit({...this.state});
+        // alert(this.state.label)
+        // console.log(newCard)
+        // console.log(cardCreateResponse)
     }
 
 
@@ -58,33 +94,33 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
         id: this.props.card.id,
         title: this.props.card.title,
         description: this.props.card.description,
-        dueDate: this.props.card.dueDate,
-        category: Categories[2],
+        due: this.props.card.due,
+        category_id: 2,
         label: "",
-        isImportant: false,
+        with_star: false,
         reminder: false,
-        done: false,
-        isRepetitive: false,
-        weekDays: []
+        is_done: false,
+        is_repetitive: false,
+        repeat_days: []
     }
 
     handleTitleUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
         this.setState({title: e.target.value});
     }
-    handleLabelUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
+    handleLabelUpdate = (e: ChangeEvent<HTMLSelectElement>): void => {
         this.setState({label: e.target.value});
     }
     handleReminderUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
         this.setState({reminder: e.target.checked});
     }
     handleImportantUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
-        this.setState({isImportant: e.target.checked});
+        this.setState({with_star: e.target.checked});
     }
     handleRepetitiveUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
-        this.setState({isRepetitive: e.target.checked});
+        this.setState({is_repetitive: e.target.checked});
     }
-    handleCategoryUpdate = (e: ChangeEvent<HTMLSelectElement>): void => {
-        this.setState({category: e.target.value});
+    handlecategory_idUpdate = (e: ChangeEvent<HTMLSelectElement>): void => {
+        this.setState({category_id: ConvertCategory2Id(e.target.value)});
     }
     handleDescriptionUpdate = (e: ChangeEvent<HTMLTextAreaElement>): void => {
         this.setState({description: e.target.value});
@@ -101,30 +137,61 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
 
             //(Number(newDate[0]) == nowDate.getFullYear() && Number(newDate[1]) == nowDate.getMonth()-1 && Number(newDate[2]) == nowDate.getDay() && Number(newDate[3]) < nowDate.getHours()) ||
             //(Number(newDate[0]) == nowDate.getFullYear() && Number(newDate[1]) == nowDate.getMonth()-1 && Number(newDate[2]) == nowDate.getDay() && Number(newDate[3]) == nowDate.getHours() && Number(newDate[4]) < nowDate.getMinutes())
-        if(Number(newDate[0]) < nowDate.getFullYear() || Number(newDate[1]) < nowDate.getMonth()-1 || Number(newDate[2]) < nowDate.getDay() || Number(newDate[3]) < nowDate.getHours() || Number(newDate[4]) < nowDate.getMinutes()){
-            this.setState({dueDate: null as any})
-        }
-        else {
-
-            this.setState({dueDate: new Date(Number(newDate[0]), Number(newDate[1]) - 1, Number(newDate[2]), Number(newDate[3]), Number(newDate[4]))})
-        }
+        // if(Number(newDate[0]) < nowDate.getFullYear() || Number(newDate[1]) < nowDate.getMonth()-1 || Number(newDate[2]) < nowDate.getDay() || Number(newDate[3]) < nowDate.getHours() || Number(newDate[4]) < nowDate.getMinutes()){
+        //     this.setState({due: null as any})
+        // }
+        // else {
+        var d: string = String(newDate[0]).concat("-").concat(String(Number(newDate[1]))).concat("-").concat(String(newDate[2]))
+        this.setState({due: d})
+        // }
 
     }
-    handleDoneUpdate = (): void => {
+    handleisDoneUpdate = async () => {
         console.log("-0-")
-        this.setState({done: !this.state.done});
-    }
-    handleWeekDaysUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
-        const weekDays = this.state.weekDays
-        let index
-
-        if (e.target.checked) {
-            weekDays.push(e.target.value)
-        } else {
-            index = weekDays.indexOf(e.target.value)
-            weekDays.splice(index, 1)
+        var updatedCard: Card = {
+            id: this.props.card.id,
+            title: this.props.card.title,
+            description: this.props.card.description,
+            due: this.props.card.due,
+            category_id: this.props.card.category_id,
+            label: this.props.card.label == "" ? "none" : this.props.card.label,
+            with_star: this.props.card.with_star,
+            reminder: this.props.card.reminder,
+            is_done: this.props.card.is_done,
+            is_repetitive: this.props.card.is_repetitive,
+            repeat_days: this.props.card.repeat_days
         }
-        this.setState({ weekDays: weekDays })
+        this.setState({is_done: !this.state.is_done});
+        //var cardUpdateResponse : number = await updateCard(updatedCard)
+    }
+    handlerepeat_daysUpdate = (e: ChangeEvent<HTMLInputElement>): void => {
+        let repeat_days: string[] = this.state.repeat_days
+        var temp: string[] = []
+        // for(var i = 0; i < repeat_days.length; i++)
+        // {
+        //     repeat_days[i] = GetRepetitiveDate(repeat_days[i]);
+        // }
+        // console.log("///////////" + repeat_days);
+        let index: number = 0
+
+        this.state.repeat_days.push(fixRepeatitiveDates(GetRepetitiveDate(e.target.value)))
+         console.log("11111111111111" + this.state.repeat_days)
+        if (e.target.checked) {
+            this.setState({
+                repeat_days: this.state.repeat_days
+            })
+        } else {
+            index = repeat_days.indexOf(e.target.value)
+            repeat_days.splice(index, 1)
+        }
+        // this.setState({ repeat_days: repeat_days })
+        // temp.push(GetRepetitiveDate(repeat_days[i]))
+
+        // this.setState({
+        //     repeat_days: temp
+        // })
+
+        //console.log("----------->>" + ConvertTodayDate())
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
@@ -145,10 +212,17 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     <label style={{textDecoration:"underline"}}>
                         Label
                     </label>
-                    <input type="text" placeholder="Enter a Label"
-                           value={this.state.label} onChange={this.handleLabelUpdate}
-                           className="form-control"
-                    />
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                        <label className="col-lg-4"></label>
+                        <select defaultValue={"none"} value={this.state.label} onChange={this.handleLabelUpdate} className="col-lg-4" name="label" style={{height: 30, borderRadius: 5, marginBottom: 30, cursor: "pointer"}}>
+                            {
+                                this.state.labels.map(label => {
+                                    return <option value={label.name}>{label.name}</option>
+                                })
+                            }
+                        </select>
+                        <label className="col-lg-4"></label>
+                    </div>
                 </div>
 
                 <div className="row" style={{marginBottom:30, marginTop:30}}>
@@ -170,7 +244,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                         <input type="checkbox"
                                onChange={this.handleImportantUpdate}
                                className="col-lg-4"
-                               defaultChecked={this.props.card.isImportant ? true : false}
+                               defaultChecked={this.props.card.with_star ? true : false}
                                style={{height: 15, width: 15, marginTop:-1}}
                         />
                     </div>
@@ -181,16 +255,16 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                         <input type="checkbox"
                                onChange={this.handleRepetitiveUpdate}
                                className="col-lg-4"
-                               defaultChecked={this.props.card.isRepetitive ? true : false}
+                               defaultChecked={this.props.card.is_repetitive ? true : false}
                                style={{height: 15, width: 15, marginTop:-1}}
                         />
                     </div>
                 </div>
                 {
-                    this.state.isRepetitive ?
+                    this.state.is_repetitive ?
                         <div className="row" style={{marginTop: 30}}>
                             <label className="col-lg-12" style={{textDecoration: "underline"}}>
-                                WeekDays
+                                repeat_days
                             </label>
                         </div>
                         :
@@ -198,56 +272,56 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                 }
 
                 {
-                    this.state.isRepetitive ?
+                    this.state.is_repetitive ?
                         <div className="row d-flex justify-content-center" style={{marginBottom: 30}}>
 
                             <div className="col-lg">
                                 <label>sat</label><br/>
                                 <input type="checkbox"
-                                       defaultChecked={this.props.card.weekDays.indexOf("sat") > -1 ? true : false}
-                                       value={"sat"} onChange={this.handleWeekDaysUpdate}
+                                       defaultChecked={this.props.card.repeat_days.indexOf("sat") > -1 ? true : false}
+                                       value={"sat"} onChange={this.handlerepeat_daysUpdate}
                                        style={{height: 15, width: 15}}/>
                             </div>
                             <div className="col-lg">
                                 <label>sun</label><br/>
                                 <input type="checkbox"
-                                       defaultChecked={this.props.card.weekDays.indexOf("sun") > -1 ? true : false}
-                                       value={"sun"} onChange={this.handleWeekDaysUpdate}
+                                       defaultChecked={this.props.card.repeat_days.indexOf("sun") > -1 ? true : false}
+                                       value={"sun"} onChange={this.handlerepeat_daysUpdate}
                                        style={{height: 15, width: 15}}/>
                             </div>
                             <div className="col-lg">
                                 <label>mon</label><br/>
                                 <input type="checkbox"
-                                       defaultChecked={this.props.card.weekDays.indexOf("mon") > -1 ? true : false}
-                                       value={"mon"} onChange={this.handleWeekDaysUpdate}
+                                       defaultChecked={this.props.card.repeat_days.indexOf("mon") > -1 ? true : false}
+                                       value={"mon"} onChange={this.handlerepeat_daysUpdate}
                                        style={{height: 15, width: 15}}/>
                             </div>
                             <div className="col-lg">
                                 <label>tue</label><br/>
                                 <input type="checkbox"
-                                       defaultChecked={this.props.card.weekDays.indexOf("tue") > -1 ? true : false}
-                                       value={"tue"} onChange={this.handleWeekDaysUpdate}
+                                       defaultChecked={this.props.card.repeat_days.indexOf("tue") > -1 ? true : false}
+                                       value={"tue"} onChange={this.handlerepeat_daysUpdate}
                                        style={{height: 15, width: 15}}/>
                             </div>
                             <div className="col-lg">
                                 <label>wed</label><br/>
                                 <input type="checkbox"
-                                       defaultChecked={this.props.card.weekDays.indexOf("wed") > -1 ? true : false}
-                                       value={"wed"} onChange={this.handleWeekDaysUpdate}
+                                       defaultChecked={this.props.card.repeat_days.indexOf("wed") > -1 ? true : false}
+                                       value={"wed"} onChange={this.handlerepeat_daysUpdate}
                                        style={{height: 15, width: 15}}/>
                             </div>
                             <div className="col-lg">
                                 <label>thu</label><br/>
                                 <input type="checkbox"
-                                       defaultChecked={this.props.card.weekDays.indexOf("thu") > -1 ? true : false}
-                                       value={"thu"} onChange={this.handleWeekDaysUpdate}
+                                       defaultChecked={this.props.card.repeat_days.indexOf("thu") > -1 ? true : false}
+                                       value={"thu"} onChange={this.handlerepeat_daysUpdate}
                                        style={{height: 15, width: 15}}/>
                             </div>
                             <div className="col-lg">
                                 <label>fri</label><br/>
                                 <input type="checkbox"
-                                       defaultChecked={this.props.card.weekDays.indexOf("fri") > -1 ? true : false}
-                                       value={"fri"} onChange={this.handleWeekDaysUpdate}
+                                       defaultChecked={this.props.card.repeat_days.indexOf("fri") > -1 ? true : false}
+                                       value={"fri"} onChange={this.handlerepeat_daysUpdate}
                                        style={{height: 15, width: 15}}/>
                             </div>
                         </div>
@@ -261,7 +335,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     </label>
                     <div className="col-lg-12 col-md-12 col-sm-12">
                         <label className="col-lg-4"></label>
-                        <select defaultValue={this.props.card.category} onChange={this.handleCategoryUpdate} className="col-lg-4" name="category" style={{height: 30, borderRadius: 5, cursor: "pointer"}}>
+                        <select defaultValue={ConvertId2Category(this.props.card.category_id)} value={ConvertId2Category(this.state.category_id)} onChange={this.handlecategory_idUpdate} className="col-lg-4" name="category_id" style={{height: 30, borderRadius: 5, cursor: "pointer"}}>
                             <option value="others" style={{backgroundColor: "lightgray"}}>others</option>
                             <option value="sport" style={{backgroundColor: "lightgreen"}}>Sport</option>
                             <option value="work" style={{backgroundColor: "lightpink"}}>Work</option>
@@ -284,7 +358,7 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                         {/*<label className="col-lg-1" style={{paddingTop: 8}}>Time:</label>*/}
 
                         <label className="col-lg-4"></label>
-                        <input className="col-lg-4" type="datetime-local" onChange={this.handleDateUpdate} style={{height: 30}}/>
+                        <input className="col-lg-4" type="date" onChange={this.handleDateUpdate} style={{height: 30}}/>
                         <label className="col-lg-4"></label>
                     </div>
                 </div>
@@ -308,15 +382,16 @@ class CardForm extends React.Component<CardFormProps, ICardFormState> {
                     </button>
                 </div>
                 <div className="form-group d-flex justify-content-center">
-                    <button type="submit" className="donebtn" disabled={this.state.title == "" ? true : false} style={{backgroundColor: this.state.title == "" ? "lightgray" : ""}} onClick={this.handleDoneUpdate}>
+                    <button type="submit" className="is_donebtn" disabled={this.state.title == "" ? true : false} style={{backgroundColor: this.state.title == "" ? "lightgray" : ""}} onClick={this.handleisDoneUpdate}>
                         {
-                            this.state.done ?
+                            this.state.is_done ?
                                 <span>Undo</span>
                                 :
-                                <span>Done</span>
+                                <span>is_done</span>
                         }
                     </button>
                 </div>
+
             </form>
         )
     }

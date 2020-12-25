@@ -11,6 +11,7 @@ interface EditableCardProps {
     card: Card,
     onDeleteClick: Function,
     onUpdateClick: Function,
+    onCopyClick: () => void
 }
 
 interface IEditableCardState{
@@ -43,13 +44,13 @@ class EditableCard extends React.Component<EditableCardProps, IEditableCardState
     render() : React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined{
 
         return (
-            <div className="mb-3 p-4" style={{boxShadow: '0 0 10px #ccc', margin: "auto", alignItems:"center", alignContent:"center", width:"100%", border:"solid", borderRadius:5, borderColor:"#a7a7a7"}} >
+            <div className="mb-3 p-4" style={{boxShadow: '0 0 10px #ccc', margin: "0px auto", alignItems:"center", alignContent:"center", width:"150", border:"solid", borderRadius:5, borderColor:"#a7a7a7"}} >
                 {
                     this.state.inEditMode ?
                     <CardForm card={this.props.card} onCancelClick={this.leaveEditMode} onFormSubmit={this.handleUpdate}/>
 
                     : (
-                    <CardBase card={this.props.card} onEditClick={this.enterEditMode} onDeleteClick={this.handleDelete}/>
+                    <CardBase card={this.props.card} onEditClick={this.enterEditMode} onDeleteClick={this.handleDelete} onCopyClick={this.props.onCopyClick}/>
                     )
                 }
             </div>

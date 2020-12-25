@@ -4,7 +4,13 @@
   border-color: #3EECAC;
 }
 
-.donebtn{
+.minicard{
+  margin: auto;
+  width: 50%;
+  height: 50%;
+}
+
+.is_donebtn{
   width: 15%;
   height: 30px;
   background-color: #3EECAC;
@@ -12,7 +18,7 @@
   border-radius: 10px;
 }
 
-.donebtn:hover{
+.is_donebtn:hover{
   background-color: #69ecc3;
 }
 
@@ -75,4 +81,41 @@ label.css-label {
   height: 5px;
   width: 5px;
   margin: 20px;
+}
+
+.Label_popup{
+  background-color: #dedede;
+  position: fixed;
+  overflow-y: auto;
+  margin: 195px 0;
+  height: 55%;
+  width: 25%;
+  right: 0px;
+  z-index: 5;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+  box-shadow: #a7a7a7;
+  border-color: #333333;
+  border-style: solid none solid solid;
+  border-width: 2px;
+}
+
+
+.labels_button{
+  background-color: #3EECAC;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  font-size:15px;
+  right: -5px;
+  margin-top: 167px;
+  height: 30px;
+  width: 7%;
+  z-index: 8;
+  position: fixed;
+  border: #333333 solid 2px;
+}
+
+.labels_button:hover{
+  cursor: pointer;
+  background-color: #bbbbbb;
 }

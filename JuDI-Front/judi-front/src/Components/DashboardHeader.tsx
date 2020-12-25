@@ -2,14 +2,55 @@ import * as React from "react";
 import {createRef, RefObject} from "react";
 import {RouteComponentProps} from "react-router";
 import "../CSS/BasePage.scss"
+import {User, UserFullData} from "../Models/user";
 import profileAvatar from "../Assets/Images/profile.png";
+import {getUserFullData, signOut} from "../Actions/UserActions";
+import {delay} from "q";
 
 interface HeaderProps {
     state: string
 }
 
-class DashboardHeader extends React.Component<HeaderProps> 
+interface IHeaderState {
+    profileImage: string,
+    xp: number
+}
+
+class DashboardHeader extends React.Component<HeaderProps, IHeaderState>
 {
+    constructor(props: HeaderProps) {
+        super(props);
+        this.state = {
+            profileImage: "",
+            xp: 0
+        }
+    }
+
+
+    componentWillMount= async () => {
+        // await delay(2000);
+        var userData: UserFullData = await getUserFullData();
+        console.log(userData)
+        this.setState({
+            profileImage: userData.avatar,
+            xp: userData.xp
+        })
+        // localStorage.setItem("image", userData.avatar)
+        // if(localStorage.getItem("image") == "")
+        //     this.setState({profileImage: ""})
+        //console.log(localStorage.getItem("image"))
+    }
+
+    onLogoutClick =async () => {
+        var response = await signOut()
+        console.log(response)
+        localStorage.setItem("token", "")
+        localStorage.setItem("image", "")
+        localStorage.setItem("xp", "")
+        localStorage.setItem("user_name", "")
+
+        // localStorage.removeItem("image")
+    }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return(
@@ -17,17 +58,26 @@ class DashboardHeader extends React.Component<HeaderProps>
                 <div className="App-header-judi">
                     JuDI
                     <a className={this.props.state==="profile" ? "active" : ""} href="/dashboard/profile">
-                    <div className="circle" style={{overflow: "hidden", alignItems:"right", height:40, width:40, position:"absolute", right:20, marginTop:-50, backgroundImage: `url(${profileAvatar})`, backgroundSize: 'cover'}}>
-                        
-                    </div>
+                        <div className="circle" style={{overflow: "hidden", alignItems:"right", height:40, width:40, position:"absolute", right:20, marginTop:-50, backgroundImage: this.state.profileImage == "" ? `url(${profileAvatar}")` : `url(${localStorage.getItem("image")})`, backgroundSize: 'cover'}}>
+
+                        </div>
+                        <div style={{overflow: "hidden", alignItems:"right", fontSize: 14, color:"#3EECAC", position:"absolute", right:65, marginTop:-40}}>
+                            {this.state.xp}XP
+                        </div>
                     </a>
+                    <div style={{overflow: "hidden", alignItems:"right", fontSize: 20, color:"#3EECAC", position:"absolute", left:10}}>
+                        {localStorage.getItem("user_name")}
+                    </div>
                 </div>
                 <div className="topnav">
                     <a className={this.props.state==="dashboard" ? "active" : ""} href="/dashboard">Dashboard</a>
                     <a className={this.props.state==="CRUDCard" ? "active" : ""} href="/dashboard/crudcard">Cards</a>
+                    <a className={this.props.state==="ranking" ? "active" : ""} href="/dashboard/ranking">Ranking</a>
                     <div className="topnav-right">
-                        <a href="/">Logout</a>
-                        
+                        <a onClick={this.onLogoutClick} href="/">
+                            Logout
+                        </a>
+
                     </div>
                 </div>
 
@@ -36,25 +86,6 @@ class DashboardHeader extends React.Component<HeaderProps>
     }
 }
 
-// const Header: React.FC = () => {
-//     return(
-//         <div>
-//             <div className="App-header-judi">
-//                 JuDI
-//             </div>
-//             <div className="topnav">
-//                 <a className="active" href="#home">home</a>
-//                 <a href="#about_site">about website</a>
-//                 <a href="#about_us">about us</a>
-//                 <div className="topnav-right">
-//                     <a href="#login">login</a>
-//                     <a href="#register">register</a>
-//                 </div>
-//             </div>
-            
-//         </div>
-//     );
-// };
 
 
 
